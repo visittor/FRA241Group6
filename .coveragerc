@@ -1,0 +1,3 @@
+[run]
+source = fra241project
+omit = fra241project/test*
