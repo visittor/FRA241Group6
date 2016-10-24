@@ -7,6 +7,9 @@ from zope.sqlalchemy import register
 # Base.metadata prior to any initialization routines
 from .Project import Project# noqa
 from .User import User# noqa
+from .Equipment import Equipment# noqa
+from .Obligation import Obligation# noqa
+from .Member import Member_table# noqa
 
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
