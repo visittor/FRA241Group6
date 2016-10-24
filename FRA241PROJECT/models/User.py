@@ -17,7 +17,7 @@ import bcrypt
 
 class User(Base):
      __tablename__ = "User"
-     id = Column(Integer, primary_key=UnicodeTranslateError)
+     id = Column(Integer, primary_key=True)
      First_name = Column(VARCHAR(30))
      Last_name = Column(VARCHAR(30))
      role = Column(VARCHAR(10))

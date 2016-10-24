@@ -69,8 +69,8 @@
 	                            <div class="form-bottom">
 				                    <form role="form" action="" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">${login}</label>
-				                        	<input type="text" name="form-username" placeholder="${login}" class="form-username form-control" id="form-username">
+				                    		<label class="sr-only" for="form-username">Username...</label>
+				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-password">Password</label>
@@ -117,28 +117,40 @@
 	                            <div class="form-bottom">
 				                    <form role="form" action="" method="post" class="registration-form">
 										<div class="form-group">
-											<label class="sr-only" for="form-user-name">${form_user_name}</label>
-											<input type="text" name="form-user-name" placeholder="${form_user_name}" class="form-user-name form-control" id="form-user-name">
+											<label class="sr-only" for="form-user-role">Statue</label>
+											<select type="text" name="form-user-role" class="form-user-role form-control" id="form-user-role">
+												<option>Please choose your statue</option>
+												<option>Teacher</option>
+												<option>Student</option>
+											</select>
 										</div>
 										<div class="form-group">
-											<label class="sr-only" for="form-student-id">${form_student_id}</label>
-											<input type="text" name="form-student-id" placeholder="${form_student_id}" class="form-student-id form-control" id="form-student-id">
+											<label class="sr-only" for="form-user-name">Username...</label>
+											<input type="text" name="form-user-name" placeholder="Username..." class="form-user-name form-control" id="form-user-name">
 										</div>
 										<div class="form-group">
-											<label class="sr-only" for="form-pass-word">${form_pass_word}</label>
-											<input type="text" name="form-pass-word" placeholder="${form_pass_word}" class="form-pass-word form-control" id="form-pass-word">
+											<label class="sr-only" for="form-student-id">Student ID</label>
+											<input type="text" name="form-student-id" placeholder="Student ID" class="form-student-id form-control" id="form-student-id">
+										</div>
+										<div class="form-group">
+											<label class="sr-only" for="form-pass-word">password</label>
+											<input type="password" name="form-pass-word" placeholder="password" class="form-pass-word form-control" id="form-pass-word">
+										</div>
+										<div class="form-group">
+											<label class="sr-only" for="form-repass-word">retype password</label>
+											<input type="password" name="form-repass-word" placeholder="retype password" class="form-repass-word form-control" id="form-repass-word">
 										</div>
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-first-name">${form_first_name}</label>
-				                        	<input type="text" name="form-first-name" placeholder="${form_first_name}" class="form-first-name form-control" id="form-first-name">
+				                    		<label class="sr-only" for="form-first-name">First name</label>
+				                        	<input type="text" name="form-first-name" placeholder="First name" class="form-first-name form-control" id="form-first-name">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-last-name">${form_last_name}</label>
-				                        	<input type="text" name="form-last-name" placeholder="${form_last_name}" class="form-last-name form-control" id="form-last-name">
+				                        	<label class="sr-only" for="form-last-name">Last name</label>
+				                        	<input type="text" name="form-last-name" placeholder="Last name" class="form-last-name form-control" id="form-last-name">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-email">${form_email}</label>
-				                        	<input type="text" name="form-email" placeholder="${form_email}" class="form-email form-control" id="form-email">
+				                        	<label class="sr-only" for="form-email">Email</label>
+				                        	<input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
 				                        </div>
 
 				                        <button type="submit" name="form.signup" class="btn">Sign me up!</button>
