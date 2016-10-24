@@ -26,7 +26,7 @@ tests_require = [
     'pytest-cov',
     ]
 
-setup(name='fra241project',
+setup(name='FRA241PROJECT',
       version='0.0',
       description='fra241project',
       long_description=README + '\n\n' + CHANGES,
@@ -49,9 +49,9 @@ setup(name='fra241project',
       install_requires=requires,
       entry_points="""\
       [paste.app_factory]
-      main = fra241project:main
+      main = FRA241PROJECT:main
       [console_scripts]
-      initialize_fra241project_db = fra241project.scripts.initializedb:main
+      initialize_fra241project_db = FRA241PROJECT.scripts.initializedb:main
       """,
       )
 # initialize_FRA241PROJECT_db = fra241project.scripts.initializedb:main
