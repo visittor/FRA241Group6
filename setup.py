@@ -9,8 +9,9 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
+    'bcrypt',
     'pyramid',
-    'pyramid_jinja2',
+    'pyramid_chameleon',
     'pyramid_debugtoolbar',
     'pyramid_tm',
     'SQLAlchemy',
@@ -27,7 +28,7 @@ tests_require = [
 
 setup(name='FRA241PROJECT',
       version='0.0',
-      description='FRA241PROJECT',
+      description='fra241project',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
           "Programming Language :: Python",
@@ -48,8 +49,9 @@ setup(name='FRA241PROJECT',
       install_requires=requires,
       entry_points="""\
       [paste.app_factory]
-      main = fra241project:main
+      main = FRA241PROJECT:main
       [console_scripts]
-      initialize_FRA241PROJECT_db = fra241project.scripts.initializedb:main
+      initialize_fra241project_db = FRA241PROJECT.scripts.initializedb:main
       """,
       )
+# initialize_FRA241PROJECT_db = fra241project.scripts.initializedb:main
