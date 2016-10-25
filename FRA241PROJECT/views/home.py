@@ -5,7 +5,7 @@ from pyramid.view import (
 )
 from ..models import User
 
-@view_config(route_name = 'home', renderer = '../templates/index/indexby92.pt')
+@view_config(route_name = 'home', renderer = '../templates/indexby92.pt')
 def home(request):
     if request.user is None:
         return HTTPFound(location=request.route_url('login'))
