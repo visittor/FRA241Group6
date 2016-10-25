@@ -102,3 +102,8 @@ def login(request):
         url=request.route_url('login'),
         next_url=next_url,
         )
+@view_config(route_name = 'logout')
+def logout(request):
+    headers = forget(request)
+    next_url = request.route_url('login')
+    return HTTPFound(location=next_url, headers=headers)
