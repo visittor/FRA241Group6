@@ -24,16 +24,19 @@ class Project(Base):
     finish_date = Column(Date)
 
     owner_id = Column(Integer,ForeignKey('User.id'))
-    leader = relationship("User", back_populates = "own_project")
+    leader = relationship("User", back_populates = "own_project")#ผู้รับผิดชอบ
 
     # Advisor_id = Column(Integer,ForeignKey('User.id'))
-    advisor = relationship("User", secondary = Advisor_table,back_populates = "advisee_project",uselist=False)
+    advisor = relationship("User", secondary = Advisor_table,back_populates = "advisee_project")
 
     project_member = relationship("User", secondary = Member_table, back_populates = "enroll_project" )
 
     project_obligation = relationship("Obligation", back_populates = "asso_to")
 
     project_equipment = relationship("Equipment", back_populates = "asso_to")
+
+    proposal_id = Column(Integer,ForeignKey("Proposal.id"))
+    proposal = relationship("Proposal",back_populates = "parent_project")
 
     def change_status(self,status):
         self.status = status
