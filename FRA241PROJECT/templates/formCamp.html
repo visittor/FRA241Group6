@@ -121,7 +121,7 @@
     <!-- ค่าใช้จ่ายในการจัดกิจกรรม-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript">
-      var i = 1;
+      var i = 0;
       $(function(){
 
         $('#btn-addBGT').click(function(){
@@ -142,14 +142,12 @@
             i--;
           } else
             alert('ไม่มี textbox ที่จะลบ');
-
-
         });
       });
     </script>
     <!-- งบประมาณโดยละเอียด-->
     <script type="text/javascript">
-      function CreateNewRow0()
+      function CreateNewRow0( order,descrip,value)
       {
         var intLine = parseInt(document.add_project_form.D_B.value);
         intLine++;
@@ -165,18 +163,19 @@
         newCell = newRow.insertCell(0)
         newCell.id = newCell.uniqueID
         newCell.setAttribute("className", "css-name");
-        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\"\">"
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\""+order+"\">"
+        //***<input type="text" size = "10" name = "D_B1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\"\">"***//
 
         //*** Column 2 ***//
         newCell = newRow.insertCell(1)
         newCell.id = newCell.uniqueID
         newCell.setAttribute("className", "css-name");
-        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"D_B2_"+intLine+"\" VALUE=\"\">"
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"D_B2_"+intLine+"\" VALUE=\""+descrip+"\">"
         //*** Column 3***//
         newCell = newRow.insertCell(2)
         newCell.id = newCell.uniqueID
         newCell.setAttribute("className", "css-name");
-        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"D_B3_"+intLine+"\" VALUE=\"\">"
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"D_B3_"+intLine+"\" VALUE=\""+value+"\">"
 
         document.add_project_form.D_B.value = intLine;
       }
@@ -310,7 +309,7 @@
   <div class="col-md-5 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-  <input  name="P_N"  class="form-control"  type="text">
+  <input  name="P_N"  class="form-control" value = "${project_title}"  type="text">
     </div>
   </div>
 </div>
@@ -319,16 +318,25 @@
     <div class="col-md-5 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input name="Year"  class="form-control"  type="text">
+  <input name="Year"  class="form-control"  value = "${project_year}" type="text">
     </div>
   </div>
 </div>
   <div class="form-group">
-    <label class="col-md-3 control-label" >วันที่จัดกิจกรรม</label>
+    <label class="col-md-3 control-label" >วันที่เริ่มจัดกิจกรรม</label>
   <div class="col-md-5 inputGroupContainer">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-      <input name="Date"  class="form-control"  type="text">
+      <input name="Date-start"  class="form-control" value = "${start_date}" type="text" placeholder="DD/MM/YY">
+    </div>
+  </div>
+</div>
+  <div class="form-group">
+    <label class="col-md-3 control-label" >วันที่สิ้นสุดจัดกิจกรรม</label>
+  <div class="col-md-5 inputGroupContainer">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+      <input name="Date-finish"  class="form-control"  value = "${finish_date}" type="text" placeholder="DD/MM/YY">
     </div>
   </div>
 </div>
@@ -337,7 +345,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-        <input name="P_P"  class="form-control"  type="text">
+        <input name="P_P"  class="form-control" value="${project_activity_location}"  type="text">
       </div>
     </div>
   </div>
@@ -365,7 +373,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-        <textarea class="form-control" name="Calibration" ></textarea>
+        <textarea class="form-control" value = "${project_Calibration}" name="Calibration" ></textarea>
       </div>
     </div>
   </div>
@@ -385,7 +393,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-        <input name="Duration"  class="form-control"  type="text">
+        <input name="Duration"  class="form-control" value="${project_duration}" type="text">
       </div>
     </div>
   </div>
@@ -405,7 +413,7 @@
     <div class="col-md-5 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-align-right"></i></span>
-  <input name="evaluation"  class="form-control" type="text">
+  <input name="evaluation"  class="form-control" value="${project_evaluation}" type="text">
     </div>
   </div>
 </div>
@@ -414,31 +422,35 @@
     <div class="col-md-5 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-  <input name="Benefits"  class="form-control" type="text">
+  <input name="Benefits"  class="form-control" value="project_profit" type="text">
     </div>
   </div>
 </div>
   <div class="form-group">
-  <label class="col-md-3 control-label">ค่าใช้จ่ายในการจัดกิจกรรม</label>
-  <button type="button" id="btn-addBGT" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></button>
-  <button type="button" id="btn-delBGT" class="btn btn-danger"><i class="glyphicon glyphicon-minus-sign"></i> </button>
-  <div class="col-md-5 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-      <div id="d"></div>
+    <label class="col-md-3 control-label">ค่าใช้จ่ายในการจัดกิจกรรม</label>
+
+    <button type="button" id="btn-addBGT" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></button>
+    <button type="button" id="btn-delBGT" class="btn btn-danger"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+    <div class="col-md-5 inputGroupContainer">
+      <div class="input-group">
+          <input type="hidden" name="BGT_count" value="0">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <div id="d"></div>
+      </div>
     </div>
   </div>
-</div>
   <div class="form-group">
     <label class="col-md-3 control-label">งบประมาณโดยละเอียด</label>
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <input type="hidden" name="D_B" value="0">
-        <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow0();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+
+        <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow0(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
         <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow0();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
         <table class="table table-striped"  id="D_BExp">
           <tr>
+            <!--script tal:repeat = "DB list_DB" >CreateNewRow0(DB[0],DB[1],DB[2]);</script-->
             <th><div align="center">ลำดับ</div></th>
             <th><div align="center">รายละเอียด</div></th>
             <th><div align="center">จำนวนเงิน(บาท)</div></th>
@@ -481,7 +493,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
-    <button type="submit" class="btn btn-warning btn-lg" >บันทึก <span class="glyphicon glyphicon-floppy-disk"></span></button>
+    <button type="submit" name = "save_proposal" class="btn btn-warning btn-lg" >บันทึก <span class="glyphicon glyphicon-floppy-disk"></span></button>
   </div>
 </div>
 
