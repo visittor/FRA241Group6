@@ -5,6 +5,8 @@ from pyramid.view import (
 )
 from ..models import User
 
+
+
 @view_config(route_name = 'home', renderer = '../templates/indexby92.pt')
 def home(request):
     if request.user is None:
@@ -13,3 +15,9 @@ def home(request):
     user = request.user
 
     return dict(user= user)
+
+@view_config(route_name = 'test')
+def test(request):
+    session = request.db_session
+    """do something"""""
+    return dict(i = 'i')

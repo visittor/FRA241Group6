@@ -20,6 +20,7 @@ class Project(Base):
     description = Column(Text)
     status = Column(VARCHAR(20))
     type = Column(VARCHAR(20))
+    # activity_date = Column(Date)
     start_date = Column(Date)
     finish_date = Column(Date)
 
@@ -35,7 +36,7 @@ class Project(Base):
 
     project_equipment = relationship("Equipment", back_populates = "asso_to")
 
-    proposal_id = Column(Integer,ForeignKey("Proposal.id"))
+
     proposal = relationship("Proposal",back_populates = "parent_project")
 
     def change_status(self,status):
