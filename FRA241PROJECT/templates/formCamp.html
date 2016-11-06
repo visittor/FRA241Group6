@@ -32,122 +32,165 @@
     <style type="text/css">
       h2 {font-size: 150%}
     </style>
-    <!-- วัตถุประสงค์-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript">
-      var s = 1;
-      $(function(){
-
-        $('#btn-addOJ').click(function(){
-
-          if(i <= 5) {
-            $('#a').append('<input name="OJ'+i+'" class="form-control" id="OJ' + i + '" type="text">'
-                    );
-            i++;
-          } else
-            alert('เพิ่มวัตถุประสงค์ได้สูงสุด 5 ข้อ');
-
-        });
-
-        $('#btn-delOJ').click(function(){
-          var r = "input#OJ" + (i-1);
-          if(i > 1) {
-            $(r).remove();
-            i--;
-          } else
-            alert('ไม่มี textbox ที่จะลบ');
-
-
-        });
-      });
-    </script>
-    <!-- ผู้รับผิดชอบ-->
-    <script type="text/javascript">
-      var j = 1;
-      $(function(){
-
-        $('#btn-addP_R').click(function(){
-
-          if(j <= 100) {
-            $('#b').append('<input name="P_R'+j+'" class="form-control" id="P_R' + j + '" type="text">'
-            );
-            j++;
-          } else
-            alert('เพิ่มได้สูงสุด100คน');
-
-        });
-
-        $('#btn-delP_R').click(function(){
-          var s = "input#P_R" + (j-1);
-          if(j > 1) {
-            $(s).remove();
-            j--;
-          } else
-            alert('ไม่มี textbox ที่จะลบ');
-
-
-        });
-      });
-    </script>
-    <!-- ผู้เข้าร่วม-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript">
-      var i = 1;
-      $(function(){
-
-        $('#btn-addP_M').click(function(){
-
-          if(i <= 100) {
-            $('#c').append('<input name="P_M'+i+'" class="form-control" id="P_M' + i + '" type="text">'
-            );
-            i++;
-          } else
-            alert('เพิ่มได้สูงสุด100คน');
-
-        });
-
-        $('#btn-delP_M').click(function(){
-          var r = "input#P_M" + (i-1);
-          if(i > 1) {
-            $(r).remove();
-            i--;
-          } else
-            alert('ไม่มี textbox ที่จะลบ');
-
-
-        });
-      });
-    </script>
-    <!-- ค่าใช้จ่ายในการจัดกิจกรรม-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript">
-      var i = 0;
-      $(function(){
-
-        $('#btn-addBGT').click(function(){
-
-          if(i <= 100) {
-            $('#d').append('<input name="BGT'+i+'" class="form-control" id="BGT' + i + '" type="text">'
-            );
-            i++;
-          } else
-            alert('เพิ่มได้สูงสุด100อัน');
-
-        });
-
-        $('#btn-delBGT').click(function(){
-          var r = "input#BGT" + (i-1);
-          if(i > 1) {
-            $(r).remove();
-            i--;
-          } else
-            alert('ไม่มี textbox ที่จะลบ');
-        });
-      });
-    </script>
-    <!-- งบประมาณโดยละเอียด-->
+    <!-- วัตถุประสงค์0-->
     <script type="text/javascript">
       function CreateNewRow0( order,descrip,value)
+      {
+        var intLine = parseInt(document.add_project_form.OJ.value);
+        intLine++;
+
+        var theTable = document.all.OJExp
+        var newRow = theTable.insertRow(theTable.rows.length)
+        newRow.id = newRow.uniqueID
+
+        var item1 = 1
+        var newCell
+
+        //*** Column 1 ***//
+        newCell = newRow.insertCell(0)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"OJ1_"+intLine+"\" VALUE=\""+order+"\">"
+        //***<input type="text" size = "10" name = "OJ1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"OJ1_"+intLine+"\" VALUE=\"\">"***//
+
+
+        document.add_project_form.OJ.value = intLine;
+      }
+
+      function RemoveRow0()
+      {
+        intLine = parseInt(document.add_project_form.OJ.value);
+        if(parseInt(intLine) > 0)
+        {
+          theTable = (document.all) ? document.all.OJExp :
+                  document.getElementById("OJExp")
+          theTableBody = theTable.tBodies[0];
+          theTableBody.deleteRow(intLine);
+          intLine--;
+          document.add_project_form.OJ.value = intLine;
+        }
+      }
+    </script>
+    <!-- ผู้รับผิดชอบ1-->
+    <script type="text/javascript">
+      function CreateNewRow1( order,descrip,value)
+      {
+        var intLine = parseInt(document.add_project_form.P_R.value);
+        intLine++;
+
+        var theTable = document.all.P_RExp
+        var newRow = theTable.insertRow(theTable.rows.length)
+        newRow.id = newRow.uniqueID
+
+        var item1 = 1
+        var newCell
+
+        //*** Column 1 ***//
+        newCell = newRow.insertCell(0)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"P_R1_"+intLine+"\" VALUE=\""+order+"\">"
+        //***<input type="text" size = "10" name = "P_R1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"P_R1_"+intLine+"\" VALUE=\"\">"***//
+
+
+        document.add_project_form.P_R.value = intLine;
+      }
+
+      function RemoveRow1()
+      {
+        intLine = parseInt(document.add_project_form.P_R.value);
+        if(parseInt(intLine) > 0)
+        {
+          theTable = (document.all) ? document.all.P_RExp :
+                  document.getElementById("P_RExp")
+          theTableBody = theTable.tBodies[0];
+          theTableBody.deleteRow(intLine);
+          intLine--;
+          document.add_project_form.P_R.value = intLine;
+        }
+      }
+    </script>
+    <!-- ผู้เข้าร่วม2-->
+    <script type="text/javascript">
+      function CreateNewRow2( order,descrip,value)
+      {
+        var intLine = parseInt(document.add_project_form.P_M.value);
+        intLine++;
+
+        var theTable = document.all.P_MExp
+        var newRow = theTable.insertRow(theTable.rows.length)
+        newRow.id = newRow.uniqueID
+
+        var item1 = 1
+        var newCell
+
+        //*** Column 1 ***//
+        newCell = newRow.insertCell(0)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"P_M1_"+intLine+"\" VALUE=\""+order+"\">"
+        //***<input type="text" size = "10" name = "P_M1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"P_M1_"+intLine+"\" VALUE=\"\">"***//
+
+
+        document.add_project_form.P_M.value = intLine;
+      }
+
+      function RemoveRow2()
+      {
+        intLine = parseInt(document.add_project_form.P_M.value);
+        if(parseInt(intLine) > 0)
+        {
+          theTable = (document.all) ? document.all.P_MExp :
+                  document.getElementById("P_MExp")
+          theTableBody = theTable.tBodies[0];
+          theTableBody.deleteRow(intLine);
+          intLine--;
+          document.add_project_form.P_M.value = intLine;
+        }
+      }
+    </script>
+    <!-- ค่าใช้จ่ายในการจัดกิจกรรม3-->
+    <script type="text/javascript">
+      function CreateNewRow3( order,descrip,value)
+      {
+        var intLine = parseInt(document.add_project_form.BGT.value);
+        intLine++;
+
+        var theTable = document.all.BGTExp
+        var newRow = theTable.insertRow(theTable.rows.length)
+        newRow.id = newRow.uniqueID
+
+        var item1 = 1
+        var newCell
+
+        //*** Column 1 ***//
+        newCell = newRow.insertCell(0)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"BGT1_"+intLine+"\" VALUE=\""+order+"\">"
+        //***<input type="text" size = "10" name = "BGT1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"BGT1_"+intLine+"\" VALUE=\"\">"***//
+
+
+        document.add_project_form.BGT.value = intLine;
+      }
+
+      function RemoveRow3()
+      {
+        intLine = parseInt(document.add_project_form.BGT.value);
+        if(parseInt(intLine) > 0)
+        {
+          theTable = (document.all) ? document.all.BGTExp :
+                  document.getElementById("BGTExp")
+          theTableBody = theTable.tBodies[0];
+          theTableBody.deleteRow(intLine);
+          intLine--;
+          document.add_project_form.BGT.value = intLine;
+        }
+      }
+    </script>
+    <!-- งบประมาณโดยละเอียด4-->
+    <script type="text/javascript">
+      function CreateNewRow4( order,descrip,value)
       {
         var intLine = parseInt(document.add_project_form.D_B.value);
         intLine++;
@@ -180,7 +223,7 @@
         document.add_project_form.D_B.value = intLine;
       }
 
-      function RemoveRow0()
+      function RemoveRow4()
       {
         intLine = parseInt(document.add_project_form.D_B.value);
         if(parseInt(intLine) > 0)
@@ -194,9 +237,9 @@
         }
       }
     </script>
-    <!--ตารางกิจกรรม-->
+    <!--ตารางกิจกรรม5-->
     <script type="text/javascript">
-      function CreateNewRow1()
+      function CreateNewRow5()
       {
         var intLine = parseInt(document.add_project_form.schedule.value);
         intLine++;
@@ -223,7 +266,7 @@
         document.add_project_form.schedule.value = intLine;
       }
 
-      function RemoveRow1()
+      function RemoveRow5()
       {
         intLine = parseInt(document.add_project_form.schedule.value);
         if(parseInt(intLine) > 0)
@@ -360,13 +403,22 @@
 </div>
   <div class="form-group">
     <label class="col-md-3 control-label">วัตถุประสงค์</label>
-    <button type="button" id="btn-addOJ" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></button>
-    <button type="button" id="btn-delOJ" class="btn btn-danger"><i class="glyphicon glyphicon-minus-sign"></i> </button>
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-    <div id="a"></div>
-  </div></div>
+        <input type="hidden" name="OJ" value="0">
+
+        <button name="btnAddOJ" type="button" id="btnAddOJ" class="btn btn-success" onClick="CreateNewRow0(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDelOJ" type="button" id="btnDelOJ" class="btn btn-danger" onClick="RemoveRow0();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+        <table class="table table-striped"  id="OJExp">
+          <tr>
+            <!--script tal:repeat = "DB list_DB" >CreateNewRow0(DB[0],DB[1],DB[2]);</script-->
+
+
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label class="col-md-3 control-label">การเทียบค่ากิจกรรม</label>
@@ -379,12 +431,20 @@
   </div>
   <div class="form-group">
     <label class="col-md-3 control-label" >ผู้รับผิดชอบ</label>
-    <button type="button" id="btn-addP_R" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></button>
-    <button type="button" id="btn-delP_R" class="btn btn-danger"><i class="glyphicon glyphicon-minus-sign"></i> </button>
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <div id="b"></div>
+        <input type="hidden" name="P_R" value="0">
+
+        <button name="btnAddP_R" type="button" id="btnAddP_R" class="btn btn-success" onClick="CreateNewRow1(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDelP_R" type="button" id="btnDelP_R" class="btn btn-danger" onClick="RemoveRow1();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+        <table class="table table-striped"  id="P_RExp">
+          <tr>
+            <!--script tal:repeat = "DB list_DB" >CreateNewRow0(DB[0],DB[1],DB[2]);</script-->
+
+
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -399,12 +459,20 @@
   </div>
   <div class="form-group">
     <label class="col-md-3 control-label">ผู้เข้าร่วมโครงการ</label>
-    <button type="button" id="btn-addP_M" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></button>
-    <button type="button" id="btn-delP_M" class="btn btn-danger"><i class="glyphicon glyphicon-minus-sign"></i> </button>
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <div id="c"></div>
+        <input type="hidden" name="P_M" value="0">
+
+        <button name="btnAddP_M" type="button" id="btnAddP_M" class="btn btn-success" onClick="CreateNewRow2(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDelP_M" type="button" id="btnDelP_M" class="btn btn-danger" onClick="RemoveRow2();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+        <table class="table table-striped"  id="P_MExp">
+          <tr>
+            <!--script tal:repeat = "DB list_DB" >CreateNewRow0(DB[0],DB[1],DB[2]);</script-->
+
+
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -428,14 +496,20 @@
 </div>
   <div class="form-group">
     <label class="col-md-3 control-label">ค่าใช้จ่ายในการจัดกิจกรรม</label>
-
-    <button type="button" id="btn-addBGT" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></button>
-    <button type="button" id="btn-delBGT" class="btn btn-danger"><i class="glyphicon glyphicon-minus-sign"></i> </button>
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
-          <input type="hidden" name="BGT_count" value="0">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <div id="d"></div>
+        <input type="hidden" name="BGT" value="0">
+
+        <button name="btnAddBGT" type="button" id="btnAddBGT" class="btn btn-success" onClick="CreateNewRow3(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDelBGT" type="button" id="btnDelBGT" class="btn btn-danger" onClick="RemoveRow3();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+        <table class="table table-striped"  id="BGTExp">
+          <tr>
+            <!--script tal:repeat = "DB list_DB" >CreateNewRow0(DB[0],DB[1],DB[2]);</script-->
+
+
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -445,8 +519,8 @@
       <div class="input-group">
         <input type="hidden" name="D_B" value="0">
 
-        <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow0(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
-        <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow0();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+        <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
         <table class="table table-striped"  id="D_BExp">
           <tr>
@@ -473,8 +547,8 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <input type="hidden" name="schedule" value="0">
-        <button name="btnAdds_chedule" type="button" id="btnAdd_schedule" class="btn btn-success" onClick="CreateNewRow1();"><i class="glyphicon glyphicon-plus-sign"></i></button>
-        <button name="btnDel_schedule" type="button" id="btnDel_schedule" class="btn btn-danger" onClick="RemoveRow1();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+        <button name="btnAdds_chedule" type="button" id="btnAdd_schedule" class="btn btn-success" onClick="CreateNewRow5();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDel_schedule" type="button" id="btnDel_schedule" class="btn btn-danger" onClick="RemoveRow5();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
         <table class="table table-striped"  id="scheduleExp">
           <tr>
             <th><div align="center">เวลา</div></th>
