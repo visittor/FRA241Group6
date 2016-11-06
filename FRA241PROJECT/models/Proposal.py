@@ -25,7 +25,7 @@ class Proposal(Base):
     objective = relationship("Objective", back_populates = "parent_proposal")#วัตถุประสงค์
 
     activity_comparition = Column(Text)#การเทียบค่ากิจกรรม
-    durtion = Column(Text)#ระยะเวลาดำเนินงาน
+    duration = Column(Text)#ระยะเวลาดำเนินงาน
 
     owner_for_proposal = relationship("Owner_for_proposal",back_populates = "parent_proposal")#ผู้รับผิดชอบ
     member_for_proposal = relationship("Member_for_proposal",back_populates = "parent_proposal")#ผู้เข้าร่วม
@@ -46,6 +46,12 @@ class Proposal(Base):
     parent_id = Column(Integer, ForeignKey("Project.id"))
     parent_project = relationship("Project", back_populates = "proposal", uselist = False)
 
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
 
 
 class Objective(Base):
@@ -56,6 +62,12 @@ class Objective(Base):
     proposal_id = Column(Integer,ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal", back_populates="objective")
 
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
 class Cost(Base):
     __tablename__ = "Cost"
     id = Column(Integer,primary_key=True)
@@ -63,6 +75,12 @@ class Cost(Base):
 
     proposal_id = Column(Integer,ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates="cost")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
 
 class Previouse_result(Base):
     __tablename__ = "Previouse_result"
@@ -72,6 +90,12 @@ class Previouse_result(Base):
     proposal_id = Column(Integer,ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "previouse_result")
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
 class Owner_for_proposal(Base):
     __tablename__ = "Owner_for_proposal"
     id = Column(Integer,primary_key=True)
@@ -80,6 +104,12 @@ class Owner_for_proposal(Base):
     proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates="owner_for_proposal")
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
 class Member_for_proposal(Base):
     __tablename__ = "Member_for_proposal"
     id = Column(Integer,primary_key=True)
@@ -87,6 +117,12 @@ class Member_for_proposal(Base):
 
     proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "member_for_proposal")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
 
 class Delicate_budget(Base):
     __tablename__ = "Delicate_budget"
@@ -98,6 +134,12 @@ class Delicate_budget(Base):
     proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "delicate_budget")
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
 class Schedule(Base):
     __tablename__ = "Schedule"
     id = Column(Integer,primary_key=True)
@@ -106,3 +148,9 @@ class Schedule(Base):
 
     proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "schedule")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
