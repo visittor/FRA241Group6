@@ -23,7 +23,7 @@
         <![endif]-->
 
         <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="assets/ico/FIBO2.jpg">
+        <link rel="shortcut icon" href="${request.static_url('FRA241PROJECT:static/assets/ico/FIBO2.jpg')}">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${request.static_url('FRA241PROJECT:static/assets/ico/apple-touch-icon-144-precomposed.png')}">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${request.static_url('FRA241PROJECT:static/assets/ico/apple-touch-icon-114-precomposed.png')}">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${request.static_url('FRA241PROJECT:static/assets/ico/apple-touch-icon-72-precomposed.png')}">
@@ -60,7 +60,7 @@
 	                        		<div class="form-top-left">
 	                        			<h3>Log in </h3>
 										<p>ใส่ชื่อผู้ใช้และรหัสผ่าน:</p>
-										<p>${message}</p>
+										<font color="red"><p>${message}</p></font>
 	                        		</div>
 	                        		<div class="form-top-right">
 	                        			<i class="fa fa-key"></i>
