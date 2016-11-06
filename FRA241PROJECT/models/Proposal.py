@@ -27,16 +27,16 @@ class Proposal(Base):
     activity_comparition = Column(Text)#การเทียบค่ากิจกรรม
     durtion = Column(Text)#ระยะเวลาดำเนินงาน
 
-    owner_for_proposal = relationship("Owner_for_proposal",back_populates = "parent_project")#ผู้รับผิดชอบ
-    member_for_proposal = relationship("Member_for_proposal",back_populates = "parent_project")#ผู้เข้าร่วม
+    owner_for_proposal = relationship("Owner_for_proposal",back_populates = "parent_proposal")#ผู้รับผิดชอบ
+    member_for_proposal = relationship("Member_for_proposal",back_populates = "parent_proposal")#ผู้เข้าร่วม
 
     number_of_member = Column(Integer)
     evaluation_index = Column(Text)#รูปแบบการประเมินผล
     profit = Column(Text)#ประโบชน์ที่คาดว่าจะได้รับ/ผลที่คาดว่าจะได้รับ
     type_of_activity = Column(Text)#ลักษณะกิจกรรม/ลักษณะการปฏิบัติงาน
 
-    cost = relationship("Cost",back_propulates="parent_proposal")#ค่าใช้จ่ายในการจัดกิจกรรม
-    delicate_budget = relationship("Delicate_budget",back_populates = "parent_project")#งบประมาณโดยละเอียด
+    cost = relationship("Cost",back_populates="parent_proposal")#ค่าใช้จ่ายในการจัดกิจกรรม
+    delicate_budget = relationship("Delicate_budget",back_populates = "parent_proposal")#งบประมาณโดยละเอียด
 
     success_criteria = Column(Text)#ตัวชี้วัดความสำเร็จของโครงการ
 
@@ -76,12 +76,16 @@ class Owner_for_proposal(Base):
     __tablename__ = "Owner_for_proposal"
     id = Column(Integer,primary_key=True)
     text = Column(Text)
+
+    proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates="owner_for_proposal")
 
 class Member_for_proposal(Base):
     __tablename__ = "Member_for_proposal"
     id = Column(Integer,primary_key=True)
     text = Column(Text)
+
+    proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "member_for_proposal")
 
 class Delicate_budget(Base):
@@ -91,12 +95,14 @@ class Delicate_budget(Base):
     descrip = Column(Text)#รายละเอียด
     value = Column(Text)#จำนวนเงิน
 
+    proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "delicate_budget")
 
 class Schedule(Base):
-    __table__ = "Schedule"
+    __tablename__ = "Schedule"
     id = Column(Integer,primary_key=True)
     time = Column(Text)
     descrip = Column(Text)
 
+    proposal_id = Column(Integer, ForeignKey("Proposal.id"))
     parent_proposal = relationship("Proposal",back_populates = "schedule")

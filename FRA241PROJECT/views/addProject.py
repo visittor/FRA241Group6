@@ -10,7 +10,8 @@ from pyramid.view import (
     view_defaults,
 )
 
-from ..models import ( Project, User)
+from ..models.Project import Project
+from ..models.User import User
 from  ..models.Proposal import (Proposal,
                                 Objective,
                                 Cost,
@@ -30,60 +31,146 @@ class Project_view():
         self.request = request
 
     @view_config(route_name = 'addProject',renderer = "../templates/index.pt")
-    def add_project(self,request):
-        if self.request.params["project_title"] == '':
-            return dict(alert='No project title',current_title = '')
+    def add_project(self):
+        # user = self.request.user
+        thisUser = self.request.user.id
+        if self.request.params.get("project_title",'') == '':
+            return dict(alert='No project title',current_title = '',flag= False)
         elif "volunteer-button" in self.request.params:
-            return dict(flag = 'volunteer',current_title = self.request.params["project_title"])
+            print "\n\n\n\n\n\n\n\nvolun\n\n\n\n\n\n\n\n\n\n"
+            return dict(flag = 'volunteer',current_title = self.request.params["project_title"],alert = False)
         elif "competitive-button" in self.request.params:
-            return dict(flag = 'competitive',current_title = self.request.params["project_title"])
+            print "\n\n\n\n\n\n\n\ncompet\n\n\n\n\n\n\n\n\n\n"
+            return dict(flag = 'competitive',current_title = self.request.params["project_title"],alert = False)
         elif "camp-button" in self.request.params:
-            return dict(flag = 'camp',current_title = self.request.params["project_title"])
+            print "\n\n\n\n\n\n\n\ncamp\n\n\n\n\n\n\n\n\n\n"
+            return dict(flag = 'camp',current_title = self.request.params["project_title"],alert = False)
 
         if "volunteer" in self.request.params:
             with transaction.manager:
                 session = self.request.db_session
                 project = Project(title=self.request.params["project_title"], type="volunteer")
+                project.owner_id = thisUser
                 session.add(project)
+            print "\n\n\n\n\n\nadd complete\n\n\n\n"
             user = self.request.user
             project_list = self.request.db_session.query(Project).filter_by(title=self.request.params["project_title"]).filter_by(owner_id=user.id).order_by(Project.id)
             project = project_list[-1]
-            headers = remember(self.request, user.id, project_id=project.id)
-            return HTTPFound(location = self.request.route_url('proposal'),headers=headers)
+            headers = remember(self.request, user.id)
+            return HTTPFound(location = self.request.route_url('proposal',project_id = project.id,type_project=project.type),headers=headers )
         elif "competitive" in self.request.params:
             with transaction.manager:
                 session = self.request.db_session
                 project = Project(title = self.request.params["project_title"],type = "competitive")
+                thisUser = self.request.user.id
+                project.owner_id = thisUser
                 session.add(project)
+            print "\n\n\n\n\n\nadd complete\n\n\n\n"
             user = self.request.user
             project_list = self.request.db_session.query(Project).filter_by(title=self.request.params["project_title"]).filter_by(owner_id=user.id).order_by(Project.id)
             project = project_list[-1]
-            headers = remember(self.request, user.id, project_id=project.id)
-            return HTTPFound(location=self.request.route_url('proposal'), headers=headers)
+            headers = remember(self.request, user.id)
+            return HTTPFound(location=self.request.route_url('proposal',project_id = project.id,type_project=project.type), headers=headers )
         elif "camp" in self.request.params:
             with transaction.manager:
                 session = self.request.db_session
                 project = Project(title = self.request.paramsp["project_title"],type = "camp")
+                thisUser = self.request.user.id
+                project.owner_id = thisUser
                 session.add(project)
+            print "\n\n\n\n\n\nadd complete\n\n\n\n"
             user = self.request.user
             project_list = self.request.db_session.query(Project).filter_by(title=self.request.params["project_title"]).filter_by(owner_id=user.id).order_by(Project.id)
             project = project_list[-1]
-            headers = remember(self.request, user.id, project_id=project.id)
-            return HTTPFound(location=self.request.route_url('proposal'),headers=headers,type_project=project.type )
+            headers = remember(self.request, user.id)
+            return HTTPFound(location=self.request.route_url('proposal',project_id = project.id,type_project=project.type),headers=headers )
 
-        return dict( current_title='')
+        return dict( current_title='',flag = False,alert = False)
 
     @view_config(route_name = 'proposal',match_param="type_project=formChamp",renderer = "../template/formChamp.pt")
-    def form_champ(self,request):
+    def form_champ(self):
+        try:
+            with self.request.db_session.query(Proposal).filter_by(parent_id=self.request.params["project_id"]).first() as proposal:
+
+                if proposal is not None:
+                    project_year=proposal.year
+                    project_activity_location=proposal.activity_location
+                    project_reason= proposal.Reason
+                    project_Calibration = proposal.activity_comparition
+                    project_duration=proposal.durtion
+                    project_evaluation = proposal.evaluation_index
+                    project_profit=proposal.profit
+                    list_OJ = [ i.text for i in proposal.objective]
+                    count_OJ = len(list_OJ)
+                    list_PR = [i.text for i in proposal.owner_for_proposal]
+                    count_P_R = len(list_PR)
+                    list_PM = [i.text for i in proposal.member_for_proposal]
+                    count_P_M = len(list_PM)
+                    list_BGT = [i.text for i in proposal.cost]
+                    count_BGT = len(list_BGT)
+                    list_DB = [[i.order,i.descrip,i.value] for i in proposal.delicate_budget]
+                    count_DB = len(list_DB)
+                    list_schedule = [[i.time,i.descrip] for i in proposal.schedule]
+                    count_schedule = len(list_schedule)
+
+                else:
+                    project_year = ''
+                    project_activity_location = ''
+                    project_reason = ''
+                    project_Calibration = ''
+                    project_duration = ''
+                    project_evaluation = ''
+                    project_profit = ''
+                    list_OJ = []
+                    count_OJ = len(list_OJ)
+                    list_PR = []
+                    count_P_R = len(list_PR)
+                    list_PM = []
+                    count_P_M = len(list_PM)
+                    list_BGT = []
+                    count_BGT = len(list_BGT)
+                    list_DB = []
+                    count_DB = len(list_DB)
+                    list_schedule = []
+                    count_schedule = len(list_schedule)
+                    is_exist = False
+        except NoResultFound:
+            is_exist = False
+            project_year = ''
+            project_activity_location = ''
+            project_reason = ''
+            project_Calibration = ''
+            project_duration = ''
+            project_evaluation = ''
+            project_profit = ''
+            list_OJ = []
+            count_OJ = len(list_OJ)
+            list_PR = []
+            count_P_R = len(list_PR)
+            list_PM = []
+            count_P_M = len(list_PM)
+            list_BGT = []
+            count_BGT = len(list_BGT)
+            list_DB = []
+            count_DB = len(list_DB)
+            list_schedule = []
+            count_schedule = len(list_schedule)
+
+        try:
+            with self.request.db_session.query(Project).filter_by(id=self.request.headers["project_id"]).first() as project:
+                if project is not None:
+                    start_date = str(project.start_date.day)+"/"+str(project.start_date.month)+"/"+str(project.start_date.year)
+                    finish_date = str(project.finish_date.day)+"/"+str(project.finish_date.month)+"/"+str(project.finish_date.year)
+                elif project is None:
+                    return HTTPFound(location=self.request.route_url("addProject"))
+        except NoResultFound:
+            return HTTPFound(location=self.request.route_url("addProject"))
+
         if "P_N" in self.request.params:
             project_title = self.request.params["P_N"]
-        else:
-            project_title = ''
 
         if "Year" in self.request.params:
             project_year = self.request.params["Year"]
-        else:
-            project_year = ''
 
         if "Date-start" in self.request.params:
             raw_date = self.request.params["Date-start"]
@@ -102,8 +189,6 @@ class Project_view():
 
             else:
                 start_date = ''
-        else:
-            start_date = ''
 
         if "Date-finish" in self.request.params:
             raw_date_finish = self.request.params["Date-finsish"]
@@ -122,77 +207,69 @@ class Project_view():
 
             else:
                 finish_date = ''
-        else:
-            finish_date = ''
 
         if "P_P" in self.request.params:
             project_activity_location = self.request.params["P_P"]
-        else:
-            project_activity_location = ''
 
         if "Reason_Project" in self.request.params:
             project_reason = self.request.params["Reason_Project"]
-        else:
-            project_reason = ''
 
         count_OJ = 1
-        list_OJ = []
         while True:
             name_inParam = "OJ"+str(count_OJ)
             if name_inParam in self.request.params:
-                list_OJ.append(self.request.params[name_inParam])
-
+                if self.request.params[name_inParam] in list_OJ:
+                    pass
+                else:
+                    list_OJ.append(self.request.params[name_inParam])
             else:
                 break
             count_OJ+=1
 
         if "Calibration" in self.request.params:
             project_Calibration = self.request.params["Calibration"]
-        else:
-            project_Calibration = ''
 
         count_P_R = 1
-        list_PR = []
         while True:
             name_PR_inParam = "P_R"+str(count_P_R)
             if name_PR_inParam in self.request.params:
-                list_PR.append(self.request.params[name_PR_inParam])
-
+                if self.request.params[name_PR_inParam] in list_PR:
+                    pass
+                else:
+                    list_PR.append(self.request.params[name_PR_inParam])
             else:
                 break
             count_P_R+=1
 
         if "Duration" in self.request.params:
             project_duration = self.request.params["Duration"]
-        else:
-            project_duration = ''
 
         count_P_M = 1
-        list_PM = []
         while True:
             name_PM_inParam = "P_M"+str(count_P_M)
             if name_PM_inParam in self.request.params:
-                list_PM.append(self.request.params[name_PM_inParam])
+                if self.request.params[name_PM_inParam] in list_PM:
+                    pass
+                else:
+                    list_PM.append(self.request.params[name_PM_inParam])
             else:
                 break
             count_P_M+=1
 
         if "evaluation" in self.request.params:
-            project_evaluation = self.request.params["evaluation"]
-        else:
-            project_evaluation = ''
+            project_evaluation = self.request.params["evaluation"]'
 
         if "Benefits" in self.request.params:
             project_profit = self.request.params["Benefits"]
-        else:
-            project_profit = ''
 
         count_BGT = 1
-        list_BGT = []
         while True:
             name_BGT_inParam = "BGT"+str(count_BGT)
             if name_BGT_inParam in self.request.params:
-                list_BGT.append(self.request.params[name_BGT_inParam])
+                if self.request.params[name_BGT_inParam] in list_BGT:
+                    pass
+                else:
+                    list_BGT.append(self.request.params[name_BGT_inParam])
             else:
                 break
             count_BGT+=1
@@ -221,12 +298,6 @@ class Project_view():
             count_schedule+=1
 
         if "save_proposal" in self.request.params:
-            try:
-                proposal = request.db_session.query(Proposal).filter_by(parent_id=self.request.headers["project_id"]).first()
-                if proposal is None:
-                    is_exist = False
-            except NoResultFound:
-                return HTTPFound(location=self.request.route_url("addProject"))
             if is_exist == False:
                 with transaction.manager:
 
@@ -238,7 +309,6 @@ class Project_view():
                                         evaluation_index = project_evaluation,
                                         profit = project_profit,
                                         )
-                    project = request.db_session.query(Project).filter_by(id = self.request.headers["project_id"]).first()
                     if type(start_date) != str:
                         project.start_date = start_date
                     if type(finish_date) != str:
@@ -264,6 +334,40 @@ class Project_view():
                         proposal.schedule.append(sch)
 
                     self.request.db_session.add(proposal)
+
+            else:
+                with transaction.manager:
+                    proposal = self.request.db_session.query(Proposal).filter_by(parent_id=self.request.headers["project_id"]).first()
+                    project = self.request.db_session.query(Project).filter_by(id=self.request.headers["project_id"]).first()
+                    proposal.year = project_year
+                    proposal.activity_location = project_activity_location
+                    proposal.Reason = project_reason
+                    proposal.activity_comparition = project_Calibration
+                    proposal.durtion = project_duration
+                    proposal.evaluation_index = project_evaluation
+                    proposal.profit = project_profit
+                    if type(start_date)!= str:
+                        project.start_date = start_date
+                    if type(finish_date) != str:
+                        project.finish_date = finish_date
+                    for i in list_OJ:
+                        obj = Objective(text=i)
+                        proposal.objective.append(obj)
+                    for i in list_PR:
+                        PR = Owner_for_proposal(text=i)
+                        proposal.owner_for_proposal.append(PR)
+                    for i in list_PM:
+                        PM = Member_for_proposal(text=i)
+                        proposal.member_for_proposal.append(PM)
+                    for i in list_BGT:
+                        BGT = Cost(text=i)
+                        proposal.cost.append(BGT)
+                    for i in list_DB:
+                        DB = Delicate_budget(order=i[0], descrip=i[1], value=i[2])
+                        proposal.delicate_budget.append(DB)
+                    for i in list_schedule:
+                        sch = Schedule(time=i[0], descrip=i[1])
+                        proposal.schedule.append(sch)
 
         return dict(project_title = project_title,
                     project_year = project_year,
