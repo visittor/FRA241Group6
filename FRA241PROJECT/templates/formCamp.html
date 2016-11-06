@@ -397,7 +397,7 @@
     <div class="col-md-5 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-      <textarea class="form-control" name="Reason_Project" ></textarea>
+      <textarea class="form-control" name="Reason_Project" value = "${project_reason}">${project_reason}</textarea>
     </div>
   </div>
 </div>
@@ -412,7 +412,7 @@
 
         <table class="table table-striped"  id="OJExp">
           <tr>
-            <script tal:repeat = "obj list_OJ" >CreateNewRow0(obj);</script>
+            <script tal:repeat = "obj OJ_" >CreateNewRow0("${obj}");</script>
 
 
           </tr>
@@ -425,7 +425,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-        <textarea class="form-control" value = "${project_Calibration}" name="Calibration" ></textarea>
+        <textarea class="form-control" value = "${project_Calibration}" name="Calibration" >${project_Calibration}</textarea>
       </div>
     </div>
   </div>
@@ -440,7 +440,7 @@
 
         <table class="table table-striped"  id="P_RExp">
           <tr>
-            <script tal:repeat = "PR list_PR" >CreateNewRow1(PR);</script>
+            <script tal:repeat = "PR PR_" >CreateNewRow1("${PR}");</script>
 
 
           </tr>
@@ -468,7 +468,7 @@
 
         <table class="table table-striped"  id="P_MExp">
           <tr>
-            <script tal:repeat = "PM list_PM" >CreateNewRow0(PM);</script>
+            <script tal:repeat = "PM PM_" >CreateNewRow2("${PM}");</script>
 
 
           </tr>
@@ -505,7 +505,7 @@
 
         <table class="table table-striped"  id="BGTExp">
           <tr>
-            <script tal:repeat = "bgt list_BGT" >CreateNewRow3(bgt);</script>
+            <script tal:repeat = "bgt BGT_" >CreateNewRow3("${bgt}");</script>
 
 
           </tr>
@@ -524,7 +524,7 @@
 
         <table class="table table-striped"  id="D_BExp">
           <tr>
-            <script tal:repeat = "DB list_DB" >CreateNewRow4(DB[0],DB[1],DB[2]);</script>
+            <script tal:repeat = "DB DB_" >CreateNewRow4("${DB[0]}","${DB[1]}","${DB[2]}");</script>
             <th><div align="center">ลำดับ</div></th>
             <th><div align="center">รายละเอียด</div></th>
             <th><div align="center">จำนวนเงิน(บาท)</div></th>
@@ -551,7 +551,7 @@
         <button name="btnDel_schedule" type="button" id="btnDel_schedule" class="btn btn-danger" onClick="RemoveRow5();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
         <table class="table table-striped"  id="scheduleExp">
           <tr>
-            <script tal:repeat = "Sch list_schedule" >CreateNewRow5(Sch[0],Sch[1]);</script>
+            <script tal:repeat = "Sch Sch_" >CreateNewRow5("${Sch[0]}","${Sch[1]}");</script>
             <th><div align="center">เวลา</div></th>
             <th><div align="center">รายละเอียด</div></th>
 
@@ -575,7 +575,7 @@
 </fieldset>
 </form>
 </div>
-    </div><!-- /.container -->
+    <!--/div--><!-- /.container -->
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
