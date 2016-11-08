@@ -1,3 +1,4 @@
+# -- coding: utf-8 --
 from pyramid.httpexceptions import HTTPFound
 from sqlalchemy.orm.exc import NoResultFound
 from pyramid.security import (
@@ -198,6 +199,8 @@ class Project_view():
             project_reason = self.request.params["Reason_Project"]
 
         count_OJ = 1
+        if "OJ1" in self.request.params:
+            list_OJ = []
         while True:
             print "\n\nfucking loop\n\n"
             name_inParam = "OJ"+str(count_OJ)
@@ -210,10 +213,29 @@ class Project_view():
                 break
             count_OJ+=1
 
-        if "Calibration" in self.request.params:
-            project_Calibration = self.request.params["Calibration"]
+        # if "Calibration" in self.request.params:
+        #     project_Calibration = self.request.params["Calibration"]
+        if "myradio" in self.request.params:
+            if self.request.params["myradio"] == 2:
+                project_Calibration = "กิจกรรมที่ไม่นับหน่วยชั่วโมง,"
+            elif self.request.params["myradio"] == 1:
+                project_Calibration = "กิจกรรมเลือกเข้าร่วม,"
+                if self.request.params.get("checkbox1","") != "":
+                    project_Calibration += "ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ:"+self.request.params.get("CB1",'')+","
+                if self.request.params.get("checkbox2","") != "":
+                    project_Calibration += "ด้านกีฬาและการส่งเสริมสุขภาพ:"+self.request.params("CB2",'')+","
+                if self.request.params.get("checkbox3","") != "":
+                    project_Calibration += "ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม:"+self.request.params.get("CB3","")+","
+                if self.request.params.get("checkbox4","") != "":
+                    project_Calibration += "ด้านทำนุบำรุงศิลปะและวัฒนธรรม:"+self.request.params.get("CB4","")+","
+                if self.request.params.get("checkbox5","") != "":
+                    project_Calibration += "ด้านนันทนาการและการพัฒนาบุคลิกภาพ:"+self.request.params.get("CB5","")+","
+                if self.request.params.get("checkbox6","") != "" :
+                    project_Calibration += "ด้านความภูมิใจ ความรัก ความผูกพันธ์มหาวิทยาลัย:"+self.request.params.get("CB6","")+","
 
         count_P_R = 1
+        if "P_R1" in self.request.params:
+            list_PR = []
         while True:
             name_PR_inParam = "P_R"+str(count_P_R)
             if name_PR_inParam in self.request.params:
@@ -229,6 +251,8 @@ class Project_view():
             project_duration = self.request.params["Duration"]
 
         count_P_M = 1
+        if "P_M1" in self.request.params:
+            list_PM = []
         while True:
             name_PM_inParam = "P_M"+str(count_P_M)
             if name_PM_inParam in self.request.params:
@@ -247,6 +271,8 @@ class Project_view():
             project_profit = self.request.params["Benefits"]
 
         count_BGT = 1
+        if "BGT1" in self.request.params:
+            list_BGT = []
         while True:
             name_BGT_inParam = "BGT"+str(count_BGT)
             if name_BGT_inParam in self.request.params:
@@ -259,7 +285,8 @@ class Project_view():
             count_BGT+=1
 
         count_DB = 1
-        list_DB = []
+        if "D_B1_1" in self.request.params:
+            list_DB = []
         while True:
             name_DB1_inParam = "D_B1_"+str(count_DB)
             name_DB2_inParam = "D_B2_"+str(count_DB)
@@ -271,7 +298,8 @@ class Project_view():
             count_DB+=1
 
         count_schedule = 1
-        list_schedule = []
+        if "schedule1_1" in self.request.params:
+            list_schedule = []
         while True:
             name_schedule1_inParam = "schedule1_"+str(count_schedule)
             name_schedule2_inParam = "schedule2_" + str(count_schedule)

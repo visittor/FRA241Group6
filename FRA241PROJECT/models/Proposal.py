@@ -47,7 +47,7 @@ class Proposal(Base):
     parent_project = relationship("Project", back_populates = "proposal", uselist = False)
 
     def __enter__(self):
-        pass
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
@@ -63,7 +63,7 @@ class Objective(Base):
     parent_proposal = relationship("Proposal", back_populates="objective")
 
     def __enter__(self):
-        pass
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
