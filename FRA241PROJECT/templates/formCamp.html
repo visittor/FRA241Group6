@@ -354,13 +354,15 @@
   </div>
 
   <div class="form-group">
+      <fieldset disabled>
     <label class="col-md-3 control-label">ชื่อโครงการ</label>
   <div class="col-md-5 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-  <input  name="P_N"  class="form-control" value = "${project_title}"  type="text">
+  <input  name="P_N" id="disabledTextInput" class="form-control" value = "${project_title}"  type="text" placeholder="Disabled input">
     </div>
   </div>
+      </fieldset>
 </div>
   <div class="form-group">
     <label class="col-md-3 control-label" >ปีการศึกษา</label>
