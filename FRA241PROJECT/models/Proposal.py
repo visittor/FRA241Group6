@@ -53,7 +53,6 @@ class Proposal(Base):
         pass
 
 
-
 class Objective(Base):
     __tablename__ = "Objective"
     id = Column(Integer , primary_key=True)
