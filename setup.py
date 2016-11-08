@@ -18,6 +18,8 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
+	'lxml',
+	'python-docx',
     ]
 
 tests_require = [
@@ -53,6 +55,7 @@ setup(name='FRA241PROJECT',
       [console_scripts]
       initialize_fra241project_db = FRA241PROJECT.scripts.initializedb:main
       insert_table = FRA241PROJECT.scripts.InsertData:main
+      gen = FRA241PROJECT.scripts.gen:main
       """,
       )
 # initialize_FRA241PROJECT_db = fra241project.scripts.initializedb:main
