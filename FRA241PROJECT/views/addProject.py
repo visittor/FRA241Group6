@@ -1,3 +1,4 @@
+# -- coding: utf-8 --
 from pyramid.httpexceptions import HTTPFound
 from sqlalchemy.orm.exc import NoResultFound
 from pyramid.security import (
@@ -95,7 +96,7 @@ class Project_view():
                 project_activity_location=proposal.activity_location
                 project_reason= proposal.Reason
                 project_Calibration = proposal.activity_comparition
-                project_duration=proposal.durtion
+                project_duration=proposal.duration
                 project_evaluation = proposal.evaluation_index
                 project_profit=proposal.profit
                 list_OJ = [ i.text for i in proposal.objective]
@@ -110,6 +111,7 @@ class Project_view():
                 count_DB = len(list_DB)
                 list_schedule = [[i.time,i.descrip] for i in proposal.schedule]
                 count_schedule = len(list_schedule)
+            is_exist = True
         except NoResultFound:
             is_exist = False
             project_year = ''
@@ -198,6 +200,8 @@ class Project_view():
             project_reason = self.request.params["Reason_Project"]
 
         count_OJ = 1
+        if "OJ1" in self.request.params:
+            list_OJ = []
         while True:
             print "\n\nfucking loop\n\n"
             name_inParam = "OJ"+str(count_OJ)
@@ -210,10 +214,30 @@ class Project_view():
                 break
             count_OJ+=1
 
-        if "Calibration" in self.request.params:
-            project_Calibration = self.request.params["Calibration"]
-
+        # if "Calibration" in self.request.params:
+        #     project_Calibration = self.request.params["Calibration"]
+        if "myradio" in self.request.params:
+            print "\n\n\n\nHave myradio\n\n\n\n\n\n"
+            if self.request.params["myradio"] == "2":
+                project_Calibration = u"กิจกรรมที่ไม่นับหน่วยชั่วโมง,"
+            elif self.request.params["myradio"] == "1":
+                project_Calibration = u"กิจกรรมเลือกเข้าร่วม,"
+                if self.request.params.get("checkbox1","") != "":
+                    project_Calibration += u"ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ:"+self.request.params.get("CB1",'')+","
+                if self.request.params.get("checkbox2","") != "":
+                    project_Calibration += u"ด้านกีฬาและการส่งเสริมสุขภาพ:"+self.request.params.get("CB2",'')+","
+                if self.request.params.get("checkbox3","") != "":
+                    project_Calibration += u"ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม:"+self.request.params.get("CB3","")+","
+                if self.request.params.get("checkbox4","") != "":
+                    project_Calibration += u"ด้านทำนุบำรุงศิลปะและวัฒนธรรม:"+self.request.params.get("CB4","")+","
+                if self.request.params.get("checkbox5","") != "":
+                    project_Calibration += u"ด้านนันทนาการและการพัฒนาบุคลิกภาพ:"+self.request.params.get("CB5","")+","
+                if self.request.params.get("checkbox6","") != "" :
+                    project_Calibration += u"ด้านความภูมิใจ ความรัก ความผูกพันธ์มหาวิทยาลัย:"+self.request.params.get("CB6","")+","
+        dict_type = {u"ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ":1,u"ด้านกีฬาและการส่งเสริมสุขภาพ":2,u"ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม":3,u"ด้านทำนุบำรุงศิลปะและวัฒนธรรม":4,u"ด้านนันทนาการและการพัฒนาบุคลิกภาพ":5,u"ด้านความภูมิใจ ความรัก ความผูกพันธ์มหาวิทยาลัย":6}
         count_P_R = 1
+        if "P_R1" in self.request.params:
+            list_PR = []
         while True:
             name_PR_inParam = "P_R"+str(count_P_R)
             if name_PR_inParam in self.request.params:
@@ -229,6 +253,8 @@ class Project_view():
             project_duration = self.request.params["Duration"]
 
         count_P_M = 1
+        if "P_M1" in self.request.params:
+            list_PM = []
         while True:
             name_PM_inParam = "P_M"+str(count_P_M)
             if name_PM_inParam in self.request.params:
@@ -247,6 +273,8 @@ class Project_view():
             project_profit = self.request.params["Benefits"]
 
         count_BGT = 1
+        if "BGT1" in self.request.params:
+            list_BGT = []
         while True:
             name_BGT_inParam = "BGT"+str(count_BGT)
             if name_BGT_inParam in self.request.params:
@@ -259,7 +287,8 @@ class Project_view():
             count_BGT+=1
 
         count_DB = 1
-        list_DB = []
+        if "D_B1_1" in self.request.params:
+            list_DB = []
         while True:
             name_DB1_inParam = "D_B1_"+str(count_DB)
             name_DB2_inParam = "D_B2_"+str(count_DB)
@@ -271,7 +300,9 @@ class Project_view():
             count_DB+=1
 
         count_schedule = 1
-        list_schedule = []
+        if "schedule1_1" in self.request.params:
+            print "\n\n\n\n\nin this fucking condition\n\n\n\n\n"
+            list_schedule = []
         while True:
             name_schedule1_inParam = "schedule1_"+str(count_schedule)
             name_schedule2_inParam = "schedule2_" + str(count_schedule)
@@ -321,8 +352,8 @@ class Project_view():
 
             else:
                 with transaction.manager:
-                    proposal = self.request.db_session.query(Proposal).filter_by(parent_id=self.request.headers["project_id"]).first()
-                    project = self.request.db_session.query(Project).filter_by(id=self.request.headers["project_id"]).first()
+                    proposal = self.request.db_session.query(Proposal).filter_by(parent_id=self.request.matchdict["project_id"]).first()
+                    project = self.request.db_session.query(Project).filter_by(id=self.request.matchdict["project_id"]).first()
                     proposal.year = project_year
                     proposal.activity_location = project_activity_location
                     proposal.Reason = project_reason
@@ -352,6 +383,7 @@ class Project_view():
                     for i in list_schedule:
                         sch = Schedule(time=i[0], descrip=i[1])
                         proposal.schedule.append(sch)
+
         if "Date-start" in self.request.params:
             start_date_fot_return = self.request.params["Date-start"]
         else:
@@ -360,23 +392,47 @@ class Project_view():
             finish_date_fot_return = self.request.params["Date-finish"]
         else:
             finish_date_fot_return = ''
-        return dict(project_title = project_title,
-                    project_year = project_year,
-                    project_activity_location = project_activity_location,
-                    project_reason = project_reason,
-                    project_Calibration = project_Calibration,
-                    project_duration = project_duration,
-                    project_evaluation = project_evaluation,
-                    project_profit = project_profit,
-                    start_date = start_date_fot_return,
-                    finish_date = finish_date_fot_return,
-                    OJ_ = list_OJ,
-                    PR_ = list_PR,
-                    PM_ = list_PM,
-                    BGT_ = list_BGT,
-                    DB_ = list_DB,
-                    Sch_ = list_schedule,
-                   )
+        dict2return =  dict(project_title=project_title,
+                    project_year=project_year,
+                    project_activity_location=project_activity_location,
+                    project_reason=project_reason,
+                    project_duration=project_duration,
+                    project_evaluation=project_evaluation,
+                    project_profit=project_profit,
+                    start_date=start_date_fot_return,
+                    finish_date=finish_date_fot_return,
+                    OJ_=list_OJ,
+                    PR_=list_PR,
+                    PM_=list_PM,
+                    BGT_=list_BGT,
+                    DB_=list_DB,
+                    Sch_=list_schedule,
+                    )
+        split_calibration = project_Calibration.split(",")
+        print "\n\n\n\n this is fucking split text",split_calibration,"\n\n\n\n\n"
+        if split_calibration == u"กิจกรรมที่ไม่นับหน่วยชั่วโมง":
+            dict2return.update(dict(myradio2="checked"))
+
+        else:
+            dict2return.update(dict(myradio1="checked"))
+            for i in range(1,len(split_calibration)-1):
+                if split_calibration[i].split(":")[0] in dict_type:
+                    if dict_type[split_calibration[i].split(":")[0]]==1:
+                        dict2return.update(dict(Checkbox1=split_calibration[i].split(":")[1]))
+                    if dict_type[split_calibration[i].split(":")[0]] == 2:
+                        dict2return.update(dict(Checkbox2=split_calibration[i].split(":")[1]))
+                    if dict_type[split_calibration[i].split(":")[0]] == 3:
+                        dict2return.update(dict(Checkbox3=split_calibration[i].split(":")[1]))
+                    if dict_type[split_calibration[i].split(":")[0]] == 4:
+                        dict2return.update(dict(Checkbox4=split_calibration[i].split(":")[1]))
+                    if dict_type[split_calibration[i].split(":")[0]] == 5:
+                        dict2return.update(dict(Checkbox5=split_calibration[i].split(":")[1]))
+                    if dict_type[split_calibration[i].split(":")[0]] == 6:
+                        dict2return.update(dict(Checkbox6=split_calibration[i].split(":")[1]))
+        print "\n\n\n\n this is fucking fucking return dick",dict2return,"\n\n\n\n\n\n\n"
+        return dict2return
+
+
 
 
 
