@@ -31,12 +31,7 @@
     <![endif]-->
     <style type="text/css">
       h2 {font-size: 150%}
-      <!--การเปรียบเทียบกิจกรรม-->
     </style>
-    <link rel="stylesheet" href="../static/indexAddproject/bootstrap.css"/>
-    <link rel="stylesheet" href="../static/indexAddproject/bower_components/Font-Awesome/css/font-awesome.css"/>
-    <link rel="stylesheet" href="../static/indexAddproject/build.css"/>
-
     <!-- วัตถุประสงค์0-->
     <script type="text/javascript">
       function CreateNewRow0(text)
@@ -429,108 +424,13 @@
   </div>
   <div class="form-group">
     <label class="col-md-3 control-label">การเทียบค่ากิจกรรม</label>
-    <div class="col-md-6 inputGroupContainer">
+    <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
-        <div class="radio radio-success">
-          <input type="radio" name="myradio" id="myradio1" value="1"checked="checked" >
-          <label >กิจกรรมเลือกเข้าร่วม</label>
-        </div>
-        <div class="radio radio-success">
-          <input type="radio" name="myradio" id="myradio2" value="2">
-          <label >กิจกรรมที่ไม่นับหน่วยชั่วโมง</label>
-        </div>
-
-        <div id="place_select">
-          <div class="checkbox checkbox-success">
-            <div class="row">
-              <div class="col-md-7">
-                    <input id="checkbox1" name="checkbox1" value="1" class="styled" type="checkbox">
-                    <label for="checkbox1">ด้านพัฒนาทักษะทางวิชาการและวิชาชีพ</label>
-              </div>
-              <div class="col-md-4"><input type="text" name="CB1" id="CB1" maxlength="5" style="width:50px;" />ชั่วโมง</div>
-            </div>
-          </div>
-
-
-          <div class="checkbox checkbox-success">
-            <div class="row">
-              <div class="col-md-7">
-                  <input id="checkbox2" name="checkbox2" value="2" class="styled" type="checkbox">
-                  <label for="checkbox2">ด้านกีฬาและการส่งเสริมสุขภาพ</label>
-              </div>
-                <div class="col-md-4"><input type="text" name="CB2" id="CB2" maxlength="5" style="width:50px;" />ชั่วโมง</div>
-              </div>
-            </div>
-
-
-          <div class="checkbox checkbox-success">
-            <div class="row">
-              <div class="col-md-7">
-                <input id="checkbox3" name="checkbox3" value="3" class="styled" type="checkbox">
-                <label for="checkbox3">ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม</label>
-              </div>
-              <div class="col-md-4"><input type="text" name="CB3" id="CB3" maxlength="5" style="width:50px;" />ชั่วโมง</div>
-            </div>
-          </div>
-
-          <div class="checkbox checkbox-success">
-            <div class="row">
-              <div class="col-md-7">
-                <input id="checkbox4" name="checkbox4" value="4" class="styled" type="checkbox">
-                <label for="checkbox4">ด้านทำนุบำรุงศิลปะและวัฒนธรรม</label>
-                </div>
-                <div class="col-md-4"><input type="text" name="CB4" id="CB4" maxlength="5" style="width:50px;" />ชั่วโมง</div>
-                </div>
-              </div>
-
-
-          <div class="checkbox checkbox-success">
-            <div class="row">
-              <div class="col-md-7">
-            <input id="checkbox5" name="checkbox5" value="5" class="styled" type="checkbox">
-            <label for="checkbox5">ด้านนันทนาการและการพัฒนาบุคลิกภาพ</label>
-              </div>
-              <div class="col-md-4"><input type="text" name="CB5" id="CB5" maxlength="5" style="width:50px;" />ชั่วโมง</div>
-          </div>
-            </div>
-
-
-
-          <div class="checkbox checkbox-success">
-            <div class="row">
-              <div class="col-md-7">
-            <input id="checkbox6" name="checkbox6" value="6" class="styled" type="checkbox">
-            <label for="checkbox6">ด้านความภูมิใจ ความรัก ความผูกพันธ์มหาวิทยาลัย</label>
-              </div>
-              <div class="col-md-4"><input type="text" name="CB6" id="CB6" maxlength="5" style="width:50px;" />ชั่วโมง</div>
-          </div>
-          </div>
-
-          </table>
-        </div>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+        <textarea class="form-control" value = "${project_Calibration}" name="Calibration" >${project_Calibration}</textarea>
       </div>
     </div>
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <!--<script type="text/javascript" src="js.js"></script>  -->
-  <script type="text/javascript">
-    $(function(){
-
-      // เมื่อ radio ชื่อว่า myradio ถูก คลิก
-      $(":radio[name='myradio']").on("click",function(){
-        var valData=$(this).val(); // เก็บค่า ไว้ในตัวแปร
-        if(valData==2){ // เปรียบเทียบค่า
-          $("#place_select").hide(); // ซ่อนส่วนที่ต้องการ
-        }else{
-          $("#place_select").show();   //แสดงส่วนที่ต้องการ
-        }
-      });
-
-    });
-  </script>
-
-
-
   <div class="form-group">
     <label class="col-md-3 control-label" >ผู้รับผิดชอบ</label>
     <div class="col-md-5 inputGroupContainer">
@@ -659,14 +559,6 @@
 
           </tr>
         </table>
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-md-3 control-label">ยืมเงินหรือไม่</label>
-    <div class="col-md-5 inputGroupContainer">
-      <div class="input-group">
-        <input id="L_M" name="L_M" value="1" class="styled" type="checkbox">
       </div>
     </div>
   </div>
