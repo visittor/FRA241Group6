@@ -432,6 +432,184 @@ class Project_view():
         print "\n\n\n\n this is fucking fucking return dick",dict2return,"\n\n\n\n\n\n\n"
         return dict2return
 
+    @view_config(route_name = 'proposal',match_param="type_project=competitive",renderer = "../templates/formCamp.pt")
+    def form_competitive(self):
+        try:
+            with self.request.db_session.query(Proposal).filter_by(parent_id=self.request.matchdict["project_id"]).one() as proposal:
+                project_year=proposal.year
+                project_place=proposal.location
+                project_activity_location = proposal.activity_location
+                project_reason= proposal.Reason
+                project_Bene=proposal.benefit
+                project_advisor = proposal.advisor_for_proposal
+                project_activity_type = proposal.type_of_activity
+                project_criteria = proposal.success_criteria
+                list_OJ = [ i.text for i in proposal.objective]
+                count_OJ = len(list_OJ)
+                list_PR = [i.text for i in proposal.owner_for_proposal]
+                count_P_R = len(list_PR)
+                list_PM = [i.text for i in proposal.member_for_proposal]
+                count_P_M = len(list_PM)
+                list_DB = [[i.order,i.descrip,i.value] for i in proposal.delicate_budget]
+                count_DB = len(list_DB)
+            is_exist = True
+        except NoResultFound:
+            is_exist = False
+            project_year = ''
+            project_activity_location = ''
+            project_place = ''
+            project_reason = ''
+            project_activity_type = ''
+            project_criteria = ''
+            project_Bene = ''
+            project_advisor = ''
+            list_OJ = []
+            count_OJ = len(list_OJ)
+            list_PR = []
+            count_P_R = len(list_PR)
+            list_PM = []
+            count_P_M = len(list_PM)
+            list_DB = []
+            count_DB = len(list_DB)
+
+
+        try:
+            with self.request.db_session.query(Project).filter_by(id=self.request.matchdict["project_id"]).first() as project:
+                # start_date = str(project.start_date.day) + "/" + str(project.start_date.month) + "/" + str(project.start_date.year)
+                # finish_date = str(project.finish_date.day) + "/" + str(project.finish_date.month) + "/" + str(project.finish_date.year)
+                project_title = project.title
+                if project.start_date is not None:
+                    start_date = str(project.start_date.day)+"/"+str(project.start_date.month)+"/"+str(project.start_date.year)
+                elif project.start_date is None:
+                    start_date = ''
+                # if project.finish_date is not None:
+                #     finish_date = str(project.finish_date.day)+"/"+str(project.finish_date.month)+"/"+str(project.finish_date.year)
+                # else:
+                #     finish_date = ''
+        except NoResultFound:
+            print "\n\n\n\n\n\n\nwhy the fuck there is no result\n\n\n\n\n\n\n"
+            return HTTPFound(location=self.request.route_url("addProject"))
+
+        if "Year" in self.request.params:
+            project_year = self.request.params.get("Year",'')
+
+        if "Place" in self.request.params:
+            project_place = self.request.params.get("Place",'')
+
+        if "Date" in self.request.params:
+            raw_date_start = self.request.params["Date"]
+            if "/" not in raw_date_start:
+                raw_date_start = 'Invalid format'
+            split_start_date = raw_date_start.split("/")
+            if len(split_start_date) != 3:
+                raw_date_start = 'Invalid format'
+            for i in split_start_date:
+                if i.isdigit() == False:
+                    raw_date_start = 'Invalid format'
+                    break
+
+            if raw_date_start != 'Invalid format':
+                start_date = datetime.date(int(split_start_date[2]), int(split_start_date[1]), int(split_start_date[0]))
+
+            else:
+                start_date = ''
+
+        if "Reason_Project" in self.request.params:
+            project_reason = self.request.params.get('Reason_Project',"")
+
+        count_OJ = 1
+        if "OJ1" in self.request.params:
+            list_OJ = []
+        while True:
+            print "\n\nfucking loop\n\n"
+            name_inParam = "OJ"+str(count_OJ)
+            if name_inParam in self.request.params:
+                if self.request.params[name_inParam] in list_OJ:
+                    pass
+                else:
+                    list_OJ.append(self.request.params[name_inParam])
+            else:
+                break
+            count_OJ+=1
+
+        count_Bene = 1
+        if "Benefits1_1" in self.request.params:
+            project_Bene = ''
+        while True:
+            print "\n\nfucking loop\n\n"
+            name_inParam = "Benefits1_"+str(count_OJ)
+            if name_inParam in self.request.params:
+                project_Bene += self.request.params[name_inParam]+";"
+            else:
+                break
+            count_Bene+=1
+
+        count_P_R = 1
+        if "P_R1" in self.request.params:
+            list_PR = []
+        while True:
+            name_PR_inParam = "P_R"+str(count_P_R)
+            if name_PR_inParam in self.request.params:
+                if self.request.params[name_PR_inParam] in list_PR:
+                    pass
+                else:
+                    list_PR.append(self.request.params[name_PR_inParam])
+            else:
+                break
+            count_P_R+=1
+
+        if "Advisor" in self.request.params:
+            project_advisor = self.request.params.get("Advisor",'')
+
+        count_P_M = 1
+        if "P_M1" in self.request.params:
+            list_PM = []
+        while True:
+            name_PM_inParam = "P_M"+str(count_P_M)
+            if name_PM_inParam in self.request.params:
+                if self.request.params[name_PM_inParam] in list_PM:
+                    pass
+                else:
+                    list_PM.append(self.request.params[name_PM_inParam])
+            else:
+                break
+            count_P_M+=1
+
+        if "P_P" in self.request.params:
+            project_activity_location = self.request.params.get("P_P",'')
+
+        if "P_C" in self.request.params:
+            project_activity_type = self.request.params["P_C"]
+
+        count_DB = 1
+        if "D_B1_1" in self.request.params:
+            list_DB = []
+        while True:
+            name_DB1_inParam = "D_B1_"+str(count_DB)
+            name_DB2_inParam = "D_B2_"+str(count_DB)
+            name_DB3_inParam = "D_B3_"+str(count_DB)
+            if name_DB1_inParam in self.request.params and name_DB2_inParam in self.request.params and name_DB3_inParam in self.request.params:
+                list_DB.append([self.request.params[name_DB1_inParam],self.request.params[name_DB2_inParam],self.request.params[name_DB3_inParam]])
+            else:
+                break
+            count_DB+=1
+
+        count_criteria = 1
+        if "S_P1_1" in self.request.params:
+            project_criteria = ''
+        while True:
+            print "\n\nfucking loop\n\n"
+            name_inParam = "S_P1_"+str(count_OJ)
+            if name_inParam in self.request.params:
+                project_criteria += self.request.params[name_inParam]+";"
+            else:
+                break
+            count_criteria+=1
+
+
+
+
+
 
 
 

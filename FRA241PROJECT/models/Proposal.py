@@ -29,10 +29,14 @@ class Proposal(Base):
 
     owner_for_proposal = relationship("Owner_for_proposal",back_populates = "parent_proposal")#ผู้รับผิดชอบ
     member_for_proposal = relationship("Member_for_proposal",back_populates = "parent_proposal")#ผู้เข้าร่วม
+    advisor_for_proposal = Column(Text)
 
     number_of_member = Column(Integer)
     evaluation_index = Column(Text)#รูปแบบการประเมินผล
-    profit = Column(Text)#ประโบชน์ที่คาดว่าจะได้รับ/ผลที่คาดว่าจะได้รับ
+    profit = Column(Text)#ผลที่คาดว่าจะได้รับ
+
+    benefit = Column(Text)#ประโบชน์ที่คาดว่าจะได้รับ
+
     type_of_activity = Column(Text)#ลักษณะกิจกรรม/ลักษณะการปฏิบัติงาน
 
     cost = relationship("Cost",back_populates="parent_proposal")#ค่าใช้จ่ายในการจัดกิจกรรม
