@@ -237,37 +237,38 @@
   </script>
   <!-- งบประมาณที่ใช้4-->
   <script type="text/javascript">
-    function CreateNewRow4()
-    {
-      var intLine = parseInt(document.add_project_form.B_U.value);
-      intLine++;
+    function CreateNewRow4( order,descrip,value)
+      {
+        var intLine = parseInt(document.add_project_form.D_B.value);
+        intLine++;
 
-      var theTable = document.all.B_UExp
-      var newRow = theTable.insertRow(theTable.rows.length)
-      newRow.id = newRow.uniqueID
+        var theTable = document.all.D_BExp
+        var newRow = theTable.insertRow(theTable.rows.length)
+        newRow.id = newRow.uniqueID
 
-      var item1 = 1
-      var newCell
+        var item1 = 1
+        var newCell
 
-      //*** Column 1 ***//
-      newCell = newRow.insertCell(0)
-      newCell.id = newCell.uniqueID
-      newCell.setAttribute("className", "css-name");
-      newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"B_U1_"+intLine+"\" VALUE=\"\">"
+        //*** Column 1 ***//
+        newCell = newRow.insertCell(0)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\""+order+"\">"
+        //***<input type="text" size = "10" name = "D_B1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\"\">"***//
 
-      //*** Column 2 ***//
-      newCell = newRow.insertCell(1)
-      newCell.id = newCell.uniqueID
-      newCell.setAttribute("className", "css-name");
-      newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"B_U2_"+intLine+"\" VALUE=\"\">"
-      //*** Column 3***//
-      newCell = newRow.insertCell(2)
-      newCell.id = newCell.uniqueID
-      newCell.setAttribute("className", "css-name");
-      newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"B_U3_"+intLine+"\" VALUE=\"\">"
+        //*** Column 2 ***//
+        newCell = newRow.insertCell(1)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"D_B2_"+intLine+"\" VALUE=\""+descrip+"\">"
+        //*** Column 3***//
+        newCell = newRow.insertCell(2)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"D_B3_"+intLine+"\" VALUE=\""+value+"\">"
 
-      document.add_project_form.B_U.value = intLine;
-    }
+        document.add_project_form.D_B.value = intLine;
+      }
 
     function RemoveRow4()
     {
@@ -355,7 +356,7 @@
         <div class="col-md-5 inputGroupContainer">
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-            <input  name="P_N" placeholder="" class="form-control"  type="text">
+            <input  name="P_N" value = "${project_title}" class="form-control"  type="text" placeholder="Disabled input">
           </div>
         </div>
       </div>
@@ -364,7 +365,7 @@
         <div class="col-md-5 inputGroupContainer">
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            <input name="Year" placeholder="" class="form-control"  type="text">
+              <input name="Year" placeholder="" class="form-control"  type="text">
           </div>
         </div>
       </div>
@@ -501,23 +502,25 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-3 control-label">งบประมาณที่ใช้</label>
-        <div class="col-md-5 inputGroupContainer">
-          <div class="input-group">
-            <input type="hidden" name="B_U" value="0">
-            <button name="btnAddB_U" type="button" id="btnAddB_U" class="btn btn-success" onClick="CreateNewRow4();"><i class="glyphicon glyphicon-plus-sign"></i></button>
-            <button name="btnDelB_U" type="button" id="btnDelB_U" class="btn btn-danger" onClick="RemoveRow4();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+      <label class="col-md-3 control-label">งบประมาณโดยละเอียด</label>
+      <div class="col-md-5 inputGroupContainer">
+        <div class="input-group">
+          <input type="hidden" name="D_B" value="0">
 
-            <table class="table table-striped"  id="B_UExp">
-              <tr>
-                <th><div align="center">ลำดับ</div></th>
-                <th><div align="center">รายละเอียด</div></th>
-                <th><div align="center">จำนวนเงิน(บาท)</div></th>
-              </tr>
-            </table>
-          </div>
+          <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+          <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+          <table class="table table-striped"  id="D_BExp">
+            <tr>
+              <script tal:repeat = "DB DB_" >CreateNewRow4("${DB[0]}","${DB[1]}","${DB[2]}");</script>
+              <th><div align="center">ลำดับ</div></th>
+              <th><div align="center">รายละเอียด</div></th>
+              <th><div align="center">จำนวนเงิน(บาท)</div></th>
+            </tr>
+          </table>
         </div>
       </div>
+    </div>
       <div class="form-group">
         <label class="col-md-3 control-label">ตัวชี้วัดความสำเร็จของโครงการ</label>
         <div class="col-md-5 inputGroupContainer">
