@@ -692,7 +692,7 @@
         <button name="btnDel_schedule" type="button" id="btnDel_schedule" class="btn btn-danger" onClick="RemoveRow6();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
         <table class="table table-striped"  id="scheduleExp">
           <tr>
-            <script tal:repeat = "Sch Sch_" >CreateNewRow5("${Sch[0]}","${Sch[1]}");</script>
+            <script tal:repeat = "Sch Sch_" >CreateNewRow6("${Sch[0]}","${Sch[1]}");</script>
             <th><div align="center">เวลา</div></th>
             <th><div align="center">รายละเอียด</div></th>
 
