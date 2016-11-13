@@ -280,7 +280,7 @@
     </script>
     <!--กำหนดการ6-->
     <script type="text/javascript">
-      function CreateNewRow6()
+      function CreateNewRow6(value,descrip)
       {
         var intLine = parseInt(document.add_project_form.schedule.value);
         intLine++;
@@ -296,13 +296,13 @@
         newCell = newRow.insertCell(0)
         newCell.id = newCell.uniqueID
         newCell.setAttribute("className", "css-name");
-        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"20\" NAME=\"schedule1_"+intLine+"\" VALUE=\"\">"
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"20\" NAME=\"schedule1_"+intLine+"\" VALUE=\""+value+"\">"
 
         //*** Column 2 ***//
         newCell = newRow.insertCell(1)
         newCell.id = newCell.uniqueID
         newCell.setAttribute("className", "css-name");
-        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"schedule2_"+intLine+"\" VALUE=\"\">"
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"schedule2_"+intLine+"\" VALUE=\""+descrip+"\">"
 
         document.add_project_form.schedule.value = intLine;
       }
@@ -393,7 +393,7 @@
   <div class="col-md-5 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-  <input  name="P_N" value = "${project_title}" placeholder="Disabled input" class="form-control"  type="text">
+  <input  name="P_N" id="disabledTextInput" value = "${project_title}" class="form-control"  type="text" placeholder="Disabled input">
     </div>
   </div>
 </div>
@@ -402,7 +402,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        <input name="Year" placeholder="" class="form-control"  type="text">
+        <input name="Year" placeholder="" class="form-control"  type="text" value="${project_year}">
       </div>
     </div>
   </div>
@@ -411,7 +411,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-        <textarea class="form-control" name="Reason_Project" placeholder=""></textarea>
+        <textarea class="form-control" name="Reason_Project" placeholder="">${project_reason}</textarea>
       </div>
     </div>
   </div>
@@ -465,7 +465,7 @@
                   <input id="checkbox2" name="checkbox2" value="2" class="styled" type="checkbox" tal:attributes =  "checked Checkbox2| nothing">
                   <label for="checkbox2">ด้านกีฬาและการส่งเสริมสุขภาพ</label>
               </div>
-                <div class="col-md-4"><input type="text" name="CB2" id="CB2" value ="0" maxlength="5" style="width:50px;" />ชั่วโมง</div>
+                <div class="col-md-4"><input type="text" name="CB2" id="CB2" tal:attributes =  "value Checkbox2|nothing" maxlength="5" style="width:50px;" />ชั่วโมง</div>
               </div>
             </div>
 
@@ -476,7 +476,7 @@
                 <input id="checkbox3" name="checkbox3" value="3" class="styled" type="checkbox" tal:attributes =  "checked Checkbox3| nothing">
                 <label for="checkbox3">ด้านบำเพ็ญประโยชน์และรักษาสิ่งแวดล้อม</label>
               </div>
-              <div class="col-md-4"><input type="text" name="CB3" id="CB3" value ="0" maxlength="5" style="width:50px;" />ชั่วโมง</div>
+              <div class="col-md-4"><input type="text" name="CB3" id="CB3" tal:attributes =  "value Checkbox3|nothing" maxlength="5" style="width:50px;" />ชั่วโมง</div>
             </div>
           </div>
 
@@ -486,7 +486,7 @@
                 <input id="checkbox4" name="checkbox4" value="4" class="styled" type="checkbox" tal:attributes =  "checked Checkbox4| nothing">
                 <label for="checkbox4">ด้านทำนุบำรุงศิลปะและวัฒนธรรม</label>
                 </div>
-                <div class="col-md-4"><input type="text" name="CB4" id="CB4" value ="0" maxlength="5" style="width:50px;" />ชั่วโมง</div>
+                <div class="col-md-4"><input type="text" name="CB4" id="CB4" tal:attributes =  "value Checkbox4|nothing" maxlength="5" style="width:50px;" />ชั่วโมง</div>
                 </div>
               </div>
 
@@ -497,7 +497,7 @@
             <input id="checkbox5" name="checkbox5" value="5" class="styled" type="checkbox" tal:attributes =  "checked Checkbox5| nothing">
             <label for="checkbox5">ด้านนันทนาการและการพัฒนาบุคลิกภาพ</label>
               </div>
-              <div class="col-md-4"><input type="text" name="CB5" id="CB5" value ="0" maxlength="5" style="width:50px;" />ชั่วโมง</div>
+              <div class="col-md-4"><input type="text" name="CB5" id="CB5" tal:attributes =  "value Checkbox5|nothing" maxlength="5" style="width:50px;" />ชั่วโมง</div>
           </div>
             </div>
 
@@ -509,7 +509,7 @@
             <input id="checkbox6" name="checkbox6" value="6" class="styled" type="checkbox" tal:attributes =  "checked Checkbox6| nothing">
             <label for="checkbox6">ด้านความภูมิใจ ความรัก ความผูกพันธ์มหาวิทยาลัย</label>
               </div>
-              <div class="col-md-4"><input type="text" name="CB6" id="CB6" value ="0" maxlength="5" style="width:50px;" />ชั่วโมง</div>
+              <div class="col-md-4"><input type="text" name="CB6" id="CB6" tal:attributes =  "value Checkbox6|nothing" maxlength="5" style="width:50px;" />ชั่วโมง</div>
           </div>
           </div>
 
@@ -540,7 +540,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input name="Advisor" placeholder="" class="form-control"  type="text">
+        <input name="Advisor" placeholder="" class="form-control"  type="text" value="${project_advisor}">
       </div>
     </div>
   </div>
@@ -583,7 +583,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-        <input name="Duration" placeholder="" class="form-control"  type="text">
+        <input name="Duration" placeholder="" class="form-control"  type="text" value="${project_duration}">
       </div>
     </div>
   </div>
@@ -592,7 +592,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-        <input name="P_P" placeholder="" class="form-control"  type="text">
+        <input name="P_P" placeholder="" class="form-control"  type="text" value="${project_activity_location}">
       </div>
     </div>
   </div>
@@ -601,7 +601,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-cog"></i></span>
-        <textarea class="form-control" name="P_C" placeholder=""></textarea>
+        <textarea class="form-control" name="P_C" placeholder="">${project_activity_type}</textarea>
       </div>
     </div>
   </div>
@@ -619,7 +619,7 @@
   <div class="col-md-5 inputGroupContainer">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-align-right"></i></span>
-      <input name="evaluation" placeholder="" class="form-control"  type="text">
+      <input name="evaluation" placeholder="" class="form-control"  type="text" value="${project_evaluation}">
     </div>
   </div>
 </div>
@@ -633,7 +633,7 @@
 
         <table class="table table-striped"  id="S_PExp">
           <tr>
-            <script tal:repeat = "cr project_criteria" >CreateNewRow0("${cr}");</script>
+            <script tal:repeat = "cr project_criteria" >CreateNewRow3("${cr}");</script>
           </tr>
         </table>
       </div>
@@ -660,7 +660,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-wrench"></i></span>
-        <textarea class="form-control" name="O_E" placeholder=""></textarea>
+        <textarea class="form-control" name="O_E" placeholder="">${project_previouse_result}</textarea>
       </div>
     </div>
   </div>
@@ -669,7 +669,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <input type="hidden" name="BGT" value="0">
-        <button name="btnAddBGT" type="button" id="btnAddBGT" class="btn btn-success" onClick="CreateNewRow5();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnAddBGT" type="button" id="btnAddBGT" class="btn btn-success" onClick="CreateNewRow5('','','');"><i class="glyphicon glyphicon-plus-sign"></i></button>
         <button name="btnDelBGT" type="button" id="btnDelBGT" class="btn btn-danger" onClick="RemoveRow5();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
         <table class="table table-striped"  id="BGTExp">
@@ -688,7 +688,7 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <input type="hidden" name="schedule" value="0">
-        <button name="btnAdds_chedule" type="button" id="btnAdd_schedule" class="btn btn-success" onClick="CreateNewRow6();"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnAdds_chedule" type="button" id="btnAdd_schedule" class="btn btn-success" onClick="CreateNewRow6('','');"><i class="glyphicon glyphicon-plus-sign"></i></button>
         <button name="btnDel_schedule" type="button" id="btnDel_schedule" class="btn btn-danger" onClick="RemoveRow6();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
         <table class="table table-striped"  id="scheduleExp">
           <tr>
@@ -722,7 +722,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
-    <button type="submit" class="btn btn-warning btn-lg" >บันทึก<span class="glyphicon glyphicon-floppy-disk"></span></button>
+    <button type="submit" class="btn btn-warning btn-lg" name="save_proposal">บันทึก<span class="glyphicon glyphicon-floppy-disk"></span></button>
   </div>
 </div>
 

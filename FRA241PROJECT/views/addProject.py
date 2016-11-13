@@ -157,6 +157,13 @@ class Project_view():
             print "\n\n\n\n\n\n\nwhy the fuck there is no result\n\n\n\n\n\n\n"
             return HTTPFound(location=self.request.route_url("addProject"))
 
+        if self.request.params.get("OJ","0") == "0":list_OJ = ''
+        if self.request.params.get("P_R","0") == "0":list_PR = ''
+        if self.request.params.get("P_M","0") == "0":list_PM = ''
+        if self.request.params.get("BGT","0") == "0":list_BGT = ''
+        if self.request.params.get("D_B","0") == "0":list_DB = ''
+        if self.request.params.get("schedule","0") == "0":list_schedule = ''
+
         if "P_N" in self.request.params:
             project_title = self.request.params["P_N"]
 
@@ -464,7 +471,6 @@ class Project_view():
                 # count_DB = len(list_DB)
             is_exist = True
         except NoResultFound:
-            is_exist = False
             project_year = ''
             project_activity_location = ''
             project_place = ''
@@ -481,6 +487,7 @@ class Project_view():
             count_P_M = len(list_PM)
             list_DB = ''
             count_DB = len(list_DB)
+            is_exist = False
 
 
         try:
@@ -499,6 +506,13 @@ class Project_view():
         except NoResultFound:
             print "\n\n\n\n\n\n\nwhy the fuck there is no result\n\n\n\n\n\n\n"
             return HTTPFound(location=self.request.route_url("addProject"))
+
+        if self.request.params.get("OJ","0") == "0":list_OJ = ''
+        if self.request.params.get("P_R","0") == "0":list_PR = ''
+        if self.request.params.get("P_M","0") == "0":list_PM = ''
+        if self.request.params.get("S_P","0") == "0":project_criteria = ''
+        if self.request.params.get("Benefits","0") == "0":project_Bene = ''
+        if self.request.params.get("D_B","0") == "0":list_DB = ''
 
         if "Year" in self.request.params:
             project_year = self.request.params.get("Year",'')
@@ -768,6 +782,7 @@ class Project_view():
             list_PM = ''
             list_DB = ''
             list_schedule = ''
+            is_exist = False
 
 
         try:
@@ -786,6 +801,13 @@ class Project_view():
         except NoResultFound:
             print "\n\n\n\n\n\n\nwhy the fuck there is no result\n\n\n\n\n\n\n"
             return HTTPFound(location=self.request.route_url("addProject"))
+        if self.request.params.get("OJ","0") == "0":list_OJ = ''
+        if self.request.params.get("P_R","0") == "0":list_PR = ''
+        if self.request.params.get("P_M","0") == "0":list_PM = ''
+        if self.request.params.get("S_P","0") == "0":project_criteria = ''
+        if self.request.params.get("Benefits","0") == "0":project_Bene = ''
+        if self.request.params.get("BGT","0") == "0":list_DB = ''
+        if self.request.params.get("schedule","0") == "0":list_schedule = ''
 
         if "Year" in self.request.params:
             project_year = self.request.params.get("Year",'')
@@ -922,6 +944,7 @@ class Project_view():
                                         activity_location=project_activity_location,
                                         Reason = project_reason,
                                         type_of_activity = project_activity_type,
+                                        activity_comparition = project_Calibration,
                                         previouse_result = project_previouse_result,
                                         evaluation_index = project_evaluation,
                                         profit = project_Bene,
@@ -955,7 +978,7 @@ class Project_view():
                     # # for i in list_schedule:
                     # #     sch = Schedule(time=i[0],descrip = i[1])
                     # #     proposal.schedule.append(sch)
-
+                    print "\n\n\n\n\n\n\n\nadded added added added added\n\n\n\n\n\n"
                     self.request.db_session.add(proposal)
 
             else:
@@ -968,6 +991,7 @@ class Project_view():
                     proposal.type_of_activity = project_activity_type
                     proposal.previouse_result = project_previouse_result
                     proposal.profit = project_Bene
+                    proposal.activity_comparition = project_Calibration
                     proposal.advisor_for_proposal = project_advisor
                     proposal.success_criteria = project_criteria
                     proposal.evaluation_index = project_evaluation
@@ -979,6 +1003,7 @@ class Project_view():
                     proposal.schedule = list_schedule
                     if type(start_date)!= str:
                         project.start_date = start_date
+                    print "\n\n\n\n\n\n\n\nchanged\n\n\n\n\n\n"
                     # for i in list_OJ:
                     #     obj = Objective(text = i)
                     #     proposal.objective.append(obj)
