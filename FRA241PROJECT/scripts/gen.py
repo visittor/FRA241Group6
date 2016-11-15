@@ -50,21 +50,20 @@ def Get_data(session, project_id):
 
 def Gen_Doc(doc_name='Doc.docx'
             , project_name_th=u''
-            , project_name_en=''
+            , project_name_en=u''
             , date_cap=u''
-            , where=''
-            , rational=''
-            , purpose_list=[]
+            , where=u''
+            , rational=u''
+            , purpose_list=list([])
             , profit=u''
-            , owner_list=[]
-            , advisor_list=[]
-            , member_list=[]
+            , owner_list=list([])
+            , advisor_list=u''
+            , member_list=list([])
             , activity_place=u''
             , type_of_activity=u''
-            , cost_list=[]
-            , success_criteria=''
+            , cost_list=list([])
+            , success_criteria=[]
             ):
-
     document = Document('FRA241PROJECT/static/Archetype_gendoc.docx')
 
     ######################################################################
@@ -100,7 +99,7 @@ def Gen_Doc(doc_name='Doc.docx'
     logo = document.paragraphs[-1]
     logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    proj_name = document.add_heading('',0)
+    proj_name = document.add_heading('', 0)
     proj_name.add_run(u'ข้อเสนอโครงการเข้าร่วม\n', style='header')
     proj_name.add_run(project_name_th + '\n', style='header') if len(project_name_th) != 0 else 0
     proj_name.add_run(project_name_en + '\n', style='header') if len(project_name_en) != 0 else 0
@@ -122,36 +121,46 @@ def Gen_Doc(doc_name='Doc.docx'
     purpose = document.add_paragraph()
     x = 1
     for i in purpose_list:
-        purpose.add_run('\t' + str(x) + '. ' + i.text + '\n', style='content')
-        x+=1
+        purpose.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(i) != 0 else purpose.add_run()
+        x += 1
     x = 0
 
     profit_head = document.add_paragraph()
     profit_head.add_run(u'ประโยชน์ที่คาดว่าจะได้รับ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     profit_content = document.add_paragraph()
-    profit_content.add_run('\t' + profit, style='content')
-    profit_content.alingment = WD_ALIGN_PARAGRAPH.THAI_JUSTIFY
+    x = 1
+    for i in profit:
+        profit_content.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(
+            i) != 0 else profit_content.add_run()
+        x += 1
+    x = 0
 
     owner_head = document.add_paragraph()
     owner_head.add_run(u'ผู้รับผิดชอบโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     owner = document.add_paragraph()
-    x = 1
-    for i in owner_list:
-        owner.add_run('\t' + str(x) + '. ' + i.text +'\n', style="content")
-        x += 1
-    x = 0
+    if len(owner_list) != 2:
+        x = 1
+        for i in owner_list:
+            owner.add_run('\t' + str(x) + '. ' + i + '\n', style="content") if len(i) != 0 else owner.add_run()
+            x += 1
+        x = 0
+    else:
+        owner.add_run('\t' + owner_list[0] + '\n', style="content") if len(owner_list[0]) != 0 else owner.add_run()
 
     advisor_head = document.add_paragraph()
     advisor_head.add_run(u'อาจารย์ที่ปรึกษาโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     advisor = document.add_paragraph()
-    x = 1
-    for i in advisor_list:
-        advisor.add_run('\t' + str(x) + '. ' + i.text +'\n', style="content")
-        x += 1
-    x = 0
+    # if len(advisor_list) != 1 :
+    #     x = 1
+    #     for i in advisor_list:
+    #         advisor.add_run('\t' + str(x) + '. ' + i + '\n', style="content")if len(i)!= 0 else advisor.add_run()
+    #         x += 1
+    #     x = 0
+    # else:
+    advisor.add_run('\t' + advisor_list + '\n', style="content") if len(advisor_list[0]) != 0 else advisor.add_run()
 
     member_head = document.add_paragraph()
     member_head.add_run(u'ผู้เข้าร่วมโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -159,15 +168,19 @@ def Gen_Doc(doc_name='Doc.docx'
     member = document.add_paragraph()
     x = 1
     for i in member_list:
-        member.add_run('\t' + str(x) + '. ' + i.text + '\n', style="content")
+        member.add_run('\t' + str(x) + '. ' + i + '\n', style="content") if len(i) != 0 else  member.add_run()
         x += 1
     x = 0
+
+    plan_head = document.add_paragraph()
+    plan_head.add_run(u'แผนการดำเนินงาน', style='header')
+
+    plan = document.add_paragraph()
+    plan.add_run(style='content')
 
     '''
 
     "Table"
-
-        Plan
 
         Date(details)
 
@@ -194,14 +207,33 @@ def Gen_Doc(doc_name='Doc.docx'
 
     '''
 
+    print cost_list
+
     success_pointer_head = document.add_paragraph()
     success_pointer_head.add_run(u'ตัวชี้วัดความสำเร็จของโครงการ', style='header')
 
     success_pointer = document.add_paragraph()
-    success_pointer.add_run('\t' + success_criteria, style='content')
+    if len(success_criteria) != 2:
+        x = 1
+        for i in success_criteria:
+            success_pointer.add_run('\t' + str(x) + '. ' + i + '\n', style="content") if len(
+                i) != 0 else success_pointer.add_run()
+            x += 1
+        x = 0
+    else:
+        success_pointer.add_run('\t' + success_criteria[0] + '\n', style="content") if len(
+            success_criteria[0]) != 0 else success_pointer.add_run()
+    # success_pointer.add_run('\t' + success_criteria, style='content')
+
+    sign_area = document.add_paragraph()
+    sign_area.add_run(u'ลงชื่อ' + '.......................................................\n', style='content')
+    sign_area.add_run((advisor_list.split('\t\t'))[0] + '\n', style="content")
+    sign_area.add_run(u'อาจารย์ที่ปรึกษาโครงการ', style="content")
+    sign_area.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
     # document.add_page_break()
     document.save(doc_name)
+    print '#########################__Done!__#########################'
 
 
 def main(argv=sys.argv):
@@ -220,20 +252,23 @@ def main(argv=sys.argv):
 
     session = get_session(maker, transaction.manager)
 
-    all_data = Get_data(session=session, project_id=4)
-    Gen_Doc(doc_name='FRA241PROJECT/static/Gened_DOC/' + str(all_data.id) + '.docx'
+    all_data = Get_data(session=session, project_id=2)
+
+    cost_list_param = all_data.proposal[0].cost.split(unichr(171)) if all_data.proposal[0].cost is not None else []
+    cost_list_parameter = [i.split(unichr(172)) for i in cost_list_param]
+
+    Gen_Doc(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Competitive_' + str(all_data.id) + '.docx'
             , project_name_th=all_data.title
             , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
             , where=all_data.proposal[0].activity_location
             , rational=all_data.proposal[0].Reason
-            , purpose_list=all_data.proposal[0].objective
-            , profit=all_data.proposal[0].profit
-            , owner_list=all_data.proposal[0].owner_for_proposal
-            , advisor_list=all_data.advisor
-            , member_list=all_data.proposal[0].member_for_proposal
+            , purpose_list=all_data.proposal[0].objective.split(unichr(171))
+            , profit=all_data.proposal[0].profit.split(unichr(171))
+            , owner_list=all_data.proposal[0].owner_for_proposal.split(unichr(171))
+            , advisor_list=all_data.proposal[0].advisor_for_proposal
+            , member_list=all_data.proposal[0].member_for_proposal.split(unichr(171))
             , activity_place=all_data.proposal[0].activity_location
             , type_of_activity=all_data.proposal[0].type_of_activity
-            , cost_list=all_data.proposal[0].cost
-            , success_criteria=all_data.proposal[0].success_criteria
+            , cost_list=cost_list_param
+            , success_criteria=all_data.proposal[0].success_criteria.split(unichr(171))
             )
-
