@@ -55,7 +55,7 @@ class Proposal(Base):
     previouse_result = Column(Text)#ผลการจัดที่ผ่านมา
 
     parent_id = Column(Integer, ForeignKey("Project.id"))
-    parent_project = relationship("Project", back_populates = "proposal", uselist = False)
+    parent_project = relationship("Project", back_populates = "proposal")
 
     def __enter__(self):
         return self
