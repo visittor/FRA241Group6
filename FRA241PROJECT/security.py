@@ -1,8 +1,11 @@
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
+from pyramid.security import (
+    Authenticated,
+    Everyone,
+)
 
 from .models import User
-
 
 class MyAuthenticationPolicy(AuthTktAuthenticationPolicy):
     def authenticated_userid(self, request):
@@ -10,6 +13,15 @@ class MyAuthenticationPolicy(AuthTktAuthenticationPolicy):
         if user is not None:
             return user.id
 
+    def effective_principals(self, request):
+        principals = [Everyone]
+        user = request.user
+        if user is not None:
+            principals.append(Authenticated)
+            principals.append(str(user.id))
+            principals.append('role:' + user.role)
+            print "\n\n\n\n\n\n\n\n\n\n",principals,"\n\n\n\n\n\n\n"
+        return principals
 def get_user(request):
     user_id = request.unauthenticated_userid
     if user_id is not None:
