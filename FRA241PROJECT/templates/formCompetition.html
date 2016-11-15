@@ -443,30 +443,10 @@
       </div>
       <div class="form-group">
         <label class="col-md-3 control-label">อาจารย์ที่ปรึกษา</label>
-        <div class="col-md-7 inputGroupContainer">
-          <table class="input-group">
-            <tr>
-              <th><div align="center">คำนำหน้า</div></th>
-              <th><div align="center">ชื่อจริง</div></th>
-              <th><div align="center">นามสกุล</div></th>
-
-              <!--td>
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              </td-->
-            <tr id = "unidentified">
-              <td classname = "css-name">
-                <input name="Advisor_MR" size = "5" placeholder="" class="form-control"  type="text" value="${project_advisor[0]}">
-              </td>
-              <td classname = "css-name">
-                <input name="Advisor_F" size = "30" placeholder="" class="form-control"  type="text" value="${project_advisor[1]}">
-              </td>
-              <td classname = "css-name">
-                <input name="Advisor_L" size= "30" placeholder="" class="form-control"  type="text" value="${project_advisor[2]}">
-              </td>
-            </tr>
-          </table>
-          <div tal:condition = "alert">
-            <label><font color="red">${alert}</font></label>
+        <div class="col-md-5 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input name="Advisor" placeholder="" class="form-control"  type="text" value="${project_advisor}">
           </div>
         </div>
       </div>
