@@ -12,3 +12,4 @@ Getting Started
 
 - $VENV/bin/pserve development.ini
 
+Just change.
