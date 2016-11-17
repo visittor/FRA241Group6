@@ -48,7 +48,7 @@ def Get_data(session, project_id):
     return session.query(Project).filter_by(id=project_id).one()
 
 
-def Gen_Doc(doc_name='Doc.docx'
+def Gen_Doc_compet(doc_name='Doc.docx'
             , project_name_th=u''
             , project_name_en=u''
             , date_cap=u''
@@ -199,18 +199,24 @@ def Gen_Doc(doc_name='Doc.docx'
     activity_type = document.add_paragraph()
     activity_type.add_run('\t' + type_of_activity, style='content')
 
-    '''
+    table_cost_head = document.add_paragraph()
+    table_cost_head.add_run(u'ตารางแสดงค่าใช้จ่าย\n', style='header')
 
-    "Table"
+    table_cost = document.add_table(rows=1, cols=3)
+    head_table = table_cost.rows[0].cells
+    item_in_head_cost_table = [u'ลำดับ', u'รายละเอียด', u'จำนวนเงิน(บาท)']
+    for i in range(0, 3):
+        head_table_for = head_table[i].add_paragraph()
+        head_table_for.add_run(item_in_head_cost_table[i], style='in table')
 
-        Cost
-
-    '''
-
-    print cost_list
+    for i in cost_list:
+        each_cost = table_cost.add_row().cells
+        for j in range(0, 3):
+            each_cells = each_cost[j].add_paragraph()
+            each_cells.add_run(i[j], style='in table')
 
     success_pointer_head = document.add_paragraph()
-    success_pointer_head.add_run(u'ตัวชี้วัดความสำเร็จของโครงการ', style='header')
+    success_pointer_head.add_run(u'\nตัวชี้วัดความสำเร็จของโครงการ', style='header')
 
     success_pointer = document.add_paragraph()
     if len(success_criteria) != 2:
@@ -223,7 +229,6 @@ def Gen_Doc(doc_name='Doc.docx'
     else:
         success_pointer.add_run('\t' + success_criteria[0] + '\n', style="content") if len(
             success_criteria[0]) != 0 else success_pointer.add_run()
-    # success_pointer.add_run('\t' + success_criteria, style='content')
 
     sign_area = document.add_paragraph()
     sign_area.add_run(u'ลงชื่อ' + '.......................................................\n', style='content')
@@ -233,6 +238,7 @@ def Gen_Doc(doc_name='Doc.docx'
 
     # document.add_page_break()
     document.save(doc_name)
+
     print '#########################__Done!__#########################'
 
 
@@ -240,7 +246,7 @@ def main(argv=sys.argv):
     if len(argv) < 2:
         usage(argv)
     config_uri = argv[1]
-    options = parse_vars(argv[2:])
+    options = parse_vars(argv[3:])
     setup_logging(config_uri)
     settings = get_appsettings(config_uri, options=options)
 
@@ -252,23 +258,32 @@ def main(argv=sys.argv):
 
     session = get_session(maker, transaction.manager)
 
-    all_data = Get_data(session=session, project_id=2)
 
-    cost_list_param = all_data.proposal[0].cost.split(unichr(171)) if all_data.proposal[0].cost is not None else []
-    cost_list_parameter = [i.split(unichr(172)) for i in cost_list_param]
+    all_data = Get_data(session=session, project_id=int(argv[2]))
 
-    Gen_Doc(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Competitive_' + str(all_data.id) + '.docx'
-            , project_name_th=all_data.title
-            , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
-            , where=all_data.proposal[0].activity_location
-            , rational=all_data.proposal[0].Reason
-            , purpose_list=all_data.proposal[0].objective.split(unichr(171))
-            , profit=all_data.proposal[0].profit.split(unichr(171))
-            , owner_list=all_data.proposal[0].owner_for_proposal.split(unichr(171))
-            , advisor_list=all_data.proposal[0].advisor_for_proposal
-            , member_list=all_data.proposal[0].member_for_proposal.split(unichr(171))
-            , activity_place=all_data.proposal[0].activity_location
-            , type_of_activity=all_data.proposal[0].type_of_activity
-            , cost_list=cost_list_param
-            , success_criteria=all_data.proposal[0].success_criteria.split(unichr(171))
-            )
+    cost_list_parameter = []
+    cost_list_param = all_data.proposal.delicate_budget.split(unichr(171)) if all_data.proposal.cost is not None else []
+    cost_list_param.pop()
+
+    for i in cost_list_param:
+        cost_list_parameter.append(i.split(unichr(172)))
+
+    if all_data.type == u'competitive':
+        Gen_Doc_compet(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Competitive_' + str(all_data.id) + '.docx'
+                , project_name_th=all_data.title
+                , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
+                , where=all_data.proposal.activity_location
+                , rational=all_data.proposal.Reason
+                , purpose_list=all_data.proposal.objective.split(unichr(171))
+                , profit=all_data.proposal.profit.split(unichr(171))
+                , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+                , advisor_list=all_data.proposal.advisor_for_proposal
+                , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+                , activity_place=all_data.proposal.activity_location
+                , type_of_activity=all_data.proposal.type_of_activity
+                , cost_list=cost_list_parameter
+                , success_criteria=all_data.proposal.success_criteria.split(unichr(171))
+                )
+        # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\FRA241PROJECT\static\Gened_DOC\Competitive_2.docx')
+    elif all_data.type == u'camp':
+        pass
