@@ -37,7 +37,6 @@ class Project(Base):
 
     project_equipment = relationship("Equipment", back_populates = "asso_to")
 
-
     proposal = relationship("Proposal",uselist = False,back_populates = "parent_project")
 
     def change_status(self,status):

@@ -17,18 +17,18 @@
 
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/Home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/Home/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="../static/Home/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="../static/Home/css/creative.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,7 +50,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${user.First_name}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -76,7 +76,7 @@
                     <a class="page-scroll" href="#equipment"><big class="glyphicon glyphicon-wrench"></big></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#log out"><b>LOG OUT</b></a>
+                    <a class="page-scroll" href="request.route_url('logout')"><b>LOG OUT</b></a>
                 </li>
             </ul>
         </div>
@@ -100,11 +100,11 @@
                     <fieldset>
                         <h2 class="text-center"><b>โครงการรอการตรวจสอบ  <span class="glyphicon glyphicon-bell" aria-hidden="true"></span></b></h2>
                         <div class="list-group">
-                            <a href="https://www.google.co.th" class="list-group-item">
-                                โครงการ FIBB RoboCamp ครั้งที่ 5
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
+                            <a tal:repeat = "uncheckpro uncheck_project" href="${request.route_url('inspectProject',project_id = str(uncheckpro.id))}" class="list-group-item">
+                                ${uncheckpro.title}
+                                <span class="pull-right text-muted small"><em></em></span>
                             </a>
-                            <a href="#" class="list-group-item">
+                            <!--a href="#" class="list-group-item">
                                 โครงการเยาวชนคนรักษ์พลังงาน
                                 <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
                             </a>
@@ -139,7 +139,7 @@
                             <a href="#" class="list-group-item">
                                 โครงการสานฝันปันรักสู่น้อง ครั้งที่ 14
                                 <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                            </a>
+                            </a-->
 
                         </div>
                     </fieldset>
@@ -154,11 +154,11 @@
                     <fieldset>
                         <h2 class="text-center"><b>โครงการผ่านการตรวจสอบ  <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></b></h2>
                         <div class="list-group">
-                            <a href="#" class="list-group-item">
-                                โครงการ FIBB RoboCamp ครั้งที่ 5
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
+                            <a tal:repeat = "checkpro checked_project" href="${request.route_url('inspectProject',project_id = str(checkpro.id))}" class="list-group-item">
+                                ${checkpro.title}
+                                <span class="pull-right text-muted small"><em></em></span>
                             </a>
-                            <a href="#" class="list-group-item">
+                            <!--a href="#" class="list-group-item">
                                 โครงการเยาวชนคนรักษ์พลังงาน
                                 <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
                             </a>
@@ -193,7 +193,7 @@
                             <a href="#" class="list-group-item">
                                 โครงการสานฝันปันรักสู่น้อง ครั้งที่ 14
                                 <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                            </a>
+                            </a-->
 
                         </div>
                     </fieldset>

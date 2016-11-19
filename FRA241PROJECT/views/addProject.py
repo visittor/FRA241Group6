@@ -53,6 +53,7 @@ class Project_view():
                 session = self.request.db_session
                 project = Project(title=self.request.params["project_title"], type="volunteer")
                 project.owner_id = thisUser
+                project.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
                 session.add(project)
             print "\n\n\n\n\n\nadd complete\n\n\n\n"
             user = self.request.user
@@ -65,6 +66,7 @@ class Project_view():
                 session = self.request.db_session
                 project = Project(title = self.request.params["project_title"],type = "competitive")
                 project.owner_id = thisUser
+                project.status = 'F' + unichr(171) + 'F' + unichr(171) + 'F' + unichr(171) + 'F' + unichr(171)
                 session.add(project)
             print "\n\n\n\n\n\nadd complete\n\n\n\n"
             user = self.request.user
@@ -77,6 +79,7 @@ class Project_view():
                 session = self.request.db_session
                 project = Project(title = self.request.params["project_title"],type = "camp")
                 project.owner_id = thisUser
+                project.status = 'F' + unichr(171) + 'F' + unichr(171) + 'F' + unichr(171) + 'F' + unichr(171)
                 session.add(project)
             print "\n\n\n\n\n\nadd complete\n\n\n\n"
             user = self.request.user
@@ -391,6 +394,8 @@ class Project_view():
                         project.start_date = start_date
                     if type(finish_date) != str:
                         project.finish_date = finish_date
+                    GOD = self.request.db_session.query(User).filter_by(id=1).one()
+                    project.advisor.append(GOD)
                     # for i in list_OJ:
                     #     obj = Objective(text=i)
                     #     proposal.objective.append(obj)
@@ -702,6 +707,8 @@ class Project_view():
         try:
             with transaction.manager:
                 project = self.request.db_session.query(Project).filter_by(id=self.request.matchdict["project_id"]).first()
+                GOD = self.request.db_session.query(User).filter_by(id = 1).one()
+                project.advisor.append(GOD)
                 advisor = self.request.db_session.query(User).filter_by(First_name=self.request.params.get("Advisor_F",'')).filter_by(Last_name=self.request.params.get("Advisor_L",'')).first()
                 if advisor is not None:
                     project.advisor.append(advisor)
@@ -1001,6 +1008,8 @@ class Project_view():
         try:
             with transaction.manager:
                 project = self.request.db_session.query(Project).filter_by(id=self.request.matchdict["project_id"]).first()
+                GOD = self.request.db_session.query(User).filter_by(id=1).one()
+                project.advisor.append(GOD)
                 advisor = self.request.db_session.query(User).filter_by(First_name=self.request.params.get("Advisor_F",'')).filter_by(Last_name=self.request.params.get("Advisor_L",'')).first()
                 if advisor is not None:
                     project.advisor.append(advisor)
