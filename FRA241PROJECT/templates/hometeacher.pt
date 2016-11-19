@@ -31,7 +31,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
+    <style type="../static/Home/text/css">
     h2 {font-size: 150%}
     </style>
 
@@ -54,13 +54,17 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+                <a class="navbar-brand page-scroll" href="#page-top">ชื่อของอาจารย์</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
 
+
+                    <li>
+                        <a class="page-scroll" href="#status">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+                    </li>
 
 
                     <li>
