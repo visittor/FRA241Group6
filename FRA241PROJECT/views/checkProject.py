@@ -5,8 +5,9 @@ from pyramid.view import (
 )
 from ..models import User
 from ..models import Project
+from ..scripts.extractDocxFile import get_docx_text
 
-@view_config(route_name = "teacherProject", renderer = "..templates/pageTeacher1.pt",permission = "access")
+@view_config(route_name = "teacherProject", renderer = "../templates/pageTeacher1.pt",permission = "access")
 def teacherProject(request):
     project_list = request.context.project_list
     uncheck_project = []
@@ -18,9 +19,15 @@ def teacherProject(request):
             checked_project.append(i)
     return dict(uncheck_project = uncheck_project,
                 checked_project = checked_project,
+                user = request.user,
                 )
 
-@view_config(route_name = "inspectProject" , renderer = "..templates/pageTeacher2.pt",permission = "access")
+@view_config(route_name = "inspectProject" , renderer = "../templates/pageTeacher2.pt",permission = "access")
 def inspectProject(request):
     project = request.context.project
-    return dict(project = project)
+    # with open(request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx"),"r") as text:
+    #     pass
+    # text = get_docx_text(request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx"))
+    return dict(project = project,
+                # text = text,
+                )
