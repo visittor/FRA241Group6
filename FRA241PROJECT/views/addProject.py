@@ -1041,10 +1041,6 @@ class Project_view():
         print "\n\n\n\n this is fucking fucking return dick",dict2return,"\n\n\n\n\n\n\n"
         return dict2return
 
-@view_config(route_name = 'teacherProject', renderer = "../templates/pageTeacher.pt",permission = 'access')
-def inspectProject(request):
-    project_list = request.contex.project_list
-
 
 
 

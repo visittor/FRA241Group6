@@ -89,15 +89,8 @@
 <br>
 <br>
 <br>
-<script type="text/javascript">
-$(document).ready(function() {
- $(".word").fancybox({
-  'width': 600, // or whatever
-  'height': 320,
-  'type': 'iframe'
- });
-}); //  ready
-</script>
+
+
 <div class="container">
     <div class="row">
 
@@ -107,9 +100,9 @@ $(document).ready(function() {
                     <fieldset>
                         <h2 class="text-center"><b>${project.title}</b></h2>
                         <p>
-                            <a class="word" href="http://docs.google.com/gview?url=$request.route_url('FRA241PROJECT:static/docx/ScriptEng.docx')&embedded=true">open a word document in fancybox</a>
-                            <!--${text}-->
-                            <!--<iframe src="request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx")"></iframe&ndash;&gt;-->
+                            <?python url = "http://docs.google.com/gview?url="+request.static_url('FRA241PROJECT:static/docx/ScriptEng.docx')+"&embedded=true"?>
+                            <a class="word" href="${url}">open a word document in fancybox</a>
+                            <!--<iframe src="request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx")">&lt;!&ndash;/iframe&ndash;&gt;-->
                         </p>
                         <!--p>
                             <br><br><br><br><br><br><br><br><br><br>
@@ -147,5 +140,5 @@ $(document).ready(function() {
 </div>
 
 
-<!--</body>-->
-<!--</html>-->
+<!--/body-->
+<!--/html-->

@@ -14,6 +14,7 @@ from pyramid.httpexceptions import (
 import datetime
 import transaction
 import time
+import copy
 
 def proposal_factory(request):
     try:
@@ -58,14 +59,16 @@ class AddProposal(object):
         return a
 
 def teacher_project_factory(request):
-    with transaction.manager:
-        project_list = request.user.advisee_project
-        for i in project_list:
-            if i.status is None or len(i.status.split(unichr(171))) == 0:
-                i.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
-    project_list = request.user.advisee_project
     id = request.user.id
-    return TeacherProject(project_list,id)
+    with transaction.manager:
+        with request.db_session.query(User).filter_by(id = id).first() as user:
+            project_list = user.advisee_project
+            for i in project_list:
+                if i.status is None or len(i.status.split(unichr(171))) == 0:
+                    i.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
+    projectList = request.db_session.query(User).filter_by(id = id).first().advisee_project
+
+    return TeacherProject(projectList,id)
 class TeacherProject(object):
     def __init__(self,project_list,id):
         self.project_list = project_list
@@ -73,14 +76,14 @@ class TeacherProject(object):
 
     def __acl__(self):
         return [
-            (Allow,Everyone,'deny')
+            (Allow,Everyone,'deny'),
             (Allow,'role:Teacher','access'),
             (Allow,'role:GOD','access'),
         ]
 
 def inspect_foctory(request):
     project_id = request.matchdict['project_id']
-    project = request.db_session.query(Project).filter_by(project_id = project_id).first()
+    project = request.db_session.query(Project).filter_by(id = project_id).first()
     return inspectProject(project)
 
 class inspectProject(object):
