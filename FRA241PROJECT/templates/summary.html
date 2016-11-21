@@ -231,14 +231,14 @@
             }
         }
     </script>
-    <!-- รายละเอียดการใช้จ่ายงบประมาณโครงการ8-->
+    <!-- รายละเอียดการใช้จ่ายงบประมาณโครงการ7-->
     <script type="text/javascript">
-        function CreateNewRow8( order,descrip,value)
+        function CreateNewRow7( order,descrip,value)
         {
-            var intLine = parseInt(document.summarize_form.SF8.value);
+            var intLine = parseInt(document.summarize_form.SF7.value);
             intLine++;
 
-            var theTable = document.all.SF8Exp
+            var theTable = document.all.SF7Exp
             var newRow = theTable.insertRow(theTable.rows.length)
             newRow.id = newRow.uniqueID
 
@@ -249,34 +249,34 @@
             newCell = newRow.insertCell(0)
             newCell.id = newCell.uniqueID
             newCell.setAttribute("className", "css-name");
-            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF81_"+intLine+"\" VALUE=\""+order+"\">"
-            //***<input type="text" size = "10" name = "SF81_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF81_"+intLine+"\" VALUE=\"\">"***//
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF71_"+intLine+"\" VALUE=\""+order+"\">"
+            //***<input type="text" size = "10" name = "SF71_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF71_"+intLine+"\" VALUE=\"\">"***//
 
             //*** Column 2 ***//
             newCell = newRow.insertCell(1)
             newCell.id = newCell.uniqueID
             newCell.setAttribute("className", "css-name");
-            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"SF82_"+intLine+"\" VALUE=\""+descrip+"\">"
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"SF72_"+intLine+"\" VALUE=\""+descrip+"\">"
             //*** Column 3***//
             newCell = newRow.insertCell(2)
             newCell.id = newCell.uniqueID
             newCell.setAttribute("className", "css-name");
-            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"SF83_"+intLine+"\" VALUE=\""+value+"\">"
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"SF73_"+intLine+"\" VALUE=\""+value+"\">"
 
-            document.summarize_form.SF8.value = intLine;
+            document.summarize_form.SF7.value = intLine;
         }
 
-        function RemoveRow8()
+        function RemoveRow7()
         {
-            intLine = parseInt(document.summarize_form.SF8.value);
+            intLine = parseInt(document.summarize_form.SF7.value);
             if(parseInt(intLine) > 0)
             {
-                theTable = (document.all) ? document.all.SF8Exp :
-                        document.getElementById("SF8Exp")
+                theTable = (document.all) ? document.all.SF7Exp :
+                        document.getElementById("SF7Exp")
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.summarize_form.SF8.value = intLine;
+                document.summarize_form.SF7.value = intLine;
             }
         }
     </script>
@@ -385,7 +385,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label">เหตุผลและความเป็นมา</label>
+                <label class="col-md-3 control-label">หลักการและเหตุผล</label>
                 <div class="col-md-5 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
@@ -452,26 +452,17 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label">สถานที่ปฏิบัติงานและระยะเวลาในการดำเนินกิจกรรม</label>
-                <div class="col-md-5 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <textarea name="SF7" class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-md-3 control-label">รายละเอียดการใช้จ่ายงบประมาณโครงการ</label>
                 <div class="col-md-5 inputGroupContainer">
                     <div class="input-group">
-                        <input type="hidden" name="SF8" value="0">
+                        <input type="hidden" name="SF7" value="0">
 
-                        <button name="btnAddSF8" type="button" id="btnAddSF8" class="btn btn-success" onClick="CreateNewRow8(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                        <button name="btnDelSF8" type="button" id="btnDelSF8" class="btn btn-danger" onClick="RemoveRow8();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+                        <button name="btnAddSF7" type="button" id="btnAddSF7" class="btn btn-success" onClick="CreateNewRow7(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                        <button name="btnDelSF7" type="button" id="btnDelSF7" class="btn btn-danger" onClick="RemoveRow7();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
-                        <table class="table table-striped"  id="SF8Exp">
+                        <table class="table table-striped"  id="SF7Exp">
                             <tr>
-                                <script tal:repeat = "SF8 SF8_" >CreateNewRow8("${SF8[0]}","${SF8[1]}","${SF8[2]}");</script>
+                                <script tal:repeat = "SF7 SF7_" >CreateNewRow7("${SF7[0]}","${SF7[1]}","${SF7[2]}");</script>
                                 <th><div align="center">ลำดับ</div></th>
                                 <th><div align="center">รายละเอียด</div></th>
                                 <th><div align="center">จำนวนเงิน(บาท)</div></th>
@@ -485,7 +476,7 @@
                 <div class="col-md-5 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <textarea name="SF9" class="form-control"></textarea>
+                        <textarea name="SF8" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -494,7 +485,7 @@
                 <div class="col-md-5 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <textarea name="SF10" class="form-control"></textarea>
+                        <textarea name="SF9" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -503,7 +494,7 @@
                 <div class="col-md-5 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <textarea name="SF11" class="form-control"></textarea>
+                        <textarea name="SF10" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -512,7 +503,7 @@
                 <div class="col-md-5 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <textarea name="SF12" class="form-control"></textarea>
+                        <textarea name="SF11" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
