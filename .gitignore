@@ -1,7 +1,5 @@
 .idea/workspace.xml
 *.pyc
-*.png
-*.jpg
 *.sqlite
 fra241project.egg-info/dependency_links.txt
 fra241project.egg-info/not-zip-safe
@@ -13,3 +11,4 @@ fra241project.egg-info/PKG-INFO
 fra241project.egg-info/top_level.txt
 fra241project.egg-info/requires.txt
 .idea/workspace.xml___jb_tmp___
+FRA241PROJECT/static/Gened_DOC/Competitive_2.docx
