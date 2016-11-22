@@ -96,36 +96,38 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <form class="well form-horizontal" action=" " method="post" id="contact_form">
+
             <div class="col-sm-7">
+                <fieldset>
                 <div class="form-box">
 
-                        <fieldset>
                             <h2 class="text-center"><b>${project.title}</b></h2>
                             <p>
                                 <a class="word" href="http://docs.google.com/gview?url=${request.static_url('FRA241PROJECT:static/docx/ScriptEng.docx')}&embedded=true">open a word document in fancybox</a>
                                 <!--<iframe src="request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx")"></iframe&ndash;&gt;-->
                             </p>
 
-                        </fieldset>
 
                 </div>
+                </fieldset>
             </div>
 
             <div class="col-sm-4">
+                <fieldset>
                 <div class="form-box">
-                        <fieldset>
                             <h2 class="text-center"><b>Comment</b></h2>
 
                             <form action="action_page.php">
                                 <textarea name="message" rows="15" cols="43">${comment.text}</textarea>
                                 <br>
                             </form>
-                        </fieldset>
                         <div>
                             <button type="submit" class="btn btn-default" name = "save">save</button><button type="submit" class="btn btn-default" name = "send-comment">ส่งการตวจ</button>
                         </div>
                 </div>
+                </fieldset>
             </div>
+
         </form>
 
     </div>

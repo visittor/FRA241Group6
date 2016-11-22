@@ -295,7 +295,7 @@
                 <!-- <a href="#services" class="page-scroll btn btn-default btn-xl sr-button btn-block"><big class="glyphicon glyphicon-ok"></big> : จบโครงการ</a><br><br>-->
 
                 <!-- <button type="button" class="btn btn-primary btn-lg btn-block"><big class="glyphicon glyphicon-ok"></big>: จบโครงการ</button>-->
-                <a href="#services" class="page-scroll btn btn-default btn-xl sr-button"><big class="glyphicon glyphicon-ok"></big> : จบโครงการ</a><br><br>
+                <a href="${request.route_url('select_project_summarize')}" class="page-scroll btn btn-default btn-xl sr-button"><big class="glyphicon glyphicon-ok"></big> : จบโครงการ</a><br><br>
                 <!--<a href="#services" class="page-scroll btn btn-default btn-xl sr-button"><big class="glyphicon glyphicon-exclamation-sign">glyphicon glyphicon-ok</big> : เช็คภาระ</a><br><br>-->
 
             </div>

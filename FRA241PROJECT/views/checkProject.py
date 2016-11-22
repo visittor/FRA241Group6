@@ -6,7 +6,6 @@ from pyramid.view import (
 from ..models.User import User
 from ..models.Project import (Project,
                              Comment,)
-import transaction
 
 @view_config(route_name = "teacherProject", renderer = "../templates/pageTeacher1.pt",permission = "access")
 def teacherProject(request):

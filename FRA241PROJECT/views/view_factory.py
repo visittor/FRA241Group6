@@ -4,6 +4,7 @@ from pyramid.security import (
 )
 from ..models.Project import Project,Comment
 from ..models.User import User
+from ..models.Summary import Summary
 from  ..models.Proposal import (Proposal,
                                 )
 from sqlalchemy.orm.exc import NoResultFound
@@ -18,7 +19,7 @@ import copy
 
 def proposal_factory(request):
     try:
-        project = request.db_session.query(Project).filter_by(id = request.matchdict["project_id"]).first()
+        project = request.db_session.query(Project).filter_by(id = request.matchdict["project_id"]).one()
     except NoResultFound:
         return HTTPFound(location=request.route_url("addProject"))
     projectId = project.id
@@ -110,3 +111,38 @@ class inspectProject(object):
         for i in self.advisor_list:
             a.append((Allow,str(i.id),"access"))
         return a
+
+def summarize_factory(request):
+    try:
+        project = request.db_session.query(Project).filter_by(id=request.matchdict["project_id"]).one()
+    except NoResultFound:
+        return HTTPFound(location=request.route_url("addProject"))
+    proposal = project.proposal
+    projectID = project.id
+    if project.summary is None:
+        with transaction.manager:
+            summary = Summary()
+            summary.parent_id = projectID
+            summary.owner_for_proposal = proposal.owner_for_proposal
+            summary.member_for_proposal = proposal.member_for_proposal
+            summary.delicate_budget = proposal.delicate_budget
+            summary.profit = proposal.profit
+            summary.Reason = proposal.Reason
+            summary.objective = proposal.objective
+            summary.target_group = ''
+            summary.location = ''
+            summary.problem = ''
+            summary.suggest = ''
+            summary.criteria = ''
+            request.db_session.add(summary)
+    project = request.db_session.query(Project).filter_by(id=request.matchdict["project_id"]).one()
+    return summarizeProject(project)
+
+class summarizeProject(object):
+    def __init__(self,project):
+        self.project = project
+
+    def __acl__(self):
+        return [(Allow,Everyone,"deny"),
+                (Allow,str(self.project.owner_id),"access"),
+                ]

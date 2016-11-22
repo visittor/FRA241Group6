@@ -39,6 +39,8 @@ class Project(Base):
 
     proposal = relationship("Proposal",uselist = False,back_populates = "parent_project")
 
+    summary = relationship("Summary",uselist = False,back_populates = "parent_project")
+
     comment = relationship("Comment",back_populates = "parent_project")
 
     def change_status(self,status):
