@@ -2,7 +2,7 @@ from pyramid.security import (
     Allow,
     Everyone,
 )
-from ..models.Project import Project
+from ..models.Project import Project,Comment
 from ..models.User import User
 from  ..models.Proposal import (Proposal,
                                 )
@@ -84,11 +84,22 @@ class TeacherProject(object):
 def inspect_foctory(request):
     project_id = request.matchdict['project_id']
     project = request.db_session.query(Project).filter_by(id = project_id).first()
-    return inspectProject(project)
+    projectID = project.id
+    userID = request.user.id
+    comment = request.db_session.query(Comment).filter_by(parent_id = projectID).filter_by(writer_id = userID).first()
+    if comment is None:
+        with transaction.manager:
+            cmt = Comment(parent_id = projectID,
+                              writer_id=userID,
+                              )
+            request.db_session.add(cmt)
+        comment = request.db_session.query(Comment).filter_by(parent_id = projectID).filter_by(writer_id = userID).first()
+    return inspectProject(project,comment)
 
 class inspectProject(object):
-    def __init__(self,project):
+    def __init__(self,project,comment):
         self.project = project
+        self.comment = comment
         self.advisor_list = self.project.advisor
 
     def __acl__(self):
