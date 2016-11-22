@@ -50,7 +50,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">request.user.First_name</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,23 +60,18 @@
 
 
                 <li>
-                    <a class="page-scroll" href="#plus">    <big class="glyphicon glyphicon-plus"></big></a> <!--พิ่มโครงการ-->
+                    <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
                 </li>
                 <li>
-                    <a class="page-scroll" href="#minus">    <big class="glyphicon glyphicon-minus"></big></a><!--ลบโครงการ-->
-                </li>
-                <li>
-                    <a class="page-scroll" href="#money">    <big class="glyphicon glyphicon-usd"></big></a> <!--พิ่มโครงการ-->
+                    <a class="page-scroll" href="#status"> <big class="glyphicon glyphicon-globe"></big></a>
                 </li>
 
                 <li>
-                    <a class="page-scroll" href="#upload"> <big class="glyphicon glyphicon-picture"></big></a>
+                    <a class="page-scroll" href="#profile"> <big class="glyphicon glyphicon-user"></big></a><!--รprofile-->
                 </li>
+
                 <li>
-                    <a class="page-scroll" href="#equipment"><big class="glyphicon glyphicon-wrench"></big></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#log out"><b>LOG OUT</b></a>
+                    <a class="page-scroll" href="${request.route_url('logout')}">LOG OUT</a>
                 </li>
             </ul>
         </div>
@@ -100,47 +95,40 @@ $(document).ready(function() {
 </script>
 <div class="container">
     <div class="row">
+        <form class="well form-horizontal" action=" " method="post" id="contact_form">
 
-        <div class="col-sm-7">
-            <div class="form-box">
-                <form class="well form-horizontal" action=" " method="post" id="contact_form">
-                    <fieldset>
-                        <h2 class="text-center"><b>${project.title}</b></h2>
-                        <p>
-                            <a class="word" href="http://docs.google.com/gview?url=$request.route_url('FRA241PROJECT:static/docx/ScriptEng.docx')&embedded=true">open a word document in fancybox</a>
-                            <!--${text}-->
-                            <!--<iframe src="request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx")"></iframe&ndash;&gt;-->
-                        </p>
-                        <!--p>
-                            <br><br><br><br><br><br><br><br><br><br>
-                            <p align = "center"> ดึงข้อมูลโครงการจาก database มาใส่ </p>
-                            <iframe src="somepage.pdf"></iframe>
-                            <br><br><br><br><br><br><br><br><br><br>
-                        </p-->
+            <div class="col-sm-7">
+                <fieldset>
+                <div class="form-box">
 
-                    </fieldset>
-                </form>
+                            <h2 class="text-center"><b>${project.title}</b></h2>
+                            <p>
+                                <a class="word" href="http://docs.google.com/gview?url=${request.static_url('FRA241PROJECT:static/docx/ScriptEng.docx')}&embedded=true">open a word document in fancybox</a>
+                                <!--<iframe src="request.static_url("FRA241PROJECT:static/docx/ScriptEng.docx")"></iframe&ndash;&gt;-->
+                            </p>
+
+
+                </div>
+                </fieldset>
             </div>
-        </div>
 
-        <div class="col-sm-4">
-            <div class="form-box">
-                <form class="well form-horizontal" action=" " method="post" id="contact_form">
-                    <fieldset>
-                        <h2 class="text-center"><b>Comment</b></h2>
+            <div class="col-sm-4">
+                <fieldset>
+                <div class="form-box">
+                            <h2 class="text-center"><b>Comment</b></h2>
 
-                        <form action="action_page.php">
-                            <textarea name="message" rows="15" cols="43"></textarea>
-                            <br>
-                        </form>
-                    </fieldset>
-                </form>
+                            <form action="action_page.php">
+                                <textarea name="message" rows="15" cols="43">${comment.text}</textarea>
+                                <br>
+                            </form>
+                        <div>
+                            <button type="submit" class="btn btn-default" name = "save">save</button><button type="submit" class="btn btn-default" name = "send-comment">ส่งการตวจ</button>
+                        </div>
+                </div>
+                </fieldset>
             </div>
-            <div>
-                <button type="submit" class="btn btn-default">save</button><button type="submit" class="btn btn-default">ส่งการตวจ</button>
-            </div>
-        </div>
 
+        </form>
 
     </div>
 
