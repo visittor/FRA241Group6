@@ -35,6 +35,8 @@ class User(Base):
 
      own_euipment = relationship("Equipment", back_populates = "owner")
 
+     own_comment = relationship("Comment",back_populates = "writer")
+
      def hash_password(self,password):
          password_hash = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
          self.password = password_hash
