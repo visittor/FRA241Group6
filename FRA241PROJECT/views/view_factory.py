@@ -65,7 +65,7 @@ def teacher_project_factory(request):
         with request.db_session.query(User).filter_by(id = id).first() as user:
             project_list = user.advisee_project
             for i in project_list:
-                if i.status is None or len(i.status.split(unichr(171))) == 0:
+                if i.status is None or len(i.status.split(unichr(171))) < 3:
                     i.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
     projectList = request.db_session.query(User).filter_by(id = id).first().advisee_project
 
@@ -82,6 +82,23 @@ class TeacherProject(object):
             (Allow,'role:GOD','access'),
         ]
 
+def admin_project_factory(request):
+    with transaction.manager:
+        project_list = request.db_session.query(Project)
+        for i in project_list:
+            if i.status is None or len(i.status.split(unichr(171))) <3:
+                i.status = 'F' + unichr(171) + 'F' + unichr(171) + 'F' + unichr(171) + 'F' + unichr(171)
+    project_list = request.db_session.query(Project)
+    return AdminProject(project_list)
+class AdminProject(object):
+    def __init__(self,project_list):
+        self.project_list = project_list
+
+    def __acl__(self):
+        return [(Allow,'role:Admin',"access"),
+                ]
+
+
 def inspect_foctory(request):
     project_id = request.matchdict['project_id']
     project = request.db_session.query(Project).filter_by(id = project_id).first()
@@ -96,7 +113,6 @@ def inspect_foctory(request):
             request.db_session.add(cmt)
         comment = request.db_session.query(Comment).filter_by(parent_id = projectID).filter_by(writer_id = userID).first()
     return inspectProject(project,comment)
-
 class inspectProject(object):
     def __init__(self,project,comment):
         self.project = project
@@ -107,6 +123,7 @@ class inspectProject(object):
         a = [
             (Allow,Everyone,"deny"),
             (Allow,'role:GOD',"access"),
+            (Allow,'role:Admin',"access")
         ]
         for i in self.advisor_list:
             a.append((Allow,str(i.id),"access"))
@@ -137,7 +154,6 @@ def summarize_factory(request):
             request.db_session.add(summary)
     project = request.db_session.query(Project).filter_by(id=request.matchdict["project_id"]).one()
     return summarizeProject(project)
-
 class summarizeProject(object):
     def __init__(self,project):
         self.project = project
