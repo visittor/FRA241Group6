@@ -62,9 +62,14 @@
             <ul class="nav navbar-nav navbar-right">
 
 
-                <?python role = True if user.role != "Student" else False ?>
-                <li tal:condition = "role">
+                <?python role_teacher = True if user.role == "Teacher" or user.role=="GOD" else False ?>
+                <?python role_admin = True if user.role == "Admin" else False ?>
+                <li tal:condition = "role_teacher">
                     <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+                </li>
+
+                <li tal:condition = "role_admin">
+                    <a class="page-scroll" href="${request.route_url('adminProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
                 </li>
 
                 <li>
@@ -192,7 +197,7 @@
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" id="checkboxSuccess" value="option1" tal:attributes =  "checked status[1]| nothing" disabled>
-                                            สถานะ 2
+                                            แอดมินตรวจสอบ proposal แล้ว
                                         </label>
                                     </div>
                                 </div>
