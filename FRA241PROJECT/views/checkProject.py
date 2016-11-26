@@ -36,14 +36,11 @@ def adminProject(request):
         elif status[1] == "T":
             checked_project.append(i)
     if "x" in request.params:
-        id_recommend_list = []
         for i in checked_project:
             if str(i.id) in request.params:
-                id_recommend_list.append(str(i.id))
-        print "\n\n\n\n\n\n\n\n\nid recommend",id_recommend_list,"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-        for i in id_recommend_list:
-            with transaction.manager:
-                pass
+                i.is_recommend = "T"
+            else:
+                i.is_recommend = "F"
         return HTTPFound(location=request.route_url('home'))
     return dict(uncheck_project = uncheck_project,
                 checked_project = checked_project,

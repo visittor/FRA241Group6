@@ -25,6 +25,8 @@ class Project(Base):
     start_date = Column(Date)
     finish_date = Column(Date)
 
+    is_recommend = Column(Text)
+
     owner_id = Column(Integer,ForeignKey('User.id'))
     leader = relationship("User", back_populates = "own_project")#ผู้รับผิดชอบ
 
@@ -67,6 +69,9 @@ class Project(Base):
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
 
+# class RecommendProject(Base):
+#     __tablename__ = "RecommendProject"
+#     id = Column(Integer,primary_key=True)
 
 class Comment(Base):
 
