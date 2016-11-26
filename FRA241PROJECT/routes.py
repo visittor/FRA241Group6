@@ -26,6 +26,7 @@ def includeme(config):
     config.add_route('addProject','/add_project')
     config.add_route('proposal','/add_proposal/{project_id}/{type_project}',factory=proposal_factory)
     config.add_route('teacherProject','/teacherProject',factory = teacher_project_factory)
+    config.add_route('adminProject','/adminProject',factory=admin_project_factory)
     config.add_route('inspectProject','/teacherProject/{project_id}',factory = inspect_foctory)
     config.add_route('select_project_summarize','/summarize')
     config.add_route('summarize','/summarize/{project_id}',factory = summarize_factory)

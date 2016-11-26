@@ -396,6 +396,12 @@ class Project_view():
                         project.finish_date = finish_date
                     GOD = self.request.db_session.query(User).filter_by(id=1).one()
                     project.advisor.append(GOD)
+                    if project.status is None or len(project.status.split(unichr(171))) == 0:
+                        project.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
+                    else:
+                        status = project.status.split(unichr(171))
+                        status[0] = status[1] = 'F'
+                        project.status = unichr(171).join(status)
                     # for i in list_OJ:
                     #     obj = Objective(text=i)
                     #     proposal.objective.append(obj)
@@ -681,6 +687,14 @@ class Project_view():
                     proposal.delicate_budget = list_DB
                     if type(start_date)!= str:
                         project.start_date = start_date
+                    GOD = self.request.db_session.query(User).filter_by(id=1).one()
+                    project.advisor.append(GOD)
+                    if project.status is None or len(project.status.split(unichr(171))) == 0:
+                        project.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
+                    else:
+                        status = project.status.split(unichr(171))
+                        status[0] = status[1] = 'F'
+                        project.status = unichr(171).join(status)
 
         if "Date" in self.request.params:
             start_date_fot_return = self.request.params["Date"]
@@ -979,6 +993,14 @@ class Project_view():
                     proposal.schedule = list_schedule
                     if type(start_date)!= str:
                         project.start_date = start_date
+                    GOD = self.request.db_session.query(User).filter_by(id=1).one()
+                    project.advisor.append(GOD)
+                    if project.status is None or len(project.status.split(unichr(171))) == 0:
+                        project.status = 'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)+'F'+unichr(171)
+                    else:
+                        status = project.status.split(unichr(171))
+                        status[0] = status[1] = 'F'
+                        project.status = unichr(171).join(status)
                     print "\n\n\n\n\n\n\n\nchanged\n\n\n\n\n\n"
         if "Date" in self.request.params:
             start_date_fot_return = self.request.params["Date"]
