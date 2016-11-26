@@ -37,6 +37,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
+        body { background-color:#ff9900;  }
         h2 {font-size: 150%}
     </style>
 
@@ -92,10 +93,13 @@
                     <fieldset>
                         <h2 class="text-center"><b>โครงการรอการตรวจสอบ  <span class="glyphicon glyphicon-bell" aria-hidden="true"></span></b></h2>
                         <div class="list-group">
+                            <div style="overflow-y:scroll;">
+
                             <a tal:repeat = "uncheckpro uncheck_project" href="${request.route_url('inspectProject',project_id = str(uncheckpro.id))}" class="list-group-item">
                                 ${uncheckpro.title}
                                 <span class="pull-right text-muted small"><em></em></span>
                             </a>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
@@ -109,10 +113,12 @@
                     <fieldset>
                         <h2 class="text-center"><b>โครงการผ่านการตรวจสอบ  <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></b></h2>
                         <div class="list-group">
+                            <div style="overflow-y:scroll;">
                             <a tal:repeat = "checkpro checked_project" href="${request.route_url('inspectProject',project_id = str(checkpro.id))}" class="list-group-item">
                                 ${checkpro.title}
                                 <span class="pull-right text-muted small"><em></em></span>
                             </a>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
