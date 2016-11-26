@@ -37,6 +37,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
+        body { background-color:#ff9900;  }
         h2 {font-size: 150%}
     </style>
 
@@ -56,27 +57,19 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-
-
-
                 <li>
-                    <a class="page-scroll" href="#plus">    <big class="glyphicon glyphicon-plus"></big></a> <!--พิ่มโครงการ-->
+                    <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
                 </li>
                 <li>
-                    <a class="page-scroll" href="#minus">    <big class="glyphicon glyphicon-minus"></big></a><!--ลบโครงการ-->
-                </li>
-                <li>
-                    <a class="page-scroll" href="#money">    <big class="glyphicon glyphicon-usd"></big></a> <!--พิ่มโครงการ-->
+                    <a class="page-scroll" href="#status"> <big class="glyphicon glyphicon-globe"></big></a>
                 </li>
 
                 <li>
-                    <a class="page-scroll" href="#upload"> <big class="glyphicon glyphicon-picture"></big></a>
+                    <a class="page-scroll" href="#profile"> <big class="glyphicon glyphicon-user"></big></a><!--รprofile-->
                 </li>
+
                 <li>
-                    <a class="page-scroll" href="#equipment"><big class="glyphicon glyphicon-wrench"></big></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="request.route_url('logout')"><b>LOG OUT</b></a>
+                    <a class="page-scroll" href="${request.route_url('logout')}">LOG OUT</a>
                 </li>
             </ul>
         </div>
@@ -100,47 +93,13 @@
                     <fieldset>
                         <h2 class="text-center"><b>โครงการรอการตรวจสอบ  <span class="glyphicon glyphicon-bell" aria-hidden="true"></span></b></h2>
                         <div class="list-group">
+                            <div style="overflow-y:scroll;">
+
                             <a tal:repeat = "uncheckpro uncheck_project" href="${request.route_url('inspectProject',project_id = str(uncheckpro.id))}" class="list-group-item">
                                 ${uncheckpro.title}
                                 <span class="pull-right text-muted small"><em></em></span>
                             </a>
-                            <!--a href="#" class="list-group-item">
-                                โครงการเยาวชนคนรักษ์พลังงาน
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการสานฝันปันรักสู่น้อง ครั้งที่ 13
-                                <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการฟีโบ้พัฒนาชุมชน
-                                <span class="pull-right text-muted small"><em>43 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการสร้างฝายชะลอน้ำ
-                                <span class="pull-right text-muted small"><em>11:32 AM</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการปลูกป่า
-                                <span class="pull-right text-muted small"><em>11:13 AM</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการติวคณิตพิชิตไฟนอล
-                                <span class="pull-right text-muted small"><em>10:57 AM</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการ FIBB RoboCamp ครั้งที่ 6
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการเยาวชนคนรักษ์พลังงาน ครั้งที่ 2
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการสานฝันปันรักสู่น้อง ครั้งที่ 14
-                                <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                            </a-->
-
+                            </div>
                         </div>
                     </fieldset>
                 </form>
@@ -154,47 +113,12 @@
                     <fieldset>
                         <h2 class="text-center"><b>โครงการผ่านการตรวจสอบ  <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></b></h2>
                         <div class="list-group">
+                            <div style="overflow-y:scroll;">
                             <a tal:repeat = "checkpro checked_project" href="${request.route_url('inspectProject',project_id = str(checkpro.id))}" class="list-group-item">
                                 ${checkpro.title}
                                 <span class="pull-right text-muted small"><em></em></span>
                             </a>
-                            <!--a href="#" class="list-group-item">
-                                โครงการเยาวชนคนรักษ์พลังงาน
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการสานฝันปันรักสู่น้อง ครั้งที่ 13
-                                <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการฟีโบ้พัฒนาชุมชน
-                                <span class="pull-right text-muted small"><em>43 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการสร้างฝายชะลอน้ำ
-                                <span class="pull-right text-muted small"><em>11:32 AM</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการปลูกป่า
-                                <span class="pull-right text-muted small"><em>11:13 AM</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการติวคณิตพิชิตไฟนอล
-                                <span class="pull-right text-muted small"><em>10:57 AM</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการ FIBB RoboCamp ครั้งที่ 6
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการเยาวชนคนรักษ์พลังงาน ครั้งที่ 2
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                โครงการสานฝันปันรักสู่น้อง ครั้งที่ 14
-                                <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                            </a-->
-
+                            </div>
                         </div>
                     </fieldset>
                 </form>
