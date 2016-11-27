@@ -40,7 +40,7 @@
     <script type="text/javascript">
         function CreateNewRow0(text)
         {
-            var intLine = parseInt(document.add_project_form.OJ.value);
+            var intLine = parseInt(document.Check_All.OJ.value);
             intLine++;
 
             var theTable = document.all.OJExp
@@ -58,12 +58,12 @@
             //***<input type="text" size = "10" name = "OJ1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"OJ1_"+intLine+"\" VALUE=\"\">"***//
 
 
-            document.add_project_form.OJ.value = intLine;
+            document.Check_All.OJ.value = intLine;
         }
 
         function RemoveRow0()
         {
-            intLine = parseInt(document.add_project_form.OJ.value);
+            intLine = parseInt(document.Check_All.OJ.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.OJExp :
@@ -71,7 +71,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.OJ.value = intLine;
+                document.Check_All.OJ.value = intLine;
             }
         }
     </script>
@@ -79,7 +79,7 @@
     <script type="text/javascript">
         function CreateNewRow1(text)
         {
-            var intLine = parseInt(document.add_project_form.P_R.value);
+            var intLine = parseInt(document.Check_All.P_R.value);
             intLine++;
 
             var theTable = document.all.P_RExp
@@ -97,12 +97,12 @@
             //***<input type="text" size = "10" name = "P_R1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"P_R1_"+intLine+"\" VALUE=\"\">"***//
 
 
-            document.add_project_form.P_R.value = intLine;
+            document.Check_All.P_R.value = intLine;
         }
 
         function RemoveRow1()
         {
-            intLine = parseInt(document.add_project_form.P_R.value);
+            intLine = parseInt(document.Check_All.P_R.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.P_RExp :
@@ -110,7 +110,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.P_R.value = intLine;
+                document.Check_All.P_R.value = intLine;
             }
         }
     </script>
@@ -118,7 +118,7 @@
     <script type="text/javascript">
         function CreateNewRow2(text)
         {
-            var intLine = parseInt(document.add_project_form.P_M.value);
+            var intLine = parseInt(document.Check_All.P_M.value);
             intLine++;
 
             var theTable = document.all.P_MExp
@@ -136,12 +136,12 @@
             //***<input type="text" size = "10" name = "P_M1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"P_M1_"+intLine+"\" VALUE=\"\">"***//
 
 
-            document.add_project_form.P_M.value = intLine;
+            document.Check_All.P_M.value = intLine;
         }
 
         function RemoveRow2()
         {
-            intLine = parseInt(document.add_project_form.P_M.value);
+            intLine = parseInt(document.Check_All.P_M.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.P_MExp :
@@ -149,7 +149,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.P_M.value = intLine;
+                document.Check_All.P_M.value = intLine;
             }
         }
     </script>
@@ -157,7 +157,7 @@
     <script type="text/javascript">
         function CreateNewRow3(text)
         {
-            var intLine = parseInt(document.add_project_form.S_P.value);
+            var intLine = parseInt(document.Check_All.S_P.value);
             intLine++;
 
             var theTable = document.all.S_PExp
@@ -174,12 +174,12 @@
             newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"S_P1_"+intLine+"\" VALUE=\""+text+"\">"
 
 
-            document.add_project_form.S_P.value = intLine;
+            document.Check_All.S_P.value = intLine;
         }
 
         function RemoveRow3()
         {
-            intLine = parseInt(document.add_project_form.S_P.value);
+            intLine = parseInt(document.Check_All.S_P.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.S_PExp :
@@ -187,7 +187,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.S_P.value = intLine;
+                document.Check_All.S_P.value = intLine;
             }
         }
     </script>
@@ -195,7 +195,7 @@
     <script type="text/javascript">
         function CreateNewRow4(text)
         {
-            var intLine = parseInt(document.add_project_form.Benefits.value);
+            var intLine = parseInt(document.Check_All.Benefits.value);
             intLine++;
 
             var theTable = document.all.BenefitsExp
@@ -213,12 +213,12 @@
 
 
 
-            document.add_project_form.Benefits.value = intLine;
+            document.Check_All.Benefits.value = intLine;
         }
 
         function RemoveRow4()
         {
-            intLine = parseInt(document.add_project_form.Benefits.value);
+            intLine = parseInt(document.Check_All.Benefits.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.BenefitsExp :
@@ -226,7 +226,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.Benefits.value = intLine;
+                document.Check_All.Benefits.value = intLine;
             }
         }
     </script>
@@ -234,7 +234,7 @@
     <script type="text/javascript">
         function CreateNewRow5(order,descrip,value)
         {
-            var intLine = parseInt(document.add_project_form.BGT.value);
+            var intLine = parseInt(document.Check_All.BGT.value);
             intLine++;
 
             var theTable = document.all.BGTExp
@@ -260,12 +260,12 @@
             newCell.id = newCell.uniqueID
             newCell.setAttribute("className", "css-name");
             newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"BGT3_"+intLine+"\" VALUE=\""+value+"\">"
-            document.add_project_form.BGT.value = intLine;
+            document.Check_All.BGT.value = intLine;
         }
 
         function RemoveRow5()
         {
-            intLine = parseInt(document.add_project_form.BGT.value);
+            intLine = parseInt(document.Check_All.BGT.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.BGTExp :
@@ -273,7 +273,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.BGT.value = intLine;
+                document.Check_All.BGT.value = intLine;
             }
         }
     </script>
@@ -281,7 +281,7 @@
     <script type="text/javascript">
         function CreateNewRow6(value,descrip)
         {
-            var intLine = parseInt(document.add_project_form.schedule.value);
+            var intLine = parseInt(document.Check_All.schedule.value);
             intLine++;
 
             var theTable = document.all.scheduleExp
@@ -303,12 +303,12 @@
             newCell.setAttribute("className", "css-name");
             newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"schedule2_"+intLine+"\" VALUE=\""+descrip+"\">"
 
-            document.add_project_form.schedule.value = intLine;
+            document.Check_All.schedule.value = intLine;
         }
 
         function RemoveRow6()
         {
-            intLine = parseInt(document.add_project_form.schedule.value);
+            intLine = parseInt(document.Check_All.schedule.value);
             if(parseInt(intLine) > 0)
             {
                 theTable = (document.all) ? document.all.scheduleExp :
@@ -316,7 +316,7 @@
                 theTableBody = theTable.tBodies[0];
                 theTableBody.deleteRow(intLine);
                 intLine--;
-                document.add_project_form.schedule.value = intLine;
+                document.Check_All.schedule.value = intLine;
             }
         }
     </script>
@@ -331,7 +331,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">request.user.First_name</a>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.First_name}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -377,6 +377,7 @@
                 <div class="col-md-7">
                     <h2 class="text-center"><b>${project.title}</b></h2>
                     <br>
+
                     <fieldset disabled>
                         <div class="form-group">
                             <label class="col-md-3 control-label">ชื่อโครงการ</label>

@@ -59,7 +59,7 @@
                     data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.First_name}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -130,7 +130,8 @@
                                             <h4 class="modal-title">Modal Header11111</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Some text in the modal.</p>
+                                            <?python comment = dictComment["teacher"][0].text if len(dictComment["teacher"])!=0 else "no comment yet"?>
+                                            <p>${comment}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -166,7 +167,8 @@
                                             <h4 class="modal-title">Modal Header2222</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Some text in the modal.</p>
+                                            <?python comment = dictComment["admin"][0].text if len(dictComment["admin"])!=0 else "no comment yet"?>
+                                            <p>${comment}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -201,7 +203,8 @@
                                             <h4 class="modal-title">Modal Header333</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Some text in the modal.</p>
+                                            <?python comment = dictComment["GOD"][0].text if len(dictComment["GOD"])!=0 else "no comment yet"?>
+                                            <p>${comment}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -219,26 +222,7 @@
 
 
 
-            <!-- Modal1 -->
-            <div class="modal fade" id="myModal1" role="dialog">
-                <div class="modal-dialog">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Some text in the modal.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
 
 
