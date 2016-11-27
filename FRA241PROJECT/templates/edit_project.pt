@@ -298,8 +298,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <?python role_teacher = True if user.role == "Teacher" or user.role=="GOD" else False ?>
-                <?python role_admin = True if user.role == "Admin" else False ?>
+                <?python role_teacher = True if request.user.role == "Teacher" or request.user.role=="GOD" else False ?>
+                <?python role_admin = True if request.user.role == "Admin" else False ?>
                 <li tal:condition = "role_teacher">
                     <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
                 </li>
@@ -348,206 +348,12 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">ชื่อโครงการ</label>
                 <div class="col-md-5 inputGroupContainer">
-                    <?python is_not_selected = False if "project_id" in request.matchdict else True?>
                     <select type="text" name="project_name" class="form-control" id="project_name" onchange="select_dropdown();">
-                        <option value="" tal:attributes =  "selected is_not_selected | nothing"></option>
-                        <option tal:condition = "not is_not_selected" value = "${request.route_url('summarize',project_id = project.id)}" selected>${project.title}</option>
-                        <option tal:repeat = "project project_list" value = "${request.route_url('summarize',project_id = project.id)}" >${project.title}</option>
+                        <option value="" selected></option>
+                        <option tal:repeat = "project project_list" value = "${request.route_url('proposal',project_id = project.id,type_project = project.type)}" >${project.title}</option>
                     </select>
                 </div>
             </div>
-            <?python is_selected = True if "project_id" in request.matchdict else False?>
-            <div tal:condition = "is_selected">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">ผู้รับผิดชอบ</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <input type="hidden" name="SF1" value="0">
-
-                            <button name="btnAddSF1" type="button" id="btnAddSF1" class="btn btn-success"
-                                    onClick="CreateNewRow1('');"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                            <button name="btnDelSF1" type="button" id="btnDelSF1" class="btn btn-danger"
-                                    onClick="RemoveRow1();"><i class="glyphicon glyphicon-minus-sign"></i></button>
-
-                            <table class="table table-striped" id="SF1Exp">
-                                <tr>
-                                    <?python PR_ = [i for i in summary.owner_for_proposal.split(unichr(171)) if i!=''] ?>
-                                    <script tal:repeat="PR PR_">CreateNewRow1("${PR}");</script>
-
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">ผู้เข้าร่วมโครงการ</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <input type="hidden" name="SF2" value="0">
-
-                            <button name="btnAddSF2" type="button" id="btnAddSF2" class="btn btn-success"
-                                    onClick="CreateNewRow2('');"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                            <button name="btnDelSF2" type="button" id="btnDelSF2" class="btn btn-danger"
-                                    onClick="RemoveRow2();"><i class="glyphicon glyphicon-minus-sign"></i></button>
-
-                            <table class="table table-striped" id="SF2Exp">
-                                <tr>
-                                    <?python PM_ = [i for i in summary.member_for_proposal.split(unichr(171)) if i!=''] ?>
-                                    <script tal:repeat="PM PM_">CreateNewRow2("${PM}");</script>
-
-
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">หลักการและเหตุผล</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                            <textarea name="SF3" class="form-control">${summary.Reason}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">วัตถุประสงค์</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <input type="hidden" name="SF4" value="0">
-
-                            <button name="btnAddSF4" type="button" id="btnAddSF4" class="btn btn-success" onClick="CreateNewRow4('');"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                            <button name="btnDelSF4" type="button" id="btnDelSF4" class="btn btn-danger" onClick="RemoveRow4();"><i class="glyphicon glyphicon-minus-sign"></i></button>
-
-                            <table class="table table-striped" id="SF4Exp">
-                                <tr>
-                                    <?python SF4_ = [i for i in summary.objective.split(unichr(171)) if i!=''] ?>
-                                    <script tal:repeat="SF4 SF4_">CreateNewRow4("${SF4}");</script>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">กลุ่มเป้าหมาย/ผู้เข้าร่วมโครงการ</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <input type="hidden" name="SF5" value="0">
-
-                            <button name="btnAddSF5" type="button" id="btnAddSF5" class="btn btn-success" onClick="CreateNewRow5(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                            <button name="btnDelSF5" type="button" id="btnDelSF5" class="btn btn-danger" onClick="RemoveRow5();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
-
-                            <table class="table table-striped"  id="SF5Exp">
-                                <tr>
-                                    <?python SF5_ = [i.split(unichr(172)) for i in summary.target_group.split(unichr(171)) if len(i.split(unichr(172)))==3 and '' not in i.split(unichr(172))] ?>
-                                    <script tal:repeat = "SF5 SF5_" >CreateNewRow5("${SF5[0]}","${SF5[1]}","${SF5[2]}");</script>
-                                    <th><div align="center">กลุ่มเป้าหมาย/ผู้เข้าร่วมโครงการ</div></th>
-                                    <th><div align="center">แผน(คน)</div></th>
-                                    <th><div align="center">เข้าจริง(คน)</div></th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">ผลที่คาดว่าจะได้รับ/ผลการดำเนินงานกิจกรรม</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <input type="hidden" name="SF6" value="0">
-
-                            <button name="btnAddSF6" type="button" id="btnAddSF6" class="btn btn-success"
-                                    onClick="CreateNewRow6('');"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                            <button name="btnDelSF6" type="button" id="btnDelSF6" class="btn btn-danger"
-                                    onClick="RemoveRow6();"><i class="glyphicon glyphicon-minus-sign"></i></button>
-
-                            <table class="table table-striped" id="SF6Exp">
-                                <tr>
-                                    <?python SF6_ = [i for i in summary.profit.split(unichr(171)) if i!=''] ?>
-                                    <script tal:repeat="SF6 SF6_">CreateNewRow6("${SF6}");</script>
-
-
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">รายละเอียดการใช้จ่ายงบประมาณโครงการ</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <input type="hidden" name="SF7" value="0">
-
-                            <button name="btnAddSF7" type="button" id="btnAddSF7" class="btn btn-success" onClick="CreateNewRow7(1,'หนังสือ',3);"><i class="glyphicon glyphicon-plus-sign"></i></button>
-                            <button name="btnDelSF7" type="button" id="btnDelSF7" class="btn btn-danger" onClick="RemoveRow7();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
-
-                            <table class="table table-striped"  id="SF7Exp">
-                                <tr>
-                                    <?python SF7_ = [i.split(unichr(172)) for i in summary.delicate_budget.split(unichr(171)) if len(i.split(unichr(172)))==3 and '' not in i.split(unichr(172))] ?>
-                                    <script tal:repeat = "SF7 SF7_" >CreateNewRow7("${SF7[0]}","${SF7[1]}","${SF7[2]}");</script>
-                                    <th><div align="center">ลำดับ</div></th>
-                                    <th><div align="center">รายละเอียด</div></th>
-                                    <th><div align="center">จำนวนเงิน(บาท)</div></th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">สถานที่ปฏิบัติงานและระยะเวลาในการดำเนินกิจกรรม</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                            <textarea name="SF8" class="form-control">${summary.location}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">ปัญหาและอุปสรรคในการดำเนินกิจกรรม</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                            <textarea name="SF9" class="form-control">${summary.problem}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">ข้อเสนอแนะในการดำเนินโครงการครั้งต่อไป</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                            <textarea name="SF10" class="form-control">${summary.suggest}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">การประเมินโครงการ</label>
-                    <div class="col-md-5 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                            <textarea name="SF11" class="form-control">${summary.criteria}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">รูปภาพรายละเอียดกิจกรรม</label>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">อัพโหลด <i class="glyphicon glyphicon-picture"></i></button>
-                </div>
-                <!-- Success message -->
-                <div class="alert alert-success" role="alert" id="success_message">Success <i
-                        class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to
-                    you
-                    shortly.
-                </div>
-
-                <!-- Button -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-warning btn-lg" name = "save">บันทึก <span
-                                class="glyphicon glyphicon-floppy-disk"></span></button>
-                    </div>
-                </div>
-        </div>
         </fieldset>
     </form>
 </div>
