@@ -13,10 +13,11 @@ def teacherProject(request):
     project_list = request.context.project_list
     uncheck_project = []
     checked_project = []
+    index = 0 if request.user.role == "Teacher" else 2
     for i in project_list:
-        if i.status.split(unichr(171))[0] == "F":
+        if i.status.split(unichr(171))[index] == "F" :
             uncheck_project.append(i)
-        elif i.status.split(unichr(171))[0] == "T":
+        elif i.status.split(unichr(171))[index] == "T" :
             checked_project.append(i)
     return dict(uncheck_project = uncheck_project,
                 checked_project = checked_project,
@@ -62,11 +63,13 @@ def inspectProject(request):
         status = [i for i in project.status.split(unichr(171))]
         if request.user.role == "Admin":
             status[1] = 'T'
+        elif request.user.role == "GOD":
+            status[2] = 'T'
         else:
             status[0] = 'T'
         project.status = unichr(171).join(status)
         print "\n\n\n\n\n\n\n\n\n\nfuck yeah\n\n\n\n\n\n\n\n"
-        if request.user.role == "Teacher":
+        if request.user.role == "Teacher" or request.user.role == "GOD":
             return HTTPFound(location=request.route_url("teacherProject"))
         else:
             return HTTPFound(location=request.route_url("adminProject"))
