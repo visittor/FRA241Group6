@@ -157,7 +157,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <select type="text" name="project_name" class="form-control" id="project_name" onchange="select_dropdown();">
                                 <option value="" selected></option>
-                                <option tal:repeat = "project project_list" value = "${request.route_url('proposal',project_id = project.id,type_project = project.type)}" >${project.title}</option>
+                                <option tal:repeat = "project project_list" value = "${request.route_url('checkStatus',project_id = project.id,type_project = project.type)}" >${project.title}</option>
                             </select>
                         </div>
                     </form>
