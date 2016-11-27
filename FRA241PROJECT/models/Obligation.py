@@ -17,6 +17,7 @@ class Obligation(Base):
     id = Column(Integer, primary_key=True)
     type = Column(VARCHAR(20))
     description = Column(Text)
+    cost = Column(Text)
     duty = Column(Text)
     status = Column(VARCHAR(20))
 

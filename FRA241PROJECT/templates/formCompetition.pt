@@ -30,6 +30,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
+      body { background-color:#ff9900;  }
       h2 {font-size: 150%}
       <!--การเปรียบเทียบกิจกรรม-->
     </style>
@@ -230,7 +231,7 @@
       }
     }
   </script>
-  <!-- งบประมาณที่ใช้4-->
+  <!-- งบปประมาณโที่ใช้้4-->
   <script type="text/javascript">
     function CreateNewRow4( order,descrip,value)
       {
@@ -267,15 +268,15 @@
 
     function RemoveRow4()
     {
-      intLine = parseInt(document.add_project_form.B_U.value);
+      intLine = parseInt(document.add_project_form.D_B.value);
       if(parseInt(intLine) > 0)
       {
-        theTable = (document.all) ? document.all.B_UExp :
-                document.getElementById("B_UExp")
+        theTable = (document.all) ? document.all.D_BExp :
+                document.getElementById("D_BExp")
         theTableBody = theTable.tBodies[0];
         theTableBody.deleteRow(intLine);
         intLine--;
-        document.add_project_form.B_U.value = intLine;
+        document.add_project_form.D_B.value = intLine;
       }
     }
   </script>
@@ -297,28 +298,27 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        <?python role_teacher = True if request.user.role == "Teacher" or request.user.role=="GOD" else False ?>
+        <?python role_admin = True if request.user.role == "Admin" else False ?>
+        <li tal:condition = "role_teacher">
+          <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+        </li>
 
+        <li tal:condition = "role_admin">
+          <a class="page-scroll" href="${request.route_url('adminProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+        </li>
 
+        <li>
+          <a class="page-scroll" href="#status">    <big class="glyphicon glyphicon-globe"></big></a> <!--status-->
+        </li>
 
-        <!--li>
-            <a class="page-scroll" href="#plus">    <big class="glyphicon glyphicon-plus"></big></a> <!--เพิ่มโครงการ-->
-          <!--/li-->
-          <!--li>
-            <a class="page-scroll" href="#minus">    <big class="glyphicon glyphicon-minus"></big></a><!--ลบโครงการ-->
-          <!--/li-->
-          <li>
-            <a class="page-scroll" href="#money">    <big class="glyphicon glyphicon-usd"></big></a> <!--เพิ่มภาพ-->
-          </li>
+        <li>
+          <a class="page-scroll" href="#profile"> <big class="glyphicon glyphicon-user"></big></a><!--รprofile-->
+        </li>
 
-          <li>
-            <a class="page-scroll" href="#upload"> <big class="glyphicon glyphicon-picture"></big></a>
-          </li>
-          <li>
-            <a class="page-scroll" href="#equipment"><big class="glyphicon glyphicon-wrench"></big></a>
-          </li>
-          <li>
-            <a class="page-scroll" href="${request.route_url('logout')}"><b>LOG OUT</b></a>
-          </li>
+        <li>
+          <a class="page-scroll" href="${request.route_url('logout')}">LOG OUT</a>
+        </li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->
@@ -492,7 +492,7 @@
         <div class="col-md-5 inputGroupContainer">
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-            <input name="S_A" placeholder="" class="form-control"  type="text">
+            <textarea class="form-control" name="S_A" value = "{N/A}">{N/A}</textarea>
           </div>
         </div>
       </div>
@@ -515,7 +515,7 @@
         </div>
       </div>
       <div class="form-group">
-      <label class="col-md-3 control-label">งบประมาณโดยละเอียด</label>
+      <label class="col-md-3 control-label">งบประมาณที่ใช้</label>
       <div class="col-md-5 inputGroupContainer">
         <div class="input-group">
           <input type="hidden" name="D_B" value="0">
