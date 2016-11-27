@@ -64,7 +64,7 @@
             newCell = newRow.insertCell(2)
             newCell.id = newCell.uniqueID
             newCell.setAttribute("className", "css-name");
-            newCell.innerHTML = " upload<INPUT TYPE=\"file\" NAME=\"img\"  VALUE=\""+bill+"\">"
+            newCell.innerHTML = " upload:<INPUT TYPE=\"FILE\" NAME=\"img\"  VALUE=\""+bill+"\">"
 
             //*** Column 4***//
             newCell = newRow.insertCell(3)
@@ -89,79 +89,53 @@
             }
         }
     </script>
+    <!--Header-->
+<body id="page-top">
 
-    <script type="text/javascript">
-        <!-- Begin
-        /* This script and many more are available free online at
-         The JavaScript Source!! http://javascript.internet.com
-         Created by: Abraham Joffe :: http://www.abrahamjoffe.com.au/ */
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.user_id}</a>
+        </div>
 
-        /***** CUSTOMIZE THESE VARIABLES *****/
-
-                // width to resize large images to
-        var maxWidth=500;
-
-        // height to resize large images to
-        var maxHeight=500;
-
-        // ระบุนามสกุลของไฟล์รูปภาพที่อนุญาติให้อัพโหลด
-        var fileTypes=["bmp","gif","png","jpg","jpeg"];
-
-        // the id of the preview image tag
-        var outImage="previewField";
-
-        // URL ของไฟล์ภาพ กรณีเลือก Upload ไฟล์ผิดรูปแบบ
-        var defaultPic="http://i560.photobucket.com/albums/ss50/sanathperera456/blank.jpg";
-
-        /***** DO NOT EDIT BELOW *****/
-        function preview(what){
-            var source=what.value;
-            var ext=source.substring(source.lastIndexOf(".")+1,source.length).toLowerCase();
-            for (var i=0; i<fileTypes.length; i++){
-                if (fileTypes[i]==ext){
-                    break;
-                }
-            }
-            globalPic=new Image();
-            if (i<fileTypes.length){
-
-                //Obtenemos los datos de la imagen de firefox
-                try{
-                    globalPic.src=what.files[0].getAsDataURL();
-                }catch(err){
-                    globalPic.src=source;
-                }
-            }else {
-                globalPic.src=defaultPic;
-                alert("Error !! Only "+fileTypes.join(", "));
-            }
-            setTimeout("applyChanges()",200);
-        }
-
-        var globalPic;
-        function applyChanges(){
-            var field=document.getElementById(outImage);
-            var x=parseInt(globalPic.width);
-            var y=parseInt(globalPic.height);
-            if (x>maxWidth) {
-                y*=maxWidth/x;
-                x=maxWidth;
-            }
-            if (y>maxHeight) {
-                x*=maxHeight/y;
-                y=maxHeight;
-            }
-            field.style.display=(x<1 || y<1)?"none":"";
-            field.src=globalPic.src;
-            field.width=x;
-            field.height=y;
-        }
-        // End -->
-    </script>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
 
 
+
+                <!--li>
+                  <a class="page-scroll" href="#plus">    <big class="glyphicon glyphicon-plus"></big></a> <!--เพิ่มโครงการ-->
+                <!--/li-->
+                <!--li>
+                  <a class="page-scroll" href="#minus">    <big class="glyphicon glyphicon-minus"></big></a><!--ลบโครงการ-->
+                <!--/li-->
+                <li>
+                    <a class="page-scroll" href="#status">    <big class="glyphicon glyphicon-globe"></big></a> <!--status-->
+                </li>
+
+
+                <li>
+                    <a class="page-scroll" href="#profile"> <big class="glyphicon glyphicon-user"></big></a><!--รprofile-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="${request.route_url('logout')}"><b>LOG OUT</b></a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<br>
+<br>
+<br>
 </head>
-
 
 <body>
 <div class="container">
@@ -175,7 +149,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4 selectContainer">
-                    <div class="input-group">
+                    <div class="input-group-center">
                         <select name="โครงการ" class="form-control selectpicker" >
                             <option value=" " >ชื่อโครงการ        </option>
                             <option>ชื่อโครงการ1</option>
@@ -204,7 +178,7 @@
                         <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4('','','','');"><i class="glyphicon glyphicon-plus-sign"></i></button>
                         <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
-                        <table class="table table-striped"  id="D_BExp">
+                        <table class="table table-condensed"  id="D_BExp">
                             <tr>
                                 <script tal:repeat = "DB DB_" >CreateNewRow4("ชื่ออุปกรณ์","ราคา","","");</script>
 
