@@ -288,7 +288,7 @@
     </script>
     <!--ผลที่คาดว่าจะได้รับ6-->
     <script type="text/javascript">
-      function CreateNewRow6(time,descrip)
+      function CreateNewRow6(time)
       {
         var intLine = parseInt(document.add_project_form.Benefits.value);
         intLine++;
@@ -629,11 +629,11 @@
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
         <input type="hidden" name="Benefits" value="0">
-        <button name="btnAdds_Benefits" type="button" id="btnAdd_Benefits" class="btn btn-success" onClick="CreateNewRow6('','');"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnAdds_Benefits" type="button" id="btnAdd_Benefits" class="btn btn-success" onClick="CreateNewRow6('');"><i class="glyphicon glyphicon-plus-sign"></i></button>
         <button name="btnDel_Benefits" type="button" id="btnDel_Benefits" class="btn btn-danger" onClick="RemoveRow6();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
         <table class="table table-striped"  id="BenefitsExp">
           <tr>
-            <script tal:repeat = "Bnf Bnf_" >CreateNewRow6("${Bnf[0]}");</script>
+            <script tal:repeat = "Bnf project_profit" >CreateNewRow6("${Bnf}");</script>
           </tr>
         </table>
       </div>
