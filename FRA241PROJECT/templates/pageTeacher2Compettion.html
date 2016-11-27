@@ -333,13 +333,14 @@
             <fieldset>
                 <div class="col-md-7">
                     <h2 class="text-center"><b>${project.title}</b></h2>
-
+                    <br>
+                    <fieldset disabled>
                     <div class="form-group">
                         <label class="col-md-3 control-label">ชื่อโครงการ</label>
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                                <input  name="P_N" value = "${project_title}" class="form-control"  type="text" placeholder="Disabled input" disabled>
+                                <input  name="P_N" value = "${project_title}" class="form-control"  type="text" placeholder="Disabled input" >
                             </div>
                         </div>
                     </div>
@@ -348,7 +349,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                <input name="Year" placeholder="" class="form-control"  type="text" value = "${project_year}"disabled>
+                                <input name="Year" placeholder="" class="form-control"  type="text" value = "${project_year}">
                             </div>
                         </div>
                     </div>
@@ -357,7 +358,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                                <input name="Place" placeholder="" class="form-control"  type="text" value = "${project_place}"disabled>
+                                <input name="Place" placeholder="" class="form-control"  type="text" value = "${project_place}">
                             </div>
                         </div>
                     </div>
@@ -366,7 +367,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                                <input name="Date" placeholder="" class="form-control"  type="text" value="${start_date}"disabled>
+                                <input name="Date" placeholder="" class="form-control"  type="text" value="${start_date}">
                             </div>
                         </div>
                     </div>
@@ -375,7 +376,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-                                <textarea class="form-control" name="Reason_Project" placeholder="" disabled >${project_reason}</textarea>
+                                <textarea class="form-control" name="Reason_Project" placeholder=""  >${project_reason}</textarea>
                             </div>
                         </div>
                     </div>
@@ -385,8 +386,8 @@
                             <div class="input-group">
                                 <input type="hidden" name="OJ" value="0">
 
-                                <button name="btnAddOJ" type="button" id="btnAddOJ" class="btn btn-success" onClick="CreateNewRow0('');" disabled><i class="glyphicon glyphicon-plus-sign"></i></button>
-                                <button name="btnDelOJ" type="button" id="btnDelOJ" class="btn btn-danger" onClick="RemoveRow0();" disabled><i class="glyphicon glyphicon-minus-sign"></i> </button>
+                                <button name="btnAddOJ" type="button" id="btnAddOJ" class="btn btn-success" onClick="CreateNewRow0('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelOJ" type="button" id="btnDelOJ" class="btn btn-danger" onClick="RemoveRow0();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
                                 <table class="table table-striped"  id="OJExp">
                                     <tr>
@@ -401,8 +402,8 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <input type="hidden" name="Benefits" value="0">
-                                <button name="btnAddBenefits" type="button" id="btnAddBenefits" class="btn btn-success" onClick="CreateNewRow1('');" disabled><i class="glyphicon glyphicon-plus-sign"></i></button>
-                                <button name="btnDelBenefits" type="button" id="btnDelBenefits" class="btn btn-danger" onClick="RemoveRow1();" disabled><i class="glyphicon glyphicon-minus-sign"></i> </button>
+                                <button name="btnAddBenefits" type="button" id="btnAddBenefits" class="btn btn-success" onClick="CreateNewRow1('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelBenefits" type="button" id="btnDelBenefits" class="btn btn-danger" onClick="RemoveRow1();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
                                 <table class="table table-striped"  id="BenefitsExp">
                                     <tr>
@@ -418,8 +419,8 @@
                             <div class="input-group">
                                 <input type="hidden" name="P_R" value="0">
 
-                                <button name="btnAddP_R" type="button" id="btnAddP_R" class="btn btn-success" onClick="CreateNewRow2('');" disabled><i class="glyphicon glyphicon-plus-sign"></i></button>
-                                <button name="btnDelP_R" type="button" id="btnDelP_R" class="btn btn-danger" onClick="RemoveRow2();" disabled><i class="glyphicon glyphicon-minus-sign"></i> </button>
+                                <button name="btnAddP_R" type="button" id="btnAddP_R" class="btn btn-success" onClick="CreateNewRow2('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelP_R" type="button" id="btnDelP_R" class="btn btn-danger" onClick="RemoveRow2();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
                                 <table class="table table-striped"  id="P_RExp">
                                     <tr>
@@ -443,13 +444,13 @@
                                     </td-->
                                 <tr id = "unidentified">
                                     <td classname = "css-name">
-                                        <input name="Advisor_MR" size = "5" placeholder="" class="form-control"  type="text" value="${project_advisor[0]}" disabled>
+                                        <input name="Advisor_MR" size = "5" placeholder="" class="form-control"  type="text" value="${project_advisor[0]}" >
                                     </td>
                                     <td classname = "css-name">
-                                        <input name="Advisor_F" size = "30" placeholder="" class="form-control"  type="text" value="${project_advisor[1]}" disabled>
+                                        <input name="Advisor_F" size = "30" placeholder="" class="form-control"  type="text" value="${project_advisor[1]}" >
                                     </td>
                                     <td classname = "css-name">
-                                        <input name="Advisor_L" size= "30" placeholder="" class="form-control"  type="text" value="${project_advisor[2]}" disabled>
+                                        <input name="Advisor_L" size= "30" placeholder="" class="form-control"  type="text" value="${project_advisor[2]}" >
                                     </td>
                                 </tr>
                             </table>
@@ -464,8 +465,8 @@
                             <div class="input-group">
                                 <input type="hidden" name="P_M" value="0">
 
-                                <button name="btnAddP_M" type="button" id="btnAddP_M" class="btn btn-success" onClick="CreateNewRow3('');"><i class="glyphicon glyphicon-plus-sign" disabled></i></button>
-                                <button name="btnDelP_M" type="button" id="btnDelP_M" class="btn btn-danger" onClick="RemoveRow3();"><i class="glyphicon glyphicon-minus-sign" disabled></i> </button>
+                                <button name="btnAddP_M" type="button" id="btnAddP_M" class="btn btn-success" onClick="CreateNewRow3('');"><i class="glyphicon glyphicon-plus-sign" ></i></button>
+                                <button name="btnDelP_M" type="button" id="btnDelP_M" class="btn btn-danger" onClick="RemoveRow3();"><i class="glyphicon glyphicon-minus-sign" ></i> </button>
 
                                 <table class="table table-striped"  id="P_MExp">
                                     <tr>
@@ -480,7 +481,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                <textarea class="form-control" name="S_A" value = "{N/A}" disabled>{N/A}</textarea>
+                                <textarea class="form-control" name="S_A" value = "{N/A}" >{N/A}</textarea>
                             </div>
                         </div>
                     </div>
@@ -489,7 +490,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                <input name="P_P" placeholder="" class="form-control"  type="text" value="${project_activity_location}" disabled>
+                                <input name="P_P" placeholder="" class="form-control"  type="text" value="${project_activity_location}" >
                             </div>
                         </div>
                     </div>
@@ -498,7 +499,7 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-cog"></i></span>
-                                <textarea class="form-control" name="P_C" placeholder="" disabled>${project_activity_type}</textarea>
+                                <textarea class="form-control" name="P_C" placeholder="" >${project_activity_type}</textarea>
                             </div>
                         </div>
                     </div>
@@ -508,8 +509,8 @@
                             <div class="input-group">
                                 <input type="hidden" name="D_B" value="0">
 
-                                <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4(1,'หนังสือ',3);" disabled><i class="glyphicon glyphicon-plus-sign"></i></button>
-                                <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();" disabled><i class="glyphicon glyphicon-minus-sign"></i> </button>
+                                <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4(1,'หนังสือ',3);" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
                                 <table class="table table-striped"  id="D_BExp">
                                     <tr>
@@ -527,8 +528,8 @@
                         <div class="col-md-5 inputGroupContainer">
                             <div class="input-group">
                                 <input type="hidden" name="S_P" value="0">
-                                <button name="btnAddS_P" type="button" id="btnAddS_P" class="btn btn-success" onClick="CreateNewRow5('');" disabled><i class="glyphicon glyphicon-plus-sign"></i></button>
-                                <button name="btnDelS_P" type="button" id="btnDelS_P" class="btn btn-danger" onClick="RemoveRow5();" disabled><i class="glyphicon glyphicon-minus-sign"></i> </button>
+                                <button name="btnAddS_P" type="button" id="btnAddS_P" class="btn btn-success" onClick="CreateNewRow5('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelS_P" type="button" id="btnDelS_P" class="btn btn-danger" onClick="RemoveRow5();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
                                 <table class="table table-striped"  id="S_PExp">
                                     <tr>
@@ -550,9 +551,9 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">ไฟล์รายละเอียดการแข่งขัน</label>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" disabled>อัพโหลด <i class="glyphicon glyphicon-picture"></i></button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" >อัพโหลด <i class="glyphicon glyphicon-picture"></i></button>
                     </div>
-
+                    </fieldset>
                 </div>
                 <div class="col-md-4">
                     <h2 class="text-center"><b>Comment</b></h2>
