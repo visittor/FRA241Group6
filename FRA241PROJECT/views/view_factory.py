@@ -38,6 +38,11 @@ def proposal_factory(request):
                                 schedule = '',
                                 previouse_result = '',
                                 activity_comparition = '',
+                                 year = '',
+                                 location = '',
+                                 activity_location = '',
+                                 duration = '',
+                                 success_criteria = '',
                                 )
             proposal.parent_id = projectId
             request.db_session.add(proposal)
@@ -100,9 +105,7 @@ class AdminProject(object):
 
 
 def inspect_foctory(request):
-    project_id = request.matchdict['project_id']
-    project = request.db_session.query(Project).filter_by(id = project_id).first()
-    projectID = project.id
+    projectID = request.matchdict['project_id']
     userID = request.user.id
     comment = request.db_session.query(Comment).filter_by(parent_id = projectID).filter_by(writer_id = userID).first()
     if comment is None:
@@ -112,6 +115,7 @@ def inspect_foctory(request):
                               )
             request.db_session.add(cmt)
         comment = request.db_session.query(Comment).filter_by(parent_id = projectID).filter_by(writer_id = userID).first()
+    project = request.db_session.query(Project).filter_by(id=projectID).first()
     return inspectProject(project,comment)
 class inspectProject(object):
     def __init__(self,project,comment):
