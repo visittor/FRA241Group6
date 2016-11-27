@@ -48,7 +48,7 @@ def Get_data(session, project_id):
     return session.query(Project).filter_by(id=project_id).one()
 
 
-def Gen_Doc_compet(doc_name='Doc.docx'
+def Gen_Doc_compet(doc_name='D.docx'
                    , project_name_th=u''
                    , project_name_en=u''
                    , date_cap=u''
@@ -242,7 +242,7 @@ def Gen_Doc_compet(doc_name='Doc.docx'
     print '#########################__Done!__#########################'
 
 
-def Gen_Doc_camp(doc_name='Doc.docx'
+def Gen_Doc_camp(doc_name='D.docx'
                  , camp_name_th=u''
                  , project_name_en=u''
                  , year=u''
@@ -408,8 +408,187 @@ def Gen_Doc_camp(doc_name='Doc.docx'
     for j in activity_double_list:
         activity_table.add_run(j[0] + '\t' + j[1] + '\n', style='content')
 
-    document.save('sdf.docx')
+    document.save(doc_name)
 
+def Gen_Doc_volun(doc_name='D.docx'
+                 , volun_name=u''
+                 , year=u''
+                 , where=u''
+                 , rational=u''
+                 , purpose_list=list([])
+                 , hours_compare=u''
+                 , advisor_list=list([])
+                 , owner_list=list([])
+                 , member_list=list([])
+                 , durations=u''
+                 , active_location=u''
+                 , type_of_activity=u''
+                 , evaluation_index=u''
+                 , success_criteria=list([])
+                 , profit=list([])
+                 , cost_list_detail=list([])
+                  ):
+
+    document = Document('FRA241PROJECT/static/Archetype_gendoc.docx')
+
+    ######################################################################
+    '''Create Style'''
+    ######################################################################
+
+    obj_styles = document.styles
+
+    obj_charstyle = obj_styles.add_style('header', WD_STYLE_TYPE.CHARACTER)
+    obj_font = obj_charstyle.font
+    obj_font.size = Pt(16)
+    obj_font.name = 'TH Sarabun New'
+    obj_font.bold = True
+    obj_font.color.rgb = RGBColor(0x00, 0x00, 0x00)
+
+    obj_charstyle = obj_styles.add_style('content', WD_STYLE_TYPE.CHARACTER)
+    obj_font = obj_charstyle.font
+    obj_font.size = Pt(16)
+    obj_font.name = 'TH Sarabun New'
+    obj_font.bold = False
+    obj_font.color.rgb = RGBColor(0x00, 0x00, 0x00)
+
+    obj_charstyle = obj_styles.add_style('in table', WD_STYLE_TYPE.CHARACTER)
+    obj_font = obj_charstyle.font
+    obj_font.size = Pt(14)
+    obj_font.name = 'TH Sarabun New'
+    obj_font.bold = False
+    obj_font.color.rgb = RGBColor(0x00, 0x00, 0x00)
+
+    ######################################################################
+
+    document.add_picture('FRA241PROJECT/static/kmutt.png', width=Inches(0.99), height=Inches(0.99))
+    logo = document.paragraphs[-1]
+    logo.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    head_volunteer_proposal = document.add_heading('', 0)
+    head_volunteer_proposal.add_run(volun_name + '\n', style='header')
+    head_volunteer_proposal.add_run(u'สาขาวิชาวิศวกรรมหุ่นยนต์และระบบอัตโนมัติ\n', style='header')
+    head_volunteer_proposal.add_run(u'สถาบันวิทยาการหุ่นยนต์ภาคสนาม (ฟีโบ้) มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี\n',style='header')
+    head_volunteer_proposal.add_run(u'ประจำปีการศึกษา ' + year + '\n\n', style='header')
+    head_volunteer_proposal.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    rationale_head = document.add_paragraph('\n')
+    rationale_head.add_run(u'หลักการและเหตุผล', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    rationale = document.add_paragraph('\t')
+    rationale.add_run(rational + '\n', style='content')
+
+    purpose_head = document.add_paragraph()
+    purpose_head.add_run(u'วัตถุประสงค์', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    purpose = document.add_paragraph()
+    x = 1
+    for i in purpose_list:
+        purpose.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(i) != 0 else purpose.add_run()
+        x += 1
+    x = 0
+
+    advisor_head = document.add_paragraph()
+    advisor_head.add_run(u'อาจารย์ที่ปรึกษาโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    advisor = document.add_paragraph()
+    x = 1
+    for i in advisor_list:
+        advisor.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(i) != 0 else purpose.add_run()
+        x += 1
+    x = 0
+
+    owner_head = document.add_paragraph()
+    owner_head.add_run(u'ผู้รับผิดชอบโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    owner = document.add_paragraph()
+    if len(owner_list) != 2:
+        x = 1
+        for i in owner_list:
+            owner.add_run('\t' + str(x) + '. ' + i + '\n', style="content") if len(i) != 0 else owner.add_run()
+            x += 1
+        x = 0
+    else:
+        owner.add_run('\t' + owner_list[0] + '\n', style="content") if len(owner_list[0]) != 0 else owner.add_run()
+
+    member_head = document.add_paragraph()
+    member_head.add_run(u'ผู้เข้าร่วมโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    member = document.add_paragraph()
+    x = 1
+    for i in member_list:
+        member.add_run('\t' + str(x) + '. ' + i + '\n', style="content") if len(i) != 0 else  member.add_run()
+        x += 1
+    x = 0
+
+    duration_head = document.add_paragraph()
+    duration_head.add_run(u'ระยะเวลาดำเนินงาน', style='header')
+
+    duration = document.add_paragraph('\t')
+    duration.add_run(durations + '\n', style='content')
+
+    location_head = document.add_paragraph()
+    location_head.add_run(u'สถานที่ปฏิบัติงาน', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    location = document.add_paragraph('\t')
+    location.add_run(active_location + '\n', style='content')
+
+    activity_type_head = document.add_paragraph()
+    activity_type_head.add_run(u'ลักษณะกิจกรรม', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    activity_type = document.add_paragraph()
+    activity_type.add_run('\t' + type_of_activity, style='content')
+
+    evaluation_head = document.add_paragraph()
+    evaluation_head.add_run(u'รูปแบบการประเมิณผล', style='header')
+
+    evaluation = document.add_paragraph('\t')
+    evaluation.add_run(evaluation_index + '\n', style='content')
+
+    success_pointer_head = document.add_paragraph()
+    success_pointer_head.add_run(u'\nตัวชี้วัดความสำเร็จของโครงการ', style='header')
+
+    success_pointer = document.add_paragraph()
+    if len(success_criteria) != 2:
+        x = 1
+        for i in success_criteria:
+            success_pointer.add_run('\t' + str(x) + '. ' + i + '\n', style="content") if len(
+                i) != 0 else success_pointer.add_run()
+            x += 1
+        x = 0
+    else:
+        success_pointer.add_run('\t' + success_criteria[0] + '\n', style="content") if len(
+            success_criteria[0]) != 0 else success_pointer.add_run()
+
+    profit_head = document.add_paragraph()
+    profit_head.add_run(u'ผลที่คาดว่าจะได้รับ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    profit_content = document.add_paragraph()
+    x = 1
+    for i in profit:
+        profit_content.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(
+            i) != 0 else profit_content.add_run()
+        x += 1
+    x = 0
+
+    table_cost_head = document.add_paragraph()
+    table_cost_head.add_run(u'งบประมาณที่ใช้\n', style='header')
+    table_cost_head.add_run(u'งบประมาณที่ใช้มีรายละเอียดดังต่อไปนี้\n', style='content')
+    table_cost_head.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+    table_cost = document.add_table(rows=1, cols=3)
+    head_table = table_cost.rows[0].cells
+    item_in_head_cost_table = [u'ลำดับที่', u'รายละเอียด', u'จำนวนเงิน(บาท)']
+    for i in range(0, 3):
+        head_table_for = head_table[i].add_paragraph()
+        head_table_for.add_run(item_in_head_cost_table[i], style='in table')
+
+    for i in cost_list_detail:
+        each_cost = table_cost.add_row().cells
+        for j in range(0, 3):
+            each_cells = each_cost[j].add_paragraph()
+            each_cells.add_run(i[j], style='in table')
+
+    document.save(doc_name)
 
 def main(argv=sys.argv):
     if len(argv) < 2:
@@ -454,21 +633,40 @@ def main(argv=sys.argv):
                        )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\FRA241PROJECT\static\Gened_DOC\Competitive_2.docx')
     elif all_data.type == u'camp':
-        Gen_Doc_camp(
-            camp_name_th=all_data.title
-            , year=all_data.proposal.year
-            , date_gap=u''
-            , where=all_data.proposal.activity_location
-            , rational=all_data.proposal.Reason
-            , purpose_list=all_data.proposal.objective.split(unichr(171))
-            , hours_compare=u''
-            , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
-            , durations=all_data.proposal.duration
-            , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
-            , evaluation_index=all_data.proposal.evaluation_index
-            , profit=all_data.proposal.profit.split(unichr(171))
-            , cost_list=all_data.proposal.cost.split(unichr(171))
-            , cost_list_detail=cost_list_parameter
-            , activity_list=all_data.proposal.schedule.split(unichr(171))
-        )
-        os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\sdf.docx')
+        Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Camp_' + str(all_data.id) + '.docx'
+                    , camp_name_th=all_data.title
+                    , year=all_data.proposal.year
+                    , date_gap=u''
+                    , where=all_data.proposal.activity_location
+                    , rational=all_data.proposal.Reason
+                    , purpose_list=all_data.proposal.objective.split(unichr(171))
+                    , hours_compare=u''
+                    , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+                    , durations=all_data.proposal.duration
+                    , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+                    , evaluation_index=all_data.proposal.evaluation_index
+                    , profit=all_data.proposal.profit.split(unichr(171))
+                    , cost_list=all_data.proposal.cost.split(unichr(171))
+                    , cost_list_detail=cost_list_parameter
+                    , activity_list=all_data.proposal.schedule.split(unichr(171))
+                    )
+        # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\sdf.docx')
+    elif all_data.type == u'volunteer':
+        Gen_Doc_volun(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Volun_' + str(all_data.id) + '.docx'
+                      , volun_name=all_data.title
+                      , year=all_data.proposal.year
+                      , where=all_data.proposal.activity_location
+                      , rational=all_data.proposal.Reason
+                      , purpose_list=all_data.proposal.objective.split(unichr(171))
+                      , hours_compare=u''
+                      , advisor_list=all_data.proposal.advisor_for_proposal.split(unichr(171))
+                      , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+                      , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+                      , durations=all_data.proposal.duration
+                      , active_location=all_data.proposal.activity_location
+                      , type_of_activity=all_data.proposal.type_of_activity
+                      , evaluation_index=all_data.proposal.evaluation_index
+                      , success_criteria=all_data.proposal.success_criteria.split(unichr(171))
+                      , profit=all_data.proposal.profit.split(unichr(171))
+                      , cost_list_detail=cost_list_parameter
+                      )
