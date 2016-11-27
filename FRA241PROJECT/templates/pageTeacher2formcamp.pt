@@ -445,7 +445,7 @@
                                         <div class="col-md-5 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-                                                <textarea class="form-control" name="Reason_Project" value = "${project.proposal.Reason}">${project_reason}</textarea>
+                                                <textarea class="form-control" name="Reason_Project" value = "${project.proposal.Reason}">${project.proposal.Reason}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -594,7 +594,7 @@
                                         <div class="col-md-5 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                                <input name="Duration"  class="form-control" value="${proposal.duration}" type="text">
+                                                <input name="Duration"  class="form-control" value="${project.proposal.duration}" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -622,7 +622,7 @@
                                         <div class="col-md-5 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-align-right"></i></span>
-                                                <input name="evaluation"  class="form-control" value="${proposal.evaluation_index}" type="text">
+                                                <input name="evaluation"  class="form-control" value="${project.proposal.evaluation_index}" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -635,7 +635,7 @@
                                                 <button name="btnDel_Benefits" type="button" id="btnDel_Benefits" class="btn btn-danger" onClick="RemoveRow6();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
                                                 <table class="table table-striped"  id="BenefitsExp">
                                                     <tr>
-                                                        <script tal:repeat = "Bnf Bnf_" >CreateNewRow6("${Bnf[0]}");</script>
+                                                        <script tal:repeat = "Bnf Bnf_" >CreateNewRow6("${Bnf}");</script>
                                                     </tr>
                                                 </table>
                                             </div>
