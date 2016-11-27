@@ -36,11 +36,14 @@ def adminProject(request):
         elif status[1] == "T":
             checked_project.append(i)
     if "x" in request.params:
+        count = 0
         for i in checked_project:
             if str(i.id) in request.params:
                 i.is_recommend = "T"
+                count += 1
             else:
                 i.is_recommend = "F"
+
         return HTTPFound(location=request.route_url('home'))
     return dict(uncheck_project = uncheck_project,
                 checked_project = checked_project,

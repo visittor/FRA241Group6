@@ -38,6 +38,11 @@ def proposal_factory(request):
                                 schedule = '',
                                 previouse_result = '',
                                 activity_comparition = '',
+                                 year = '',
+                                 location = '',
+                                 activity_location = '',
+                                 duration = '',
+                                 success_criteria = '',
                                 )
             proposal.parent_id = projectId
             request.db_session.add(proposal)
