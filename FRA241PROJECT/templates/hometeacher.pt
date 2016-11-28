@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Home - ระบบกิจกรรมนักศึกษา</title>
+    <link rel="shortcut icon" href="${request.static_url('FRA241PROJECT:static/assets/ico/FIBO2.jpg')}">
 
     <!-- Bootstrap Core CSS -->
     <link href="../static/Home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +33,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-        h2 {font-size: 150%}
+        h2 {font-size: 150%; color: black;text-shadow: white 0.1em 0.1em 0.2em}
         h4{color: white; text-shadow: black 0.1em 0.1em 0.2em}
         h1{color: white; text-shadow: black 0.1em 0.1em 0.2em}
     </style>
@@ -111,7 +112,7 @@
                     <h1 align="center">โครงการที่น่าสนใจ</h1><br>
                     <hr class="primary">
                     <div class="container-fluid">
-                        <p class="text-muted">สามารถคลิก ที่ปุ่ม "กรอกข้อมูล" เพื่อทำการสมัครเข้าร่วมโครงการ </p>
+                        <h2>สามารถคลิก ที่ปุ่ม "ดูรายละเอียด" เพื่อทำการสมัครเข้าร่วมโครงการ </h2>
 
 
                         <div class="container">
@@ -119,7 +120,7 @@
                                 <div tal:repeat = "project project_recommend" class="col-lg-3 col-lg-offset-0 text-center">
 
                                     <h2 class="section-heading"></h2>
-                                    <p class="text-faded">${project.title}</p>
+                                    <h2 >${project.title}</h2>
                                     <hr class="light">
                                     <a href="${request.route_url('recommend',project_id = project.id)}" class="page-scroll btn btn-default btn-xl sr-button"><big class="glyphicon glyphicon-pencil"></big> : ดูรายละเอียด</a><br><br>
                                 </div>

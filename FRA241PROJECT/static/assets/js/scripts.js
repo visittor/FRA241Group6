@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("../static/assets/img/IMG_0328.jpg");
+    $.backstretch("../static/assets/img/FIBOBuilding.jpg");
     
     /*
         Login form validation
