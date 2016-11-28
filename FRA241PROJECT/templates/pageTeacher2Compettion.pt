@@ -8,7 +8,7 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="shortcut icon" href="${request.static_url('FRA241PROJECT:static/assets/ico/FIBO2.jpg')}">
     <!-- library of header-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,15 +28,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bootstrap.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bower_components/Font-Awesome/css/font-awesome.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/build.css')}"/>
+    <!-- วัตถุประสงค์0-->
     <style type="text/css">
         body { background-color:#ff9900;  }
         h2 {font-size: 150%}
         <!--การเปรียบเทียบกิจกรรม-->
     </style>
-    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bootstrap.css')}"/>
-    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bower_components/Font-Awesome/css/font-awesome.css')}"/>
-    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/build.css')}"/>
-    <!-- วัตถุประสงค์0-->
     <script type="text/javascript">
         function CreateNewRow0(text)
         {
@@ -290,7 +291,7 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">request.user.First_name</a>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.First_name}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

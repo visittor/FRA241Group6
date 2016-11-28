@@ -118,7 +118,7 @@ def inspectProject(request):
                            OJ_=[i for i in project.proposal.objective.split(unichr(171)) if i != ""],
                            project_Bene=[i for i in project.proposal.profit.split(unichr(171)) if i != ''],
                            PR_=[i for i in project.proposal.owner_for_proposal.split(unichr(171)) if i != ''],
-                           project_advisor=project.proposal.advisor_for_proposal.split(unichr(172)),
+                           project_advisor=project.proposal.advisor_for_proposal.split(unichr(172)) if len(project.proposal.advisor_for_proposal.split(unichr(172)))==3 else [u'ยังไม่ใส่',u'ย่อาจารย์ที่ปรึกษาหรือ',u'ใส่์ที่ปรึกษาที่ไม่มีอยู่ในระบบ'],
                            PM_=[i for i in project.proposal.member_for_proposal.split(unichr(171)) if i != ''],
                            DB_=[i.split(unichr(172)) for i in project.proposal.delicate_budget.split(unichr(171)) if
                                 len(i.split(unichr(172))) == 3 and '' not in i.split(unichr(172))],
@@ -141,3 +141,5 @@ def inspectProject(request):
 
                            )
         return Response(render("../templates/pageTeacher2Volunteer.pt", dict2return,request=request))
+    else:
+        return Response('<body>May be it is a god\'s business, no human kind can access this kind of content.</body>')
