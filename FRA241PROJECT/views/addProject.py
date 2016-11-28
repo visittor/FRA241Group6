@@ -18,6 +18,7 @@ from  ..models.Proposal import (Proposal,
                                 )
 from ..scripts.gen import *
 import datetime
+import time
 import transaction
 
 @view_config(route_name = 'plusButton')
@@ -1285,10 +1286,13 @@ class Project_view():
 
 @view_config(route_name = 'download')
 def download(request):
-    project = request.db_session.query(Project).filter_by(id = request.matchdict["project_id"])
+    project = request.db_session.query(Project).filter_by(id = request.matchdict["project_id"]).first()
+    if project is None:
+        return HTTPFound(location=request.route_url('addProject'))
     os.remove('FRA241PROJECT/static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')
     gennn(request.db_session,request.matchdict["project_id"],request.static_url('FRA241PROJECT:static/Gened_DOC/'))
-    return Response('<iframe src='+request.static_url('FRA241PROJECT/static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')+'></iframe>')
+    time.sleep(3)
+    return Response('<iframe src='+request.static_url('FRA241PROJECT:static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')+'></iframe>')
 
 
 
