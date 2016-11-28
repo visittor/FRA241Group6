@@ -717,7 +717,7 @@
     <label class="col-md-3 control-label">ดาวน์โหลดเอกสาร</label>
     <div class="col-md-5 inputGroupContainer">
       <div class="input-group">
-        <a href=" " class="btn btn-primary " target="_blank">คลิกเพื่อดาวน์โหลด</a>
+        <a href="${request.route_url('download',project_id = request.matchdict['project_id'])}" class="btn btn-primary " target="_blank">คลิกเพื่อดาวน์โหลด</a>
       </div>
     </div>
   </div>

@@ -605,7 +605,7 @@ def gennn(ses, num,path):
         cost_list_parameter.append(i.split(unichr(172)))
 
     if all_data.type == u'competitive':
-        Gen_Doc_compet(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Competitive_' + str(all_data.id) + '.docx'
+        Gen_Doc_compet(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'competitive_' + str(all_data.id) + '.docx'
                        , project_name_th=all_data.title
                        , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
                        , where=all_data.proposal.activity_location
@@ -637,7 +637,7 @@ def gennn(ses, num,path):
         #                )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\FRA241PROJECT\static\Gened_DOC\Competitive_2.docx')
     elif all_data.type == u'camp':
-        Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Camp_' + str(all_data.id) + '.docx'
+        Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'camp_' + str(all_data.id) + '.docx'
                      , camp_name_th=all_data.title
                      , year=all_data.proposal.year
                      , date_gap=u''
@@ -673,7 +673,7 @@ def gennn(ses, num,path):
         #              )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\sdf.docx')
     elif all_data.type == u'volunteer':
-        Gen_Doc_volun(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Volun_' + str(all_data.id) + '.docx'
+        Gen_Doc_volun(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'volunteer_' + str(all_data.id) + '.docx'
                       , volun_name=all_data.title
                       , year=all_data.proposal.year
                       , where=all_data.proposal.activity_location

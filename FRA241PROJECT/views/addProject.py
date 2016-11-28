@@ -1285,9 +1285,10 @@ class Project_view():
 
 @view_config(route_name = 'download')
 def download(request):
-    os.remove('FRA241PROJECT/static/Gened_DOC/Camp_3.docx')
+    project = request.db_session.query(Project).filter_by(id = request.matchdict["project_id"])
+    os.remove('FRA241PROJECT/static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')
     gennn(request.db_session,request.matchdict["project_id"],request.static_url('FRA241PROJECT:static/Gened_DOC/'))
-    return Response('<iframe src='+request.static_url('FRA241PROJECT:static/Gened_DOC/Camp_2.docx')+'></iframe>')
+    return Response('<iframe src='+request.static_url('FRA241PROJECT/static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')+'></iframe>')
 
 
 
