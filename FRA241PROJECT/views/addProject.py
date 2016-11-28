@@ -10,11 +10,13 @@ from pyramid.view import (
     view_config,
     view_defaults,
 )
+from pyramid.response import  Response
 
 from ..models.Project import Project
 from ..models.User import User
 from  ..models.Proposal import (Proposal,
                                 )
+from ..scripts.gen import *
 import datetime
 import transaction
 
@@ -1281,8 +1283,11 @@ class Project_view():
         print "\n\n\n\n this is fucking fucking return dick",dict2return,"\n\n\n\n\n\n\n"
         return dict2return
 
-
-
+@view_config(route_name = 'download')
+def download(request):
+    os.remove('FRA241PROJECT/static/Gened_DOC/Camp_3.docx')
+    gennn(request.db_session,request.matchdict["project_id"],request.static_url('FRA241PROJECT:static/Gened_DOC/'))
+    return Response('<iframe src='+request.static_url('FRA241PROJECT:static/Gened_DOC/Camp_2.docx')+'></iframe>')
 
 
 
