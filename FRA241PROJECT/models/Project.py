@@ -25,6 +25,8 @@ class Project(Base):
     start_date = Column(Date)
     finish_date = Column(Date)
 
+    is_recommend = Column(Text)
+
     owner_id = Column(Integer,ForeignKey('User.id'))
     leader = relationship("User", back_populates = "own_project")#ผู้รับผิดชอบ
 
@@ -37,8 +39,11 @@ class Project(Base):
 
     project_equipment = relationship("Equipment", back_populates = "asso_to")
 
-
     proposal = relationship("Proposal",uselist = False,back_populates = "parent_project")
+
+    summary = relationship("Summary",uselist = False,back_populates = "parent_project")
+
+    comment = relationship("Comment",back_populates = "parent_project")
 
     def change_status(self,status):
         self.status = status
@@ -64,3 +69,24 @@ class Project(Base):
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
 
+# class RecommendProject(Base):
+#     __tablename__ = "RecommendProject"
+#     id = Column(Integer,primary_key=True)
+
+class Comment(Base):
+
+    __tablename__ = "Comment"
+    id = Column(Integer,primary_key=True)
+    text = Column(Text)
+
+    parent_id = Column(Integer, ForeignKey("Project.id"))
+    parent_project = relationship("Project", back_populates = "comment")
+
+    writer_id = Column(Integer,ForeignKey("User.id"))
+    writer = relationship("User",back_populates = "own_comment")
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass

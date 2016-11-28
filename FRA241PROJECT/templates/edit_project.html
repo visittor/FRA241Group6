@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ระบบกิจกรรมนักศึกษา-สรุปโครงการ</title>
+    <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+    <link rel="shortcut icon" href="${request.static_url('FRA241PROJECT:static/assets/ico/FIBO2.jpg')}">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+    <link rel='stylesheet prefetch'
+          href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- library of header-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="css/creative.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        body { background-color:#ff9900;  }
+        h2 {  font-size: 150%  }
+    </style>
+
+    <!-- ผู้รับผิดชอบ1-->
+    <script type="text/javascript">
+        function CreateNewRow1(text) {
+            var intLine = parseInt(document.summarize_form.SF1.value);
+            intLine++;
+
+            var theTable = document.all.SF1Exp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"SF1_" + intLine + "\" VALUE=\"" + text + "\">"
+            //***<input type="text" size = "10" name = "SF11_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF11_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.summarize_form.SF1.value = intLine;
+        }
+
+        function RemoveRow1() {
+            intLine = parseInt(document.summarize_form.SF1.value);
+            if (parseInt(intLine) > 0) {
+                theTable = (document.all) ? document.all.SF1Exp :
+                        document.getElementById("SF1Exp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.summarize_form.SF1.value = intLine;
+            }
+        }
+    </script>
+    <!-- ผู้เข้าร่วม2-->
+    <script type="text/javascript">
+        function CreateNewRow2(text) {
+            var intLine = parseInt(document.summarize_form.SF2.value);
+            intLine++;
+
+            var theTable = document.all.SF2Exp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"SF2" + intLine + "\" VALUE=\"" + text + "\">"
+            //***<input type="text" size = "10" name = "SF21_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF21_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.summarize_form.SF2.value = intLine;
+        }
+
+        function RemoveRow2() {
+            intLine = parseInt(document.summarize_form.SF2.value);
+            if (parseInt(intLine) > 0) {
+                theTable = (document.all) ? document.all.SF2Exp :
+                        document.getElementById("SF2Exp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.summarize_form.SF2.value = intLine;
+            }
+        }
+    </script>
+    <!-- วัตถุประสงค์4-->
+    <script type="text/javascript">
+        function CreateNewRow4(text) {
+            var intLine = parseInt(document.summarize_form.SF4.value);
+            intLine++;
+
+            var theTable = document.all.SF4Exp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"SF4" + intLine + "\" VALUE=\"" + text + "\">"
+            //***<input type="text" size = "10" name = "SF41_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF41_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.summarize_form.SF4.value = intLine;
+        }
+
+        function RemoveRow4() {
+            intLine = parseInt(document.summarize_form.SF4.value);
+            if (parseInt(intLine) > 0) {
+                theTable = (document.all) ? document.all.SF4Exp :
+                        document.getElementById("SF4Exp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.summarize_form.SF4.value = intLine;
+            }
+        }
+    </script>
+    <!--กลุ่มเป้าหมาย/ผู้เข้าร่วมโครงการ5-->
+    <script type="text/javascript">
+        function CreateNewRow5( order,descrip,value)
+        {
+            var intLine = parseInt(document.summarize_form.SF5.value);
+            intLine++;
+
+            var theTable = document.all.SF5Exp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF51_"+intLine+"\" VALUE=\""+order+"\">"
+            //***<input type="text" size = "10" name = "SF51_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF51_"+intLine+"\" VALUE=\"\">"***//
+
+            //*** Column 2 ***//
+            newCell = newRow.insertCell(1)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"SF52_"+intLine+"\" VALUE=\""+descrip+"\">"
+            //*** Column 3***//
+            newCell = newRow.insertCell(2)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"SF53_"+intLine+"\" VALUE=\""+value+"\">"
+
+            document.summarize_form.SF5.value = intLine;
+        }
+
+        function RemoveRow5()
+        {
+            intLine = parseInt(document.summarize_form.SF5.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.SF5Exp :
+                        document.getElementById("SF5Exp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.summarize_form.SF5.value = intLine;
+            }
+        }
+    </script>
+    <!-- ผลที่คาดว่าจะได้รับ6-->
+    <script type="text/javascript">
+        function CreateNewRow6(text) {
+            var intLine = parseInt(document.summarize_form.SF6.value);
+            intLine++;
+
+            var theTable = document.all.SF6Exp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"SF6" + intLine + "\" VALUE=\"" + text + "\">"
+            //***<input type="text" size = "10" name = "SF61_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF61_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.summarize_form.SF6.value = intLine;
+        }
+
+        function RemoveRow6() {
+            intLine = parseInt(document.summarize_form.SF6.value);
+            if (parseInt(intLine) > 0) {
+                theTable = (document.all) ? document.all.SF6Exp :
+                        document.getElementById("SF6Exp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.summarize_form.SF6.value = intLine;
+            }
+        }
+    </script>
+    <!-- รายละเอียดการใช้จ่ายงบประมาณโครงการ7-->
+    <script type="text/javascript">
+        function CreateNewRow7( order,descrip,value)
+        {
+            var intLine = parseInt(document.summarize_form.SF7.value);
+            intLine++;
+
+            var theTable = document.all.SF7Exp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF71_"+intLine+"\" VALUE=\""+order+"\">"
+            //***<input type="text" size = "10" name = "SF71_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"SF71_"+intLine+"\" VALUE=\"\">"***//
+
+            //*** Column 2 ***//
+            newCell = newRow.insertCell(1)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"SF72_"+intLine+"\" VALUE=\""+descrip+"\">"
+            //*** Column 3***//
+            newCell = newRow.insertCell(2)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"SF73_"+intLine+"\" VALUE=\""+value+"\">"
+
+            document.summarize_form.SF7.value = intLine;
+        }
+
+        function RemoveRow7()
+        {
+            intLine = parseInt(document.summarize_form.SF7.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.SF7Exp :
+                        document.getElementById("SF7Exp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.summarize_form.SF7.value = intLine;
+            }
+        }
+    </script>
+
+
+</head>
+<!--Header-->
+<body id="page-top">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.user_id}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <?python role_teacher = True if user.role == "Teacher" or user.role=="GOD" else False ?>
+                <?python role_admin = True if user.role == "Admin" else False ?>
+                <li tal:condition = "role_teacher">
+                    <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+                </li>
+
+                <li tal:condition = "role_admin">
+                    <a class="page-scroll" href="${request.route_url('adminProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="#status">    <big class="glyphicon glyphicon-globe"></big></a> <!--status-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="#profile"> <big class="glyphicon glyphicon-user"></big></a><!--รprofile-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="${request.route_url('logout')}">LOG OUT</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<!--Header-->
+<body>
+<script type="text/javascript">
+    function select_dropdown(){
+        var url = document.summarize_form.project_name.value;
+        alert(url);
+        if(url){
+            window.location = url;
+
+        }
+    }
+</script>
+
+<div class="container">
+    <form class="well form-horizontal" action=" " method="post" name="summarize_form" id="summarize_form">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>สรุปโครงการ</legend>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">ชื่อโครงการ</label>
+                <div class="col-md-5 inputGroupContainer">
+                    <select type="text" name="project_name" class="form-control" id="project_name" onchange="select_dropdown();">
+                        <option value="" selected></option>
+                        <option tal:repeat = "project project_list" value = "${request.route_url('proposal',project_id = project.id,type_project = project.type)}" >${project.title}</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<!--/div><!-- /.container -->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+
+<script src="js/index.js"></script>
+
+
+</body>
+</html>

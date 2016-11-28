@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <title>ระบบกิจกรรมนักศึกษา-ตรวจโครงการ</title>
+    <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- library of header-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Core CSS -->
+    <link href="${request.static_url('FRA241PROJECT:static/index/vendor/bootstrap/css/bootstrap.min.css')}" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="${request.static_url('FRA241PROJECT:static/index/vendor/font-awesome/css/font-awesome.min.css')}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- Plugin CSS -->
+    <link href="${request.static_url('FRA241PROJECT:static/index/vendor/magnific-popup/magnific-popup.css')}" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="${request.static_url('FRA241PROJECT:static/index/css/creative.min.css')}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        body { background-color:#ff9900;  }
+        h2 {font-size: 150%}
+        <!--การเปรียบเทียบกิจกรรม-->
+    </style>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bootstrap.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bower_components/Font-Awesome/css/font-awesome.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/build.css')}"/>
+    <!-- วัตถุประสงค์0-->
+    <script type="text/javascript">
+        function CreateNewRow0(text)
+        {
+            var intLine = parseInt(document.Check_All.OJ.value);
+            intLine++;
+
+            var theTable = document.all.OJExp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"OJ"+intLine+"\" VALUE=\""+text+"\">"
+            //***<input type="text" size = "10" name = "OJ1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"OJ1_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.Check_All.OJ.value = intLine;
+        }
+
+        function RemoveRow0()
+        {
+            intLine = parseInt(document.Check_All.OJ.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.OJExp :
+                        document.getElementById("OJExp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.Check_All.OJ.value = intLine;
+            }
+        }
+    </script>
+    <!--ประโยชน์ที่คาดว่าจะได้รับ1-->
+    <script type="text/javascript">
+        function CreateNewRow1(text)
+        {
+            var intLine = parseInt(document.Check_All.Benefits.value);
+            intLine++;
+
+            var theTable = document.all.BenefitsExp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"Benefits1_"+intLine+"\" VALUE=\""+text+"\">"
+
+
+
+            document.Check_All.Benefits.value = intLine;
+        }
+
+        function RemoveRow1()
+        {
+            intLine = parseInt(document.Check_All.Benefits.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.BenefitsExp :
+                        document.getElementById("BenefitsExp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.Check_All.Benefits.value = intLine;
+            }
+        }
+    </script>
+    <!-- ผู้รับผิดชอบ2-->
+    <script type="text/javascript">
+        function CreateNewRow2(text)
+        {
+            var intLine = parseInt(document.Check_All.P_R.value);
+            intLine++;
+
+            var theTable = document.all.P_RExp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"P_R"+intLine+"\" VALUE=\""+text+"\">"
+            //***<input type="text" size = "10" name = "P_R1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"P_R1_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.Check_All.P_R.value = intLine;
+        }
+
+        function RemoveRow2()
+        {
+            intLine = parseInt(document.Check_All.P_R.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.P_RExp :
+                        document.getElementById("P_RExp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.Check_All.P_R.value = intLine;
+            }
+        }
+    </script>
+    <!-- ผู้เข้าร่วม3-->
+    <script type="text/javascript">
+        function CreateNewRow3(text)
+        {
+            var intLine = parseInt(document.Check_All.P_M.value);
+            intLine++;
+
+            var theTable = document.all.P_MExp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"P_M"+intLine+"\" VALUE=\""+text+"\">"
+            //***<input type="text" size = "10" name = "P_M1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"P_M1_"+intLine+"\" VALUE=\"\">"***//
+
+
+            document.Check_All.P_M.value = intLine;
+        }
+
+        function RemoveRow3()
+        {
+            intLine = parseInt(document.Check_All.P_M.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.P_MExp :
+                        document.getElementById("P_MExp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.Check_All.P_M.value = intLine;
+            }
+        }
+    </script>
+    <!-- ตัวชี้วัดความสำเร็จของโครงการ5-->
+    <script type="text/javascript">
+        function CreateNewRow5(text)
+        {
+            var intLine = parseInt(document.Check_All.S_P.value);
+            intLine++;
+
+            var theTable = document.all.S_PExp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"S_P1_"+intLine+"\" VALUE=\""+text+"\">"
+
+
+            document.Check_All.S_P.value = intLine;
+        }
+
+        function RemoveRow5()
+        {
+            intLine = parseInt(document.Check_All.S_P.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.S_PExp :
+                        document.getElementById("S_PExp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.Check_All.S_P.value = intLine;
+            }
+        }
+    </script>
+    <!-- งบปประมาณโที่ใช้้4-->
+    <script type="text/javascript">
+        function CreateNewRow4( order,descrip,value)
+        {
+            var intLine = parseInt(document.Check_All.D_B.value);
+            intLine++;
+
+            var theTable = document.all.D_BExp
+            var newRow = theTable.insertRow(theTable.rows.length)
+            newRow.id = newRow.uniqueID
+
+            var item1 = 1
+            var newCell
+
+            //*** Column 1 ***//
+            newCell = newRow.insertCell(0)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\""+order+"\">"
+            //***<input type="text" size = "10" name = "D_B1_"+intLine "value = "">     "<INPUT TYPE=\"TEXT\" SIZE=\"10\" NAME=\"D_B1_"+intLine+"\" VALUE=\"\">"***//
+
+            //*** Column 2 ***//
+            newCell = newRow.insertCell(1)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"30\" NAME=\"D_B2_"+intLine+"\" VALUE=\""+descrip+"\">"
+            //*** Column 3***//
+            newCell = newRow.insertCell(2)
+            newCell.id = newCell.uniqueID
+            newCell.setAttribute("className", "css-name");
+            newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"15\" NAME=\"D_B3_"+intLine+"\" VALUE=\""+value+"\">"
+
+            document.Check_All.D_B.value = intLine;
+        }
+
+        function RemoveRow4()
+        {
+            intLine = parseInt(document.Check_All.D_B.value);
+            if(parseInt(intLine) > 0)
+            {
+                theTable = (document.all) ? document.all.D_BExp :
+                        document.getElementById("D_BExp")
+                theTableBody = theTable.tBodies[0];
+                theTableBody.deleteRow(intLine);
+                intLine--;
+                document.Check_All.D_B.value = intLine;
+            }
+        }
+    </script>
+
+</head>
+< id="page-top">
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="${request.route_url('home')}">request.user.First_name</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <?python role_teacher = True if request.user.role == "Teacher" or request.user.role=="GOD" else False ?>
+                <?python role_admin = True if request.user.role == "Admin" else False ?>
+                <li tal:condition = "role_teacher">
+                    <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+                </li>
+
+                <li tal:condition = "role_admin">
+                    <a class="page-scroll" href="${request.route_url('adminProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="#status">    <big class="glyphicon glyphicon-globe"></big></a> <!--status-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="#profile"> <big class="glyphicon glyphicon-user"></big></a><!--รprofile-->
+                </li>
+
+                <li>
+                    <a class="page-scroll" href="${request.route_url('logout')}">LOG OUT</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+
+</nav>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <form class="well form-horizontal" action=" " method="post" name="Check_All" id="Check_All">
+            <fieldset>
+                <div class="col-md-7">
+                    <h2 class="text-center"><b>${project.title}</b></h2>
+                    <br>
+                    <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ชื่อโครงการ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                                <input  name="P_N" value = "${project.title}" class="form-control"  type="text" placeholder="Disabled input" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" >ปีการศึกษา</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                <input name="Year" placeholder="" class="form-control"  type="text" value = "${project.proposal.year}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">สถานที่</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                                <input name="Place" placeholder="" class="form-control"  type="text" value = "${project.proposal.location}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">วันที่จัดกิจกรรม</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                                <input name="Date" placeholder="" class="form-control"  type="text" value="${project.start_date}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">หลักการและเหตุผล</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+                                <textarea class="form-control" name="Reason_Project" placeholder=""  >${project.proposal.Reason}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">วัตถุประสงค์</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input type="hidden" name="OJ" value="0">
+
+                                <button name="btnAddOJ" type="button" id="btnAddOJ" class="btn btn-success" onClick="CreateNewRow0('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelOJ" type="button" id="btnDelOJ" class="btn btn-danger" onClick="RemoveRow0();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+                                <table class="table table-striped"  id="OJExp">
+                                    <tr>
+                                        <script tal:repeat = "obj OJ_"  >CreateNewRow0("${obj}");</script>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ประโยชน์ที่คาดว่าจะได้รับ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input type="hidden" name="Benefits" value="0">
+                                <button name="btnAddBenefits" type="button" id="btnAddBenefits" class="btn btn-success" onClick="CreateNewRow1('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelBenefits" type="button" id="btnDelBenefits" class="btn btn-danger" onClick="RemoveRow1();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+                                <table class="table table-striped"  id="BenefitsExp">
+                                    <tr>
+                                        <script tal:repeat = "benefit project_Bene" >CreateNewRow1("${benefit}");</script>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" >ผู้รับผิดชอบ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input type="hidden" name="P_R" value="0">
+
+                                <button name="btnAddP_R" type="button" id="btnAddP_R" class="btn btn-success" onClick="CreateNewRow2('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelP_R" type="button" id="btnDelP_R" class="btn btn-danger" onClick="RemoveRow2();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+                                <table class="table table-striped"  id="P_RExp">
+                                    <tr>
+                                        <script tal:repeat = "PR PR_" >CreateNewRow2("${PR}");</script>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">อาจารย์ที่ปรึกษา</label>
+                        <div class="col-md-7 inputGroupContainer">
+                            <table class="input-group">
+                                <tr>
+                                    <th><div align="center">คำนำหน้า</div></th>
+                                    <th><div align="center">ชื่อจริง</div></th>
+                                    <th><div align="center">นามสกุล</div></th>
+
+                                    <!--td>
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    </td-->
+                                <tr id = "unidentified">
+                                    <td classname = "css-name">
+                                        <input name="Advisor_MR" size = "5" placeholder="" class="form-control"  type="text" value="${project_advisor[0]}" >
+                                    </td>
+                                    <td classname = "css-name">
+                                        <input name="Advisor_F" size = "30" placeholder="" class="form-control"  type="text" value="${project_advisor[1]}" >
+                                    </td>
+                                    <td classname = "css-name">
+                                        <input name="Advisor_L" size= "30" placeholder="" class="form-control"  type="text" value="${project_advisor[2]}" >
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ผู้เข้าร่วมโครงการ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input type="hidden" name="P_M" value="0">
+
+                                <button name="btnAddP_M" type="button" id="btnAddP_M" class="btn btn-success" onClick="CreateNewRow3('');"><i class="glyphicon glyphicon-plus-sign" ></i></button>
+                                <button name="btnDelP_M" type="button" id="btnDelP_M" class="btn btn-danger" onClick="RemoveRow3();"><i class="glyphicon glyphicon-minus-sign" ></i> </button>
+
+                                <table class="table table-striped"  id="P_MExp">
+                                    <tr>
+                                        <script tal:repeat = "PM PM_" >CreateNewRow3("${PM}");</script>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">แผนการดำเนินการ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                <textarea class="form-control" name="S_A" value = "{N/A}" >{N/A}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">สถานที่ดำเนินการ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <input name="P_P" placeholder="" class="form-control"  type="text" value="${project.proposal.activity_location}" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ลักษณะกิจกรรม</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-cog"></i></span>
+                                <textarea class="form-control" name="P_C" placeholder="" >${project.proposal.type_of_activity}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">งบประมาณที่ใช้</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input type="hidden" name="D_B" value="0">
+
+                                <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4(1,'หนังสือ',3);" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+                                <table class="table table-striped"  id="D_BExp">
+                                    <tr>
+                                        <script tal:repeat = "DB DB_" >CreateNewRow4("${DB[0]}","${DB[1]}","${DB[2]}");</script>
+                                        <th><div align="center">ลำดับ</div></th>
+                                        <th><div align="center">รายละเอียด</div></th>
+                                        <th><div align="center">จำนวนเงิน(บาท)</div></th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ตัวชี้วัดความสำเร็จของโครงการ</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input type="hidden" name="S_P" value="0">
+                                <button name="btnAddS_P" type="button" id="btnAddS_P" class="btn btn-success" onClick="CreateNewRow5('');" ><i class="glyphicon glyphicon-plus-sign"></i></button>
+                                <button name="btnDelS_P" type="button" id="btnDelS_P" class="btn btn-danger" onClick="RemoveRow5();" ><i class="glyphicon glyphicon-minus-sign"></i> </button>
+
+                                <table class="table table-striped"  id="S_PExp">
+                                    <tr>
+                                        <!--? python criteria = project_criteria.split(';') ?>
+                                        <!--? python print criteria ?-->
+                                        <script tal:repeat = "cr project_criteria" >CreateNewRow5("${cr}");</script>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ยืมเงินหรือไม่</label>
+                        <div class="col-md-5 inputGroupContainer">
+                            <div class="input-group">
+                                <input id="L_M" name="L_M" value="1" class="styled" type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">ไฟล์รายละเอียดการแข่งขัน</label>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" >อัพโหลด <i class="glyphicon glyphicon-picture"></i></button>
+                    </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="text-center"><b>Comment</b></h2>
+                    <div class="form-group">
+                        <textarea name="message" rows="15" cols="43">${comment.text}</textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-warning btn-lg" name = "save">save <span class="glyphicon glyphicon-floppy-disk"></span></button>&nbsp;
+                        <button type="submit" class="btn btn-primary btn-lg" name = "send-comment">ส่งการตรวจ <span class="glyphicon glyphicon-ok"></span></button>
+                    </div>
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+
+</div>
+
+
+<!--</body>-->
+<!--</html>-->

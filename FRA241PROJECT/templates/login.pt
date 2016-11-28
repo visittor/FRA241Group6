@@ -6,14 +6,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ระบบกิจกรรมนักศึกษา</title>
+        <title>ระบบกิจกรรมนักศึกษาสถานบันวิทยาการหุ่นยนต์ภาคสนาม</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/assets/bootstrap/css/bootstrap.min.css')}">
-        <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/assets/font-awesome/css/font-awesome.min.css')}">
-		<link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/assets/css/form-elements.css')}">
-        <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/assets/css/style.css')}">
+        <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../static/assets/css/form-elements.css">
+        <link rel="stylesheet" href="../static/assets/css/style.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,6 +29,24 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${request.static_url('FRA241PROJECT:static/assets/ico/apple-touch-icon-72-precomposed.png')}">
         <link rel="apple-touch-icon-precomposed" href="${request.static_url('FRA241PROJECT:static/assets/ico/apple-touch-icon-57-precomposed.png')}">
 
+		<style>
+			div.transbox {
+				margin: 10px;
+				background-color: #ffffff;
+				opacity: 0.8;
+				filter: alpha(opacity=60); /* For IE8 and earlier */
+			}
+
+			div.transbox p {
+				margin: 5%;
+				font-weight: bold;
+				color: #000000;
+			}
+			h4{color: white; text-shadow: black 0.1em 0.1em 0.2em}
+			h1{color: white; text-shadow: black 0.1em 0.1em 0.2em}
+		</style>
+
+
     </head>
 
     <body>
@@ -41,14 +59,14 @@
 
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h2><strong>ระบบกิจกรรมนักศึกษา</strong> </h2>
+                            <h1><strong>ระบบกิจกรรมนักศึกษา</strong> </h1>
 							<img src="http://www2.kmutt.ac.th/news/thumbnail.aspx?f=nRLfCEk468.jpg&w=240"height="160" width="150">
-								<h2><strong>Login &amp; Register</strong> </h2>
+								<h1><strong>Login &amp; Register</strong> </h1>
                             <div class="description">
                             	<p>
-	                            	<strong>ระบบกิจกรรมนักศึกษาของสถาบันวิทยาการหุ่นยนต์ภาคสนาม</strong>
+									<h4><font size="5px">ระบบกิจกรรมนักศึกษาของสถาบันวิทยาการหุ่นยนต์ภาคสนาม</font></h4>
                             	</p>
-                            </div>
+							</div>
                         </div>
                     </div>
 
@@ -80,24 +98,7 @@
 				                    </form>
 								</div>
 							</div>
-
-					<!--<div class="social-login">
-                    <!--	<h3>...or login with:</h3>
-                        <div class="social-login-buttons">
-                                <a class="btn btn-link-1 btn-link-1-facebook" href="#">
-                                    <i class="fa fa-facebook"></i> Facebook
-                                </a>
-                                <a class="btn btn-link-1 btn-link-1-twitter" href="#">
-                                    <i class="fa fa-twitter"></i> Twitter
-                                </a>
-                                <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-                                    <i class="fa fa-google-plus"></i> Google Plus
-                                </a>
-                            </div>
-                    </div> -->
-
 				</div>
-
                         <div class="col-sm-1 middle-border"></div>
                         <div class="col-sm-1"></div>
                         	
@@ -117,9 +118,9 @@
 	                            <div class="form-bottom">
 				                    <form role="form" action="" method="post" class="registration-form">
 										<div class="form-group">
-											<label class="sr-only" for="form-user-role">Statue</label>
+											<label class="sr-only" for="form-user-role">Status</label>
 											<select type="text" name="form-user-role" class="form-user-role form-control" id="form-user-role">
-												<option>Please choose your statue</option>
+												<option>Please choose your status</option>
 												<option>Teacher</option>
 												<option>Student</option>
 											</select>
@@ -153,6 +154,8 @@
 				                        	<input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
 				                        </div>
 
+
+
 				                        <button type="submit" name="form.signup" class="btn">Sign me up!</button>
 				                    </form>
 			                    </div>
@@ -173,7 +176,7 @@
         			
         			<div class="col-sm-8 col-sm-offset-2">
         				<div class="footer-border"></div>
-        				<p> <a href="http://fibo.kmutt.ac.th/" target="_blank"><strong>Institute of FIeld roBOtics</strong></a>
+        				<p> <a href="http://fibo.kmutt.ac.th/" target="_blank"><h4><strong>Institute of FIeld roBOtics</strong></h4></a>
 						</p>
         			</div>
         			
@@ -182,13 +185,13 @@
         </footer>
 
         <!-- Javascript -->
-        <script src="${request.static_url('FRA241PROJECT:static/assets/js/jquery-1.11.1.min.js')}"></script>
-        <script src="${request.static_url('FRA241PROJECT:static/assets/bootstrap/js/bootstrap.min.js')}"></script>
-        <script src="${request.static_url('FRA241PROJECT:static/assets/js/jquery.backstretch.min.js')}"></script>
-        <script src="${request.static_url('FRA241PROJECT:static/assets/js/scripts.js')}"></script>
+        <script src="../static/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../static/assets/js/jquery.backstretch.min.js"></script>
+        <script src="../static/assets/js/scripts.js"></script>
         
         <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
+            <script src="../static/assets/js/placeholder.js"></script>
         <![endif]-->
 
     </body>

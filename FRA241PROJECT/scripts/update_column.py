@@ -32,6 +32,8 @@ from ..models import (Proposal,
                         Member_for_proposal,
                         Delicate_budget,
                         Schedule,
+                        Project,
+                        Obligation,
                         )# noqa
 
 
