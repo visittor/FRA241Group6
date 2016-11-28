@@ -590,26 +590,15 @@ def Gen_Doc_volun(doc_name='D.docx'
 
     document.save(doc_name)
 
-def main(argv=sys.argv):
-    if len(argv) < 2:
-        usage(argv)
-    config_uri = argv[1]
-    options = parse_vars(argv[3:])
-    setup_logging(config_uri)
-    settings = get_appsettings(config_uri, options=options)
+def gennn(ses, num):
 
-    engine = engine_from_config(settings, prefix='sqlalchemy.')
-    Base.metadata.create_all(engine)
+    # all_data = Get_data(session=session, project_id=int(argv[2]))
 
-    maker = sessionmaker()
-    maker.configure(bind=engine)
-
-    session = get_session(maker, transaction.manager)
-
-    all_data = Get_data(session=session, project_id=int(argv[2]))
+    all_data = Get_data(session=ses, project_id=num)
 
     cost_list_parameter = []
-    cost_list_param = all_data.proposal.delicate_budget.split(unichr(171)) if all_data.proposal.cost is not None else []
+    cost_list_param = all_data.proposal.delicate_budget.split(
+        unichr(171)) if all_data.proposal.cost is not None else []
     cost_list_param.pop()
 
     for i in cost_list_param:
@@ -634,22 +623,22 @@ def main(argv=sys.argv):
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\FRA241PROJECT\static\Gened_DOC\Competitive_2.docx')
     elif all_data.type == u'camp':
         Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Camp_' + str(all_data.id) + '.docx'
-                    , camp_name_th=all_data.title
-                    , year=all_data.proposal.year
-                    , date_gap=u''
-                    , where=all_data.proposal.activity_location
-                    , rational=all_data.proposal.Reason
-                    , purpose_list=all_data.proposal.objective.split(unichr(171))
-                    , hours_compare=u''
-                    , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
-                    , durations=all_data.proposal.duration
-                    , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
-                    , evaluation_index=all_data.proposal.evaluation_index
-                    , profit=all_data.proposal.profit.split(unichr(171))
-                    , cost_list=all_data.proposal.cost.split(unichr(171))
-                    , cost_list_detail=cost_list_parameter
-                    , activity_list=all_data.proposal.schedule.split(unichr(171))
-                    )
+                     , camp_name_th=all_data.title
+                     , year=all_data.proposal.year
+                     , date_gap=u''
+                     , where=all_data.proposal.activity_location
+                     , rational=all_data.proposal.Reason
+                     , purpose_list=all_data.proposal.objective.split(unichr(171))
+                     , hours_compare=u''
+                     , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+                     , durations=all_data.proposal.duration
+                     , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+                     , evaluation_index=all_data.proposal.evaluation_index
+                     , profit=all_data.proposal.profit.split(unichr(171))
+                     , cost_list=all_data.proposal.cost.split(unichr(171))
+                     , cost_list_detail=cost_list_parameter
+                     , activity_list=all_data.proposal.schedule.split(unichr(171))
+                     )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\sdf.docx')
     elif all_data.type == u'volunteer':
         Gen_Doc_volun(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Volun_' + str(all_data.id) + '.docx'
@@ -670,3 +659,23 @@ def main(argv=sys.argv):
                       , profit=all_data.proposal.profit.split(unichr(171))
                       , cost_list_detail=cost_list_parameter
                       )
+
+
+def main(argv=sys.argv):
+    if len(argv) < 2:
+        usage(argv)
+    config_uri = argv[1]
+    options = parse_vars(argv[3:])
+    setup_logging(config_uri)
+    settings = get_appsettings(config_uri, options=options)
+
+    engine = engine_from_config(settings, prefix='sqlalchemy.')
+    Base.metadata.create_all(engine)
+
+    maker = sessionmaker()
+    maker.configure(bind=engine)
+
+    session = get_session(maker, transaction.manager)
+
+    gennn(session,int(argv[2]))
+
