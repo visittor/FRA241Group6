@@ -3,11 +3,15 @@ from pyramid.view import (
     forbidden_view_config,
     view_config,
 )
+from pyramid.response import Response
 from ..models import (User,
                       Project,
                       Obligation,
                       )
+import os
 import transaction
+import uuid
+import shutil
 # fuck
 @view_config(route_name = 'select_cost',renderer = '../templates/cost.pt')
 def select_cost(request):
@@ -22,7 +26,7 @@ def select_cost(request):
     return dict(project_list = project_list)
 
 @view_config(route_name = 'cost',renderer = '../templates/cost.pt',permission = "access")
-def select_cost(request):
+def cost(request):
     project = request.context.project
     projectID = project.id
     obligation_list = request.context.obligation_list
@@ -35,6 +39,7 @@ def select_cost(request):
         while True:
             name_inParam_DB1 = "D_B1_"+str(count_DB)
             name_inParam_DB2 = "D_B2_" + str(count_DB)
+            name_inParam_DB3 = "D_B3_" + str(count_DB)
             name_inParam_DB4 = "D_B4_" + str(count_DB)
             if name_inParam_DB1 in request.params:
                 with transaction.manager:
@@ -47,6 +52,7 @@ def select_cost(request):
                     if request.params.get(name_inParam_DB4,"") != "T":
                         oblig.status = "F"
                     request.db_session.add(oblig)
+                store_file(request,name_inParam_DB3)
             else:
                 break
             count_DB += 1
@@ -61,3 +67,21 @@ def select_cost(request):
                 project_list = project_list,
                 )
 
+@view_config(route_name='bar')
+def show_current_route_pattern(request):
+    introspector = request.registry.introspector
+    route_name = request.matched_route.name
+    route_intr = introspector.get('routes', route_name)
+    return Response(str(route_intr['pattern']))
+
+def store_file(request,paramsName):
+    filename = request.POST[paramsName].filename
+
+    input_file = request.POST[paramsName].file
+    file_path = os.path.join(request.static_url('FRA241PROJECT:static/'), '%s.mp3' % uuid.uuid4())
+    temp_file_path = file_path + '~'
+    input_file.seek(0)
+    with open(temp_file_path, 'wb') as output_file:
+        shutil.copyfileobj(input_file, output_file)
+
+    os.rename(temp_file_path, file_path)

@@ -64,7 +64,7 @@
             newCell = newRow.insertCell(2)
             newCell.id = newCell.uniqueID
             newCell.setAttribute("className", "css-name");
-            newCell.innerHTML = " upload:<INPUT TYPE=\"FILE\" NAME=\"img\"  VALUE=\""+bill+"\">"
+            newCell.innerHTML = " upload:<INPUT TYPE=\"FILE\" NAME=\"D_B3_"+intLine+"\" VALUE=\"\">"
 
             //*** Column 4***//
             newCell = newRow.insertCell(3)
@@ -72,12 +72,12 @@
             newCell.setAttribute("className", "css-name");
             //newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\" checked> completed";
             if (Checked == "T"){
-                if(Diabled == "T"){newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE="T" checked disabled > completed";}
-                else {newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\" checked> completed";}
+                if(Diabled == "T"){newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE=\"T\" checked disabled > completed";}
+                else {newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE=\"T\" checked> completed";}
             }
             else{
-                if (Diabled == "T"){ newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE="T" disabled > ";}
-                else{ newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE="T" >";}
+                if (Diabled == "T"){ newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE=\"T\" disabled > ";}
+                else{ newCell.innerHTML = "<INPUT TYPE=\"checkbox\" NAME=\"D_B4_"+intLine+"\"VALUE=\"T\" >";}
             }
 
             document.add_project_form.D_B.value = intLine;
@@ -126,8 +126,8 @@
 
 
 
-                <?python role_teacher = True if user.role == "Teacher" or user.role=="GOD" else False ?>
-                <?python role_admin = True if user.role == "Admin" else False ?>
+                <?python role_teacher = True if request.user.role == "Teacher" or request.user.role=="GOD" else False ?>
+                <?python role_admin = True if request.user.role == "Admin" else False ?>
                 <li tal:condition = "role_teacher">
                     <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
                 </li>
@@ -187,20 +187,19 @@
                 </div>
             </div>
             <?python is_selected = True if "project_id" in request.matchdict else False?>
-            <!--<div tal:condition = "is_selected">-->
+            <div tal:condition = "is_selected">
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-5 inputGroupContainer">
                         <div class="input-group">
                             <input type="hidden" name="D_B" value="0">
                             <?python diabled = "T" if request.user.role!= "Admin" else "F" ?>
-                            <?python  ?>
-                            <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4('','','','','F','${disabled}');"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                            <button name="btnAddD_B" type="button" id="btnAddD_B" class="btn btn-success" onClick="CreateNewRow4('','','','','T','${diabled}');"><i class="glyphicon glyphicon-plus-sign"></i></button>
                             <button name="btnDelD_B" type="button" id="btnDelD_B" class="btn btn-danger" onClick="RemoveRow4();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
 
                             <table class="table table-condensed"  id="D_BExp">
                                 <tr>
-                                    <script tal:repeat = "oblig obligation_list" >CreateNewRow4("${oblig.description}","${oblig.cost}","","","oblig.status","${disabled}");</script>
+                                    <script tal:repeat = "oblig obligation_list" >CreateNewRow4("${oblig.description}","${oblig.cost}","","","${oblig.status}","${diabled}");</script>
 
                                 </tr>
                             </table>
@@ -217,7 +216,7 @@
                         <button type="submit" name = "save_cost" class="btn btn-warning btn-lg" >บันทึก <span class="glyphicon glyphicon-floppy-disk"></span></button>
                     </div>
                 </div>
-            <!--</div>-->
+            </div>
         <!--/fieldset-->
     </form>
 </div>
