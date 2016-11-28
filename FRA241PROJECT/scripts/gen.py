@@ -590,7 +590,7 @@ def Gen_Doc_volun(doc_name='D.docx'
 
     document.save(doc_name)
 
-def gennn(ses, num):
+def gennn(ses, num,path):
 
     # all_data = Get_data(session=session, project_id=int(argv[2]))
 
@@ -605,7 +605,7 @@ def gennn(ses, num):
         cost_list_parameter.append(i.split(unichr(172)))
 
     if all_data.type == u'competitive':
-        Gen_Doc_compet(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Competitive_' + str(all_data.id) + '.docx'
+        Gen_Doc_compet(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'competitive_' + str(all_data.id) + '.docx'
                        , project_name_th=all_data.title
                        , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
                        , where=all_data.proposal.activity_location
@@ -620,9 +620,24 @@ def gennn(ses, num):
                        , cost_list=cost_list_parameter
                        , success_criteria=all_data.proposal.success_criteria.split(unichr(171))
                        )
+        # Gen_Doc_compet(doc_name=path + 'Competitive_' + str(all_data.id) + '.text'
+        #                , project_name_th=all_data.title
+        #                , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
+        #                , where=all_data.proposal.activity_location
+        #                , rational=all_data.proposal.Reason
+        #                , purpose_list=all_data.proposal.objective.split(unichr(171))
+        #                , profit=all_data.proposal.profit.split(unichr(171))
+        #                , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+        #                , advisor_list=all_data.proposal.advisor_for_proposal
+        #                , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+        #                , activity_place=all_data.proposal.activity_location
+        #                , type_of_activity=all_data.proposal.type_of_activity
+        #                , cost_list=cost_list_parameter
+        #                , success_criteria=all_data.proposal.success_criteria.split(unichr(171))
+        #                )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\FRA241PROJECT\static\Gened_DOC\Competitive_2.docx')
     elif all_data.type == u'camp':
-        Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Camp_' + str(all_data.id) + '.docx'
+        Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'camp_' + str(all_data.id) + '.docx'
                      , camp_name_th=all_data.title
                      , year=all_data.proposal.year
                      , date_gap=u''
@@ -639,9 +654,26 @@ def gennn(ses, num):
                      , cost_list_detail=cost_list_parameter
                      , activity_list=all_data.proposal.schedule.split(unichr(171))
                      )
+        # Gen_Doc_camp(doc_name=path + 'Camp_' + str(all_data.id) + '.text'
+        #              , camp_name_th=all_data.title
+        #              , year=all_data.proposal.year
+        #              , date_gap=u''
+        #              , where=all_data.proposal.activity_location
+        #              , rational=all_data.proposal.Reason
+        #              , purpose_list=all_data.proposal.objective.split(unichr(171))
+        #              , hours_compare=u''
+        #              , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+        #              , durations=all_data.proposal.duration
+        #              , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+        #              , evaluation_index=all_data.proposal.evaluation_index
+        #              , profit=all_data.proposal.profit.split(unichr(171))
+        #              , cost_list=all_data.proposal.cost.split(unichr(171))
+        #              , cost_list_detail=cost_list_parameter
+        #              , activity_list=all_data.proposal.schedule.split(unichr(171))
+        #              )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\sdf.docx')
     elif all_data.type == u'volunteer':
-        Gen_Doc_volun(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'Volun_' + str(all_data.id) + '.docx'
+        Gen_Doc_volun(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'volunteer_' + str(all_data.id) + '.docx'
                       , volun_name=all_data.title
                       , year=all_data.proposal.year
                       , where=all_data.proposal.activity_location
@@ -659,7 +691,24 @@ def gennn(ses, num):
                       , profit=all_data.proposal.profit.split(unichr(171))
                       , cost_list_detail=cost_list_parameter
                       )
-
+        # Gen_Doc_volun(doc_name=path + 'Volun_' + str(all_data.id) + '.text'
+        #               , volun_name=all_data.title
+        #               , year=all_data.proposal.year
+        #               , where=all_data.proposal.activity_location
+        #               , rational=all_data.proposal.Reason
+        #               , purpose_list=all_data.proposal.objective.split(unichr(171))
+        #               , hours_compare=u''
+        #               , advisor_list=all_data.proposal.advisor_for_proposal.split(unichr(171))
+        #               , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
+        #               , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
+        #               , durations=all_data.proposal.duration
+        #               , active_location=all_data.proposal.activity_location
+        #               , type_of_activity=all_data.proposal.type_of_activity
+        #               , evaluation_index=all_data.proposal.evaluation_index
+        #               , success_criteria=all_data.proposal.success_criteria.split(unichr(171))
+        #               , profit=all_data.proposal.profit.split(unichr(171))
+        #               , cost_list_detail=cost_list_parameter
+        #               )
 
 def main(argv=sys.argv):
     if len(argv) < 2:
