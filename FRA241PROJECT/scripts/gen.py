@@ -246,7 +246,7 @@ def Gen_Doc_camp(doc_name='D.docx'
                  , camp_name_th=u''
                  , project_name_en=u''
                  , year=u''
-                 , date_gap=u''
+                 , date_cap=u''
                  , where=u''
                  , rational=u''
                  , purpose_list=list([])
@@ -258,7 +258,7 @@ def Gen_Doc_camp(doc_name='D.docx'
                  , profit=list([])
                  , cost_list=list([])
                  , cost_list_detail=list([])
-                 , activity_list = list([])
+                 , activity_list=list([])
                  ):
     document = Document('FRA241PROJECT/static/Archetype_gendoc.docx')
 
@@ -301,7 +301,7 @@ def Gen_Doc_camp(doc_name='D.docx'
     head_camp_proposal.add_run(u'สถาบันวิทยาการหุ่นยนต์ภาคสนาม (ฟีโบ้) มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี\n',
                                style='header')
     head_camp_proposal.add_run(u'ประจำปีการศึกษา ' + year + '\n', style='header')
-    head_camp_proposal.add_run(u'ระหว่างวันที่ ' + '\n', style='header')
+    head_camp_proposal.add_run(u'ระหว่างวันที่ ' + date_cap + '\n', style='header')
     head_camp_proposal.add_run(u'ณ ' + where, style='header')
     head_camp_proposal.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
@@ -410,25 +410,25 @@ def Gen_Doc_camp(doc_name='D.docx'
 
     document.save(doc_name)
 
-def Gen_Doc_volun(doc_name='D.docx'
-                 , volun_name=u''
-                 , year=u''
-                 , where=u''
-                 , rational=u''
-                 , purpose_list=list([])
-                 , hours_compare=u''
-                 , advisor_list=list([])
-                 , owner_list=list([])
-                 , member_list=list([])
-                 , durations=u''
-                 , active_location=u''
-                 , type_of_activity=u''
-                 , evaluation_index=u''
-                 , success_criteria=list([])
-                 , profit=list([])
-                 , cost_list_detail=list([])
-                  ):
 
+def Gen_Doc_volun(doc_name='D.docx'
+                  , volun_name=u''
+                  , year=u''
+                  , where=u''
+                  , rational=u''
+                  , purpose_list=list([])
+                  , hours_compare=u''
+                  , advisor_list=list([])
+                  , owner_list=list([])
+                  , member_list=list([])
+                  , durations=u''
+                  , active_location=u''
+                  , type_of_activity=u''
+                  , evaluation_index=u''
+                  , success_criteria=list([])
+                  , profit=list([])
+                  , cost_list_detail=list([])
+                  ):
     document = Document('FRA241PROJECT/static/Archetype_gendoc.docx')
 
     ######################################################################
@@ -467,7 +467,8 @@ def Gen_Doc_volun(doc_name='D.docx'
     head_volunteer_proposal = document.add_heading('', 0)
     head_volunteer_proposal.add_run(volun_name + '\n', style='header')
     head_volunteer_proposal.add_run(u'สาขาวิชาวิศวกรรมหุ่นยนต์และระบบอัตโนมัติ\n', style='header')
-    head_volunteer_proposal.add_run(u'สถาบันวิทยาการหุ่นยนต์ภาคสนาม (ฟีโบ้) มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี\n',style='header')
+    head_volunteer_proposal.add_run(u'สถาบันวิทยาการหุ่นยนต์ภาคสนาม (ฟีโบ้) มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี\n',
+                                    style='header')
     head_volunteer_proposal.add_run(u'ประจำปีการศึกษา ' + year + '\n\n', style='header')
     head_volunteer_proposal.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
@@ -590,7 +591,10 @@ def Gen_Doc_volun(doc_name='D.docx'
 
     document.save(doc_name)
 
-def gennn(ses, num,path):
+
+def gennn(ses, num, path):
+    month_list = [u'มกราคม', u'กุมภาพันธ์', u'มีนาคม', u'เมษายน', u'พฤษภาคม', u'มิถุนายน', u'กรกฏาคม', u'สิงหาคม',
+                  u'กันยายน', u'ตุลาคม', u'พฤศจิกายน', u'ธันวาคม']
 
     # all_data = Get_data(session=session, project_id=int(argv[2]))
 
@@ -605,9 +609,18 @@ def gennn(ses, num,path):
         cost_list_parameter.append(i.split(unichr(172)))
 
     if all_data.type == u'competitive':
+        startdate = all_data.start_date
+        findate = all_data.finish_date
+        if startdate is not None:
+            datecap = unicode(
+                unicode(startdate.day) + ' ' + month_list[int(startdate.month) + 1] + ' - ' + unicode(
+                    startdate.day) + ' ' +
+                month_list[int(findate.month) + 1] + ' ' + unicode(findate.year))
+        else:
+            datecap = u''
         Gen_Doc_compet(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'competitive_' + str(all_data.id) + '.docx'
                        , project_name_th=all_data.title
-                       , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
+                       , date_cap=datecap
                        , where=all_data.proposal.activity_location
                        , rational=all_data.proposal.Reason
                        , purpose_list=all_data.proposal.objective.split(unichr(171))
@@ -622,7 +635,7 @@ def gennn(ses, num,path):
                        )
         # Gen_Doc_compet(doc_name=path + 'Competitive_' + str(all_data.id) + '.text'
         #                , project_name_th=all_data.title
-        #                , date_cap=u'17 มกราคม – 21 มีนาคม 2559'
+        #                , date_cap=u''
         #                , where=all_data.proposal.activity_location
         #                , rational=all_data.proposal.Reason
         #                , purpose_list=all_data.proposal.objective.split(unichr(171))
@@ -637,10 +650,20 @@ def gennn(ses, num,path):
         #                )
         # os.startfile('C:\Users\PHURINPAT\Documents\GitHub\FRA241Group6\FRA241PROJECT\static\Gened_DOC\Competitive_2.docx')
     elif all_data.type == u'camp':
+        startdate = all_data.start_date
+        findate = all_data.finish_date
+        if startdate is not None:
+            datecap = unicode(
+                unicode(startdate.day) + ' ' + month_list[int(startdate.month) + 1] + ' - ' + unicode(
+                    startdate.day) + ' ' +
+                month_list[int(findate.month) + 1] + ' ' + unicode(findate.year))
+        else:
+            datecap = u''
+
         Gen_Doc_camp(doc_name='FRA241PROJECT/static/Gened_DOC/' + 'camp_' + str(all_data.id) + '.docx'
                      , camp_name_th=all_data.title
                      , year=all_data.proposal.year
-                     , date_gap=u''
+                     , date_cap=datecap
                      , where=all_data.proposal.activity_location
                      , rational=all_data.proposal.Reason
                      , purpose_list=all_data.proposal.objective.split(unichr(171))
@@ -657,7 +680,7 @@ def gennn(ses, num,path):
         # Gen_Doc_camp(doc_name=path + 'Camp_' + str(all_data.id) + '.text'
         #              , camp_name_th=all_data.title
         #              , year=all_data.proposal.year
-        #              , date_gap=u''
+        #              , date_cap=u''
         #              , where=all_data.proposal.activity_location
         #              , rational=all_data.proposal.Reason
         #              , purpose_list=all_data.proposal.objective.split(unichr(171))
@@ -710,6 +733,7 @@ def gennn(ses, num,path):
         #               , cost_list_detail=cost_list_parameter
         #               )
 
+
 def main(argv=sys.argv):
     if len(argv) < 2:
         usage(argv)
@@ -726,5 +750,4 @@ def main(argv=sys.argv):
 
     session = get_session(maker, transaction.manager)
 
-    gennn(session,int(argv[2]))
-
+    gennn(session, int(argv[2]))
