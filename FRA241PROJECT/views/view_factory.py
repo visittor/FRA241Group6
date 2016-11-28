@@ -198,3 +198,23 @@ class checkStatus(object):
     def __acl__(self):
         print "\n\n\n\n\n\n\n\n owner id",self.ownerID,"\n\n\n\n\n\n\n\n"
         return [(Allow,str(self.ownerID),"access")]
+def cost_factory(request):
+    project = request.db_session.query(Project).filter_by(id = request.matchdict["project_id"]).first()
+    project_list = request.db_session.query(Project)
+    if project is None :
+        return HTTPFound(location=request.route_url('home'))
+    obligation_list = project.project_obligation
+    filtered_obligation_list = []
+    for i in obligation_list:
+        if i.type == "bill":
+            filtered_obligation_list.append(i)
+    return  costProject(project,filtered_obligation_list,project_list)
+class costProject(object):
+    def __init__(self,project,obligation_list,project_list):
+        self.project = project
+        self.obligation_list = obligation_list
+        self.project_list = project_list
+    def __acl__(self):
+        return [(Allow,"role:Admin","access"),
+                (Allow,str(self.project.owner_id),"access"),
+                ]

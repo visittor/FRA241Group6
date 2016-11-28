@@ -175,7 +175,7 @@
                 <hr class="primary">
                 <div class="">
                     <div class="service-box">
-                        <button type="button" class="btn btn-primary btn-lg btn-block"><big class="glyphicon glyphicon-plus"></big> : กรอกแบบฟอร์ม</button><br>
+                        <a href = "${request.route_url('select_project_cost')}" type="button" class="btn btn-primary btn-lg btn-block" ><big class="glyphicon glyphicon-plus"></big> : กรอกแบบฟอร์ม</a><br>
                         <p class="text-muted">เอกสารที่ไว้ใช้ในการขอยืมเงินและใบเสร็จที่ต้องนำไปส่งให้กับเจ้าหน้าที่</p>
                     </div>
                 </div>
