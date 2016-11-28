@@ -4,7 +4,7 @@
 
   <title>ระบบกิจกรรมนักศึกษา-โครงการการแข่งขัน</title>
  <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-
+  <link rel="shortcut icon" href="${request.static_url('FRA241PROJECT:static/assets/ico/FIBO2.jpg')}">
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
@@ -563,6 +563,14 @@
       <div class="form-group">
         <label class="col-md-3 control-label">ไฟล์รายละเอียดการแข่งขัน</label>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">อัพโหลด <i class="glyphicon glyphicon-picture"></i></button>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">ดาวน์โหลดเอกสาร</label>
+        <div class="col-md-5 inputGroupContainer">
+          <div class="input-group">
+            <a href=" " class="btn btn-primary " target="_blank">คลิกเพื่อดาวน์โหลด</a>
+          </div>
+        </div>
       </div>
       <!-- Success message -->
       <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
