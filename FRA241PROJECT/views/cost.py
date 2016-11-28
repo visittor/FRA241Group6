@@ -8,7 +8,8 @@ from ..models import (User,
                       Obligation,
                       )
 import transaction
-@view_config(route_name = 'select_project_cost',renderer = '../templates/cost.pt')
+# fuck
+@view_config(route_name = 'select_cost',renderer = '../templates/cost.pt')
 def select_cost(request):
     if request.user.role == "Admin":
         project_list = request.db_session.query(Project)
@@ -18,7 +19,6 @@ def select_cost(request):
         project_list = request.user.own_project
     elif request.user.role == "GOD":
         project_list = request.user.own_project
-
     return dict(project_list = project_list)
 
 @view_config(route_name = 'cost',renderer = '../templates/cost.pt',permission = "access")
