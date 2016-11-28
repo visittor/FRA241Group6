@@ -88,6 +88,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+		<?python role_teacher = True if request.user.role == "Teacher" or request.user.role=="GOD" else False ?>
+		<?python role_admin = True if request.user.role == "Admin" else False ?>
         <li tal:condition = "role_teacher">
           <a class="page-scroll" href="${request.route_url('teacherProject')}">    <big class="glyphicon glyphicon-ok"></big></a> <!--ตรวจโครงการ-->
         </li>
@@ -148,7 +150,7 @@
       </div>
       <div class="form-group">
 
-        <button type="submit" name = "competitive-button" class="btn btn-warning btn-lg btn-block"><h1>โครงการการแข่งขัน</h1></button>
+        <button type="submit" name = "competitive-button" class="btn btn-success btn-lg btn-block"><h1>โครงการการแข่งขัน</h1></button>
 
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
           <div class="modal-dialog modal-lg" role="document">

@@ -52,16 +52,15 @@ def cost(request):
                     if request.params.get(name_inParam_DB4,"") != "T":
                         oblig.status = "F"
                     request.db_session.add(oblig)
-                store_file(request,name_inParam_DB3)
+                # store_file(request,name_inParam_DB3)
             else:
                 break
             count_DB += 1
-            obligation_list = request.db_session.query(Obligation).filter_by(project_id = projectID).filter_by(type = "bill")
-            return dict(project=project,
-                        obligation_list=obligation_list,
-                        project_list=project_list,
-                        )
-
+        obligation_list = request.db_session.query(Obligation).filter_by(project_id = projectID).filter_by(type = "bill")
+        return dict(project=project,
+					obligation_list=obligation_list,
+					project_list=project_list,
+					)
     return dict(project = project,
                 obligation_list = obligation_list,
                 project_list = project_list,

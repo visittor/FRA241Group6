@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>ระบบกิจกรรมนักศึกษา-โครงการน่าสนใจ</title>
     <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-
+    <link rel="shortcut icon" href="${request.static_url('FRA241PROJECT:static/assets/ico/FIBO2.jpg')}">
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
     <link rel='stylesheet prefetch'
@@ -107,40 +107,40 @@
 
             <table class="table table-bordered">
                 <tr class="active">
-                    <td class="active">${project.title}</td>
+                    <td class="active"><b>ชื่อโครงการ :</b></td>
                 </tr>
                 <tr class="active">
-                    <td class="info" id=""></td>
+                    <td class="info" id="">${project.title}</td>
                 </tr>
                 <tr class="active">
-                    <td class="active">${project.leader.First_name}</td>
+                    <td class="active"><b>ผู้รับผิดชอบโครงการ :</b></td>
                 </tr>
                 <tr class="active">
-                    <td class="info" id=""></td>
+                    <td class="info" id="">${project.leader.First_name}</td>
                 </tr>
                 <tr class="active">
-                    <td class="active">${project.start_date}</td>
+                    <td class="active"><b>วันที่จัดกิจกรรม :</b></td>
                 </tr>
                 <tr >
-                    <td class="info" id=""></td>
+                    <td class="info" id="">${project.start_date}</td>
                 </tr>
                 <tr class="active">
-                    <td class="active">${project.proposal.activity_location}</td>
+                    <td class="active"><b>สถานที่จัดกิจกรรม :</b></td>
                 </tr>
                 <tr class="active">
-                    <td class="info" id=""></td>
+                    <td class="info" id="">${project.proposal.activity_location}</td>
                 </tr>
                 <tr class="active">
-                <td class="active">${' '.join(project.proposal.objective.split(unichr(171)))}</td>
+                <td class="active"><b>วัตถุประสงค์ :</b></td>
                 </tr>
                 <tr class="active">
-                    <td class="info" id=""></td>
+                    <td class="info" id="">${' '.join(project.proposal.objective.split(unichr(171)))}</td>
                 </tr>
                 <tr class="active">
-                    <td class="active">${project.proposal.Reason}</td>
+                    <td class="active"><b>หลักการและเหตุผล :</b></td>
                 </tr>
                 <tr class="active">
-                    <td class="info" id=""></td>
+                    <td class="info" id="">${project.proposal.Reason}</td>
                 </tr>
 
 
