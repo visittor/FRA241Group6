@@ -166,3 +166,35 @@ class summarizeProject(object):
         return [(Allow,Everyone,"deny"),
                 (Allow,str(self.project.owner_id),"access"),
                 ]
+
+def check_status_factory(request):
+    projectID = request.matchdict["project_id"]
+
+    project = request.db_session.query(Project).filter_by(id = projectID).first()
+    if project is None:
+        return HTTPFound(location=request.route_url('addProject'))
+    ownerID = project.owner_id
+    CommentList = project.comment
+    dictComment = dict(teacher=[],
+                        admin=[],
+                        GOD=[],
+                        )
+    for i in CommentList:
+        if i.writer.role == "Admin":
+            dictComment["admin"].append(i)
+        elif i.writer.role == "Teacher":
+            dictComment["teacher"].append(i)
+        elif i.writer.role == "GOD":
+            dictComment["GOD"].append(i)
+    status = project.status.split(unichr(171))
+    return checkStatus(status,dictComment,projectID,ownerID)
+class checkStatus(object):
+    def __init__(self,status,dictComment,projectID,ownerID):
+        self.status = status
+        self.dictComment = dictComment
+        self.projectID = projectID
+        self.ownerID = ownerID
+
+    def __acl__(self):
+        print "\n\n\n\n\n\n\n\n owner id",self.ownerID,"\n\n\n\n\n\n\n\n"
+        return [(Allow,str(self.ownerID),"access")]

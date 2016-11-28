@@ -373,8 +373,16 @@ class Project_view():
                     count_P_M += 1
             if self.request.params.get("evaluation", "") != "":
                 project_evaluation = self.request.params["evaluation"]
-            if "Benefits" in self.request.params:
-                project_profit = self.request.params["Benefits"]
+            count_bene = 1
+            if "Benefits1_1" in self.request.params:
+                project_profit = ''
+                while True:
+                    name_Bene_inParam = "Benefits1_"+str(count_bene)
+                    if name_Bene_inParam in self.request.params:
+                        project_profit += self.request.params[name_Bene_inParam]+unichr(171)
+                    else:
+                        break
+                    count_bene+=1
             count_BGT = 1
             if "BGT1" in self.request.params:
                 list_BGT = ''
@@ -472,7 +480,7 @@ class Project_view():
                             project_reason=project_reason,
                             project_duration=project_duration,
                             project_evaluation=project_evaluation,
-                            project_profit=project_profit,
+                            project_profit=[i for i in project_profit.split(unichr(171)) if i != ''],
                             start_date=start_date_for_return,
                             finish_date=finish_date_for_return,
                             OJ_=[i for i in list_OJ.split(unichr(171)) if i != ''],

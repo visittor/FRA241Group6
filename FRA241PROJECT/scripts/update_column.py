@@ -33,6 +33,7 @@ from ..models import (Proposal,
                         Delicate_budget,
                         Schedule,
                         Project,
+                        Obligation,
                         )# noqa
 
 

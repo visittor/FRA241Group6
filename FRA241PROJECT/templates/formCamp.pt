@@ -286,6 +286,44 @@
         }
       }
     </script>
+    <!--ผลที่คาดว่าจะได้รับ6-->
+    <script type="text/javascript">
+      function CreateNewRow6(time)
+      {
+        var intLine = parseInt(document.add_project_form.Benefits.value);
+        intLine++;
+
+        var theTable = document.all.BenefitsExp
+        var newRow = theTable.insertRow(theTable.rows.length)
+        newRow.id = newRow.uniqueID
+
+        var item1 = 1
+        var newCell
+
+        //*** Column 1 ***//
+        newCell = newRow.insertCell(0)
+        newCell.id = newCell.uniqueID
+        newCell.setAttribute("className", "css-name");
+        newCell.innerHTML = "<INPUT TYPE=\"TEXT\" SIZE=\"50\" NAME=\"Benefits1_"+intLine+"\" VALUE=\""+time+"\">"
+
+
+        document.add_project_form.Benefits.value = intLine;
+      }
+
+      function RemoveRow6()
+      {
+        intLine = parseInt(document.add_project_form.Benefits.value);
+        if(parseInt(intLine) > 0)
+        {
+          theTable = (document.all) ? document.all.BenefitsExp :
+                  document.getElementById("BenefitsExp")
+          theTableBody = theTable.tBodies[0];
+          theTableBody.deleteRow(intLine);
+          intLine--;
+          document.add_project_form.Benefits.value = intLine;
+        }
+      }
+    </script>
 
   </head>
   <!--Header-->
@@ -589,12 +627,18 @@
   <div class="form-group">
     <label class="col-md-3 control-label">ผลที่คาดว่าจะได้รับ</label>
     <div class="col-md-5 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-  <input name="Benefits"  class="form-control" value="${project_profit}" type="text">
+      <div class="input-group">
+        <input type="hidden" name="Benefits" value="0">
+        <button name="btnAdds_Benefits" type="button" id="btnAdd_Benefits" class="btn btn-success" onClick="CreateNewRow6('');"><i class="glyphicon glyphicon-plus-sign"></i></button>
+        <button name="btnDel_Benefits" type="button" id="btnDel_Benefits" class="btn btn-danger" onClick="RemoveRow6();"><i class="glyphicon glyphicon-minus-sign"></i> </button>
+        <table class="table table-striped"  id="BenefitsExp">
+          <tr>
+            <script tal:repeat = "Bnf project_profit" >CreateNewRow6("${Bnf}");</script>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
-</div>
   <div class="form-group">
     <label class="col-md-3 control-label">ค่าใช้จ่ายในการจัดกิจกรรม</label>
     <div class="col-md-5 inputGroupContainer">
