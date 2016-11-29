@@ -418,7 +418,7 @@ def Gen_Doc_volun(doc_name='D.docx'
                   , rational=u''
                   , purpose_list=list([])
                   , hours_compare=u''
-                  , advisor_list=list([])
+                  , advisor_list=u''
                   , owner_list=list([])
                   , member_list=list([])
                   , durations=u''
@@ -492,11 +492,12 @@ def Gen_Doc_volun(doc_name='D.docx'
     advisor_head.add_run(u'อาจารย์ที่ปรึกษาโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     advisor = document.add_paragraph()
-    x = 1
-    for i in advisor_list:
-        advisor.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(i) != 0 else purpose.add_run()
-        x += 1
-    x = 0
+    advisor.add_run('\t' + advisor_list + '\n', style='content')
+    # x = 1
+    # for i in advisor_list:
+    #     advisor.add_run('\t' + str(x) + '. ' + i + '\n', style='content') if len(i) != 0 else purpose.add_run()
+    #     x += 1
+    # x = 0
 
     owner_head = document.add_paragraph()
     owner_head.add_run(u'ผู้รับผิดชอบโครงการ', style='header').alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -589,6 +590,12 @@ def Gen_Doc_volun(doc_name='D.docx'
             each_cells = each_cost[j].add_paragraph()
             each_cells.add_run(i[j], style='in table')
 
+    sign_area = document.add_paragraph()
+    sign_area.add_run(u'\n\nลงชื่อ' + '.......................................................\n', style='content')
+    sign_area.add_run((advisor_list.split('\t\t'))[0] + '\n', style="content")
+    sign_area.add_run(u'อาจารย์ที่ปรึกษาโครงการ', style="content")
+    sign_area.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
     document.save(doc_name)
 
 
@@ -604,6 +611,12 @@ def gennn(ses, num, path):
     cost_list_param = all_data.proposal.delicate_budget.split(
         unichr(171)) if all_data.proposal.cost is not None else []
     cost_list_param.pop()
+
+    advisor_name = all_data.proposal.advisor_for_proposal
+    absolutely_advisor_name = advisor_name.split(unichr(172))
+
+    advisor_name_last = absolutely_advisor_name[0] + u' ' + absolutely_advisor_name[1] + u'    ' + absolutely_advisor_name[2]
+    print advisor_name_last
 
     for i in cost_list_param:
         cost_list_parameter.append(i.split(unichr(172)))
@@ -626,7 +639,7 @@ def gennn(ses, num, path):
                        , purpose_list=all_data.proposal.objective.split(unichr(171))
                        , profit=all_data.proposal.profit.split(unichr(171))
                        , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
-                       , advisor_list=all_data.proposal.advisor_for_proposal
+                       , advisor_list=advisor_name_last
                        , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
                        , activity_place=all_data.proposal.activity_location
                        , type_of_activity=all_data.proposal.type_of_activity
@@ -703,7 +716,7 @@ def gennn(ses, num, path):
                       , rational=all_data.proposal.Reason
                       , purpose_list=all_data.proposal.objective.split(unichr(171))
                       , hours_compare=u''
-                      , advisor_list=all_data.proposal.advisor_for_proposal.split(unichr(171))
+                      , advisor_list=advisor_name_last
                       , owner_list=all_data.proposal.owner_for_proposal.split(unichr(171))
                       , member_list=all_data.proposal.member_for_proposal.split(unichr(171))
                       , durations=all_data.proposal.duration

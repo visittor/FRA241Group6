@@ -808,6 +808,7 @@ class Project_view():
                 with transaction.manager:
                     proposal = self.request.db_session.query(Proposal).filter_by(parent_id=self.request.matchdict["project_id"]).first()
                     project = self.request.db_session.query(Project).filter_by(id=self.request.matchdict["project_id"]).first()
+                    member = project.project_member
                     for i in member:
                         text = i.First_name+"\t"+i.Last_name+"\t"+str(i.student_id)+unichr(171)
                         if text not in list_PM.split(unichr(171)):
@@ -906,7 +907,7 @@ def download(request):
         return HTTPFound(location=request.route_url('addProject'))
     # os.remove('FRA241PROJECT/static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')
     gennn(request.db_session,request.matchdict["project_id"],request.static_url('FRA241PROJECT:static/Gened_DOC/'))
-    time.sleep(3)
+    time.sleep(1)
     return Response('<iframe src='+request.static_url('FRA241PROJECT:static/Gened_DOC/'+project.type+'_'+str(project.id)+'.docx')+'></iframe>')
 
 
