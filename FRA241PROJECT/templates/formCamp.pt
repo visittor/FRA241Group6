@@ -29,15 +29,15 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
+
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bootstrap.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bower_components/Font-Awesome/css/font-awesome.css')}"/>
+    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/build.css')}"/>
+<style type="text/css">
       body { background-color:#ff9900;  }
       h2 {font-size: 150%}
       <!--การเปรียบเทียบกิจกรรม-->
     </style>
-    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bootstrap.css')}"/>
-    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/bower_components/Font-Awesome/css/font-awesome.css')}"/>
-    <link rel="stylesheet" href="${request.static_url('FRA241PROJECT:static/indexAddproject/build.css')}"/>
-
     <!-- วัตถุประสงค์0-->
     <script type="text/javascript">
       function CreateNewRow0(text)
@@ -336,7 +336,7 @@
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.user_id}</a>
+        <a class="navbar-brand page-scroll" href="${request.route_url('home')}">${request.user.First_name}</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
